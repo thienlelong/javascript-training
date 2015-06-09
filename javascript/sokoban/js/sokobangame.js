@@ -4,9 +4,13 @@ function SokobanGame(levels, place) {
 	addHandler(newGame, "click", method(this, "newGame"));
 	var reset = dom("BUTTON", null, "Reset level");
 	addHandler(reset, "click", method(this, "resetLevel"));
-	this.status = dom("DIV");
+	var select = dom("SELECT", null,dom("option",{'value': '0'}, '1'),
+						dom("option",{'value': '1'}, '2'),
+						dom("option",{'value': '2'}, '3'), "Set level");
+	addHandler(select, "change", method(this, "setLevel"));
+	this.status = dom("DIV",{"class" : "status"});
 	this.container = dom("DIV", {"class" : "container"}, dom("H1", {"class" : "title"}, "Sokoban"),
-		dom("DIV", {"class" : "menu"}, newGame, " ", reset), this.status);
+		dom("DIV", {"class" : "menu"}, newGame, " ", reset, "", select), this.status);
 	place.appendChild(this.container);
 	addHandler(document, "keydown", method(this, "keyDown"));
 	this.newGame();
@@ -14,6 +18,12 @@ function SokobanGame(levels, place) {
 
 SokobanGame.prototype.newGame = function() {
 	this.level = 0;
+	this.resetLevel();
+};
+
+SokobanGame.prototype.setLevel = function(event) {
+	var level = Number(event.target.value);
+	this.level = level;
 	this.resetLevel();
 };
 
