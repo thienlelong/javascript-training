@@ -1,3 +1,4 @@
+
 function forEachIn(object, action) {
 	for (var property in object) {
 		if (Object.prototype.hasOwnProperty.call(object, property))
@@ -5,7 +6,7 @@ function forEachIn(object, action) {
 	}
 }
 
-// The reduce Function
+// the reduce Function
 function forEach(array, action) {
 	for (var i = 0; i < array.length; i++)
 		action(array[i]);

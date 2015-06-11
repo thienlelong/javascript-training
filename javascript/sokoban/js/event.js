@@ -1,8 +1,8 @@
-// Register an event
-// In Internet Explorer use attachEvent()
-// On other browsers use addEventListener()
+// register an event
+// in Internet Explorer use attachEvent()
+// on other browsers use addEventListener()
 function registerEventHandler(node, event, handler) {
-	if (typeof node.addEventListener == 'function')
+	if (typeof node.addEventListener === 'function')
 		node.addEventListener(event, handler, false);
 	else
 		node.attachEvent('on' + event, handler);
@@ -10,11 +10,11 @@ function registerEventHandler(node, event, handler) {
 
 // registerEventHandler(button, 'click', function(){print('console.log (2)');});
 
-// Unregister event
-// In Internet Explorer use detachEvent()
-// On other browsers use removeEventListener()
+// unregister event
+// in Internet Explorer use detachEvent()
+// on other browsers use removeEventListener()
 function unregisterEventHandler(node, event, handler) {
-	if (typeof node.removeEventListener == 'function')
+	if (typeof node.removeEventListener === 'function')
 		node.removeEventListener(event, handler, false);
 	else
 		node.detachEvent('on' + event, handler);
@@ -39,12 +39,12 @@ function normalizeEvent(event) {
 	if ((event.toElement || event.fromElement) && !event.relatedTarget)
 		event.relatedTarget = event.toElement || event.fromElement;
 
-	if (event.clientX != undefined && event.pageX == undefined) {
+	if (event.clientX !== undefined && event.pageX === undefined) {
 		event.pageX = event.clientX + document.body.scrollLeft;
 		event.pageY = event.clientY + document.body.scrollTop;
 	}
 
-	if (event.type == 'keypress')
+	if (event.type === 'keypress')
 		event.character = String.fromCharCode(event.charCode || event.keyCode);
 
 	return event;

@@ -1,3 +1,5 @@
+/* global dom, Square, Point */
+
 function SokobanField(level) {
 	this.fieldDiv = dom("DIV");
 	this.squares = [];
@@ -5,20 +7,21 @@ function SokobanField(level) {
 	for (var y = 0; y < level.field.length; y++) {
 		var line = level.field[y], squareRow = [];
 		for (var x = 0; x < line.length; x++) {
-			var img = dom("IMG");
+			var img = dom('IMG');
 			this.fieldDiv.appendChild(img);
 			squareRow.push(new Square(line.charAt(x), img));
-			if (line.charAt(x) == "@")
+			if (line.charAt(x) === '@')
 				this.playerPos = new Point(x, y);
 		}
-		this.fieldDiv.appendChild(dom("BR"));
+
+		this.fieldDiv.appendChild(dom('BR'));
 		this.squares.push(squareRow);
 	}
 }
 
 SokobanField.prototype.status = function() {
-	return this.bouldersToGo + " boulder" +
-	(this.bouldersToGo == 1 ? "" : "s") + " to go.";
+	return this.bouldersToGo + ' boulder' +
+	(this.bouldersToGo === 1 ? '' : 's') + ' to go.';
 };
 
 SokobanField.prototype.won = function() {
@@ -37,23 +40,26 @@ SokobanField.prototype.move = function(direction) {
 	var playerSquare = this.squares[this.playerPos.y][this.playerPos.x],
 	targetPos = this.playerPos.add(direction),
 	targetSquare = this.squares[targetPos.y][targetPos.x];
-	// First, see if the player can push a boulder...
-	if (targetSquare.content == "boulder") {
+
+	// first, see if the player can push a boulder...
+
+	if (targetSquare.content === 'boulder') {
 		var pushPos = targetPos.add(direction),
 		pushSquare = this.squares[pushPos.y][pushPos.x];
-		if (pushSquare.content == "empty") {
-			targetSquare.setContent("empty");
-			pushSquare.setContent("boulder");
+		if (pushSquare.content === 'empty') {
+			targetSquare.setContent('empty');
+			pushSquare.setContent('boulder');
 		}
-		else if (pushSquare.content == "exit") {
-			targetSquare.setContent("empty");
+		else if (pushSquare.content === 'exit') {
+			targetSquare.setContent('empty');
 			this.bouldersToGo--;
 		}
 	}
-	// Then, try to move...
-	if (targetSquare.content == "empty") {
-		playerSquare.setContent("empty");
-		targetSquare.setContent("player");
+
+	// then, try to move...
+	if (targetSquare.content === 'empty') {
+		playerSquare.setContent('empty');
+		targetSquare.setContent('player');
 		this.playerPos = targetPos;
 	}
 };

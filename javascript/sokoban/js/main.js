@@ -1,4 +1,6 @@
-var level =[{boulders: 9,
+/* global SokobanGame */
+
+var level = [{boulders: 9,
      field: ['######  ##### ',
           '#    #  #   # ',
           '# 0  #### 0 # ',
@@ -37,6 +39,5 @@ var level =[{boulders: 9,
           '      ## 0   #',
           '      #*0 0  #',
           '      ########']}];
-
 
 new SokobanGame(level, document.body);
