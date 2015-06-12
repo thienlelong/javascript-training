@@ -3,18 +3,13 @@
 ## Practice Sokoban game Structure
 
 - Folder "js" include 
-
-  - File reset.css: reset there are tag base in css
-  - File styles.css: styles for page index.html, contact.html
-  - File header.css
-  - File footer.css
-  - File contact.css
+  - Inlude js file
 
 - Folder "images" 
 
   - Include images in practice
 
-- "sokoban.html" include header, banner, menu, footer, content
+- "sokoban.html" 
 
 
 - .editorconfig: config editor using project
