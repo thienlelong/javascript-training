@@ -1,0 +1,9 @@
+ /*Style for todo */
+body {
+    background-color: #f5f5f5;
+    font-family: 'Helvetica', 'Arial', 'sans-serif';
+}
+
+.container {
+    min-width: 100%;
+}
