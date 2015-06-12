@@ -1,0 +1,67 @@
+/*
+* style filter acction todo
+*/
+
+.todo-filter {
+    font-size: 14px;
+    font-weight: 300;
+
+    position: relative;
+
+    overflow: hidden;
+
+    height: 20px;
+    padding: 10px 15px;
+
+    text-align: center;
+
+    color: #777;
+    border-top: 1px solid #e6e6e6;
+    background-color: #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 8px 0 -3px #f6f6f6,
+    0 9px 1px -3px rgba(0, 0, 0, .2), 0 16px 0 -6px #f6f6f6,
+    0 17px 2px -6px rgba(0, 0, 0, .2);
+}
+
+.todo-filter__count {
+    float: left;
+}
+
+.todo-filter__list {
+    position: absolute;
+    right: 0;
+    left: 0;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.todo-filter__list li {
+    display: inline-block;
+    display: inline-block;
+    padding: 0px 10px;
+    cursor: pointer;
+}
+
+/* clear button */
+
+.todo-filter__clear {
+    line-height: 20px;
+
+    float: right;
+    background: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    border: 0px;
+    color: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+    font-family: inherit;
+    cursor: pointer;
+    position: relative;
+}
+.todo-filter__clear:hover {
+    text-decoration: underline;
+}

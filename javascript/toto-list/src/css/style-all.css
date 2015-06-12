@@ -2,5 +2,8 @@
 @import '_header.css';
 @import '_footer.css';
 @import '_container.css';
-@import 'toto-list.css';
+@import 'todo.css';
+@import 'todo-list.css';
+@import 'todo-new.css';
+@import 'todo-filter.css';
 

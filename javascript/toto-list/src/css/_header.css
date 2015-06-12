@@ -1,12 +1,11 @@
 /**
 * style header page
 * */
-.header-container{
+.header{
     text-align: center; 
 }
 
-
-.header-container .header-title {
+.header .header__title {
     width: 100%;
     font-size: 100px;
     font-weight: 100;

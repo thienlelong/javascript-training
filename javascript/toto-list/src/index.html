@@ -6,20 +6,36 @@
   <link rel="stylesheet" href="css/style-all.css">
 </head>
 <body>
-  <!-- Begin - Todo UI -->
-  <div class="container">
-    <header class="header-container">
-      <h1 class="header-title">todos</h1>
+    <!-- Begin - Todo UI -->
+    <div class="container">
+    <header class="header">
+      <h1 class="header__title">todos</h1>
     </header>
-    <section id="todoApp" class="todo-app">
-      <div class="new-todo">
-        <input id="toggleAll" class="toggle-all fa fa-chevron-down hidden" type="checkbox">
-        <input id="newTodo" class ="new-todo-name" type="text" placeholder="What needs to be done?">
-      </div>
-      <ul id="todoList" class="todo-list"></ul>
+
+    <section id="todoApp" class="content todo">
+        <div class="todo-new">
+            <input id="toggleAll" class="todo-new__toggle--all fa fa-chevron-down hidden" type="checkbox">
+            <input id="todoNew" class ="todo-new__field" type="text" placeholder="What needs to be done?">
+        </div>
+        <ul id="todoList" class="todo-list"></ul>
+
+        <!-- End .todo-list-warp-->
+        <div class="todo-filter">
+            <span id="count" class="todo-filter__count">items left</span>
+            <ul class="todo-filter__list">
+                <li><a id="btnAll" class="filter__btn filter__btn--all ">All</a></li>
+                <li><a id="btnActive" class="filter__btn filter__btn--actice">Active</a></li>
+                <li><a id="btnComplete" class="filter__btn filter__btn--completed">Completed</a></li>
+            </ul>
+            <button id="btnClear" class="todo-filter__clear filter__btn filter__btn--clear">Clear completed</button> 
+        </div>
+    <!-- End list action-->
+
     </section>
-    <footer class="footer-container">
-      <p class="info">Double-click to edit a todo</p>
+
+    <footer class="footer">
+      <p class="footer__info">Double-click to edit a todo</p>
+      <p class="footer__info">Written: Thien Le</p>
     </footer>
   </div>
   <!-- End - Todo UI -->
