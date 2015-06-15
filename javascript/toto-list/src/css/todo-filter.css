@@ -41,26 +41,31 @@
 .todo-filter__list li {
     display: inline-block;
     display: inline-block;
-    padding: 0px 10px;
+
+    padding: 0 10px;
+
     cursor: pointer;
 }
 
 /* clear button */
 
 .todo-filter__clear {
-    line-height: 20px;
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 14px;
+
+    position: relative;
 
     float: right;
-    background: transparent;
+
     cursor: pointer;
-    text-decoration: none;
-    border: 0px;
-    color: inherit;
-    font-size: 100%;
+    cursor: pointer;
     vertical-align: baseline;
-    font-family: inherit;
-    cursor: pointer;
-    position: relative;
+    text-decoration: none;
+
+    color: inherit;
+    border: 0;
+    background: transparent;
 }
 .todo-filter__clear:hover {
     text-decoration: underline;

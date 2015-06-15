@@ -1,0 +1,97 @@
+.todo-item {
+    border-bottom: 1px solid #ededed;
+}
+
+.todo-item .todo-view {
+    position: relative;
+}
+
+
+.todo-item__toggle {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 50px;
+    height: 65px;
+
+    text-align: center;
+
+    outline: none;
+
+            appearance: none;
+       -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.todo-item__toggle:after {
+    position: absolute;
+    top: 18px;
+    left: 4px;
+
+    display: inline-block;
+
+    width: 30px;
+    height: 30px;
+
+    content: '';
+
+    border: 1px solid #efefef;
+    -webkit-border-radius: 30px;
+       -moz-border-radius: 30px;
+            border-radius: 30px;
+}
+
+.todo-item__toggle:checked:after {
+    border: 1px solid #c7e0db;
+    background: url(../images/check-icon.png) no-repeat center center;
+}
+
+.todo-item__name {
+    font-size: 24px;
+
+    display: block;
+
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px 50px 20px 60px;
+
+    border: none;
+}
+
+
+.todo-item__btn-delete {
+    font-size: 24px;
+
+    position: absolute;
+    top: 0;
+    right: 10px;
+
+    display: none;
+
+    width: 40px;
+    height: 40px;
+    margin: 10px 0;
+
+    cursor: pointer;
+    text-align: center;
+
+    color: #cc9a9a;
+}
+
+.todo-item__btn-delete:hover {
+    display: inline;
+}
+
+.todo-item__edit {
+    font-size: 24px;
+
+    box-sizing: border-box;
+    width: 500px;
+    height: 56px;
+    margin: 0 0 0 48px;
+    padding: 20px 50px 20px 10px;
+
+    border: 1px solid #999;
+    outline: none;
+}

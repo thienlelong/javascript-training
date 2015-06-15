@@ -2,11 +2,12 @@
 * todo new 
 */
 
-.todo-new{
+.todo-new {
+    position: relative;
+
     border-bottom: 1px solid #ccc;
-    box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
-    background-color: rgba(0, 0, 0, 0.003);
-    position: relative;       
+    background-color: rgba(0, 0, 0, .003);
+    box-shadow: inset 0 -2px 1px rgba(0,0,0,.03);
 }
 
 .todo-new__field {
@@ -18,6 +19,8 @@
     padding: 16px 16px 16px 60px;
 
     border: none;
+    border-bottom: 1px solid #e6e6e6;
+    outline: none;
     background: #fff;
 
     webkit-box-sizing: border-box;

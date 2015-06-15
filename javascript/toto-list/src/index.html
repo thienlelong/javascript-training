@@ -12,12 +12,14 @@
       <h1 class="header__title">todos</h1>
     </header>
 
-    <section id="todoApp" class="content todo">
+    <section id="todoApp" class="content todos">
         <div class="todo-new">
             <input id="toggleAll" class="todo-new__toggle--all fa fa-chevron-down hidden" type="checkbox">
             <input id="todoNew" class ="todo-new__field" type="text" placeholder="What needs to be done?">
         </div>
-        <ul id="todoList" class="todo-list"></ul>
+        <ul id="todoList" class="todo-list">
+            
+        </ul>
 
         <!-- End .todo-list-warp-->
         <div class="todo-filter">
@@ -35,11 +37,19 @@
 
     <footer class="footer">
       <p class="footer__info">Double-click to edit a todo</p>
-      <p class="footer__info">Written: Thien Le</p>
+      <p class="footer__info">Written: Thien Le </p>
     </footer>
-  </div>
-  <!-- End - Todo UI -->
+    </div>
+    <!-- End - Todo UI -->
 
- 
+     <!-- Import App scripts-->
+    <script type="text/javascript" src="js/helper.js"></script>
+    <script type="text/javascript" src="js/dom.js"></script>
+    <script type="text/javascript" src="js/model.js"></script>
+    <script type="text/javascript" src="js/todo-item.js"></script>
+    <script type="text/javascript" src="js/todo-list.js"></script>
+    <script type="text/javascript" src="js/todo-filter.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    
 </body>
 </html>
