@@ -3,6 +3,6 @@
   "disallowMultipleLineStrings": true,
   "requireCapitalizedConstructors": true,
   "requireSpaceAfterLineComment": true,
-  "disallowCapitalizedComments": true,
-  "validateIndentation": "\t"
+  "disallowCapitalizedComments": true
+
 }

@@ -1,14 +1,14 @@
-// Define models of application
+// define models of application
 var model = (function() {
-  // Defines that JavaScript code should be executed in "strict mode" (local scope)
-  "use strict";
+  // defines that JavaScript code should be executed in "strict mode" (local scope)
+  'use strict';
 
   var models = {
     Todo: Todo
   };
 
   /*
-  * Todo (task) constructor
+  * todo (task) constructor
   * @param {String}  : name of task
   * @param {Boolean} : status of task - completed or not
   */
@@ -20,3 +20,4 @@ var model = (function() {
 
   return models;
 })();
+

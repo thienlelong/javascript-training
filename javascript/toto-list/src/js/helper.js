@@ -1,10 +1,10 @@
-// Define utility methods
-var helpers = (function(){
-  "use strict";
+// define utility methods
+var helpers = (function() {
+  'use strict';
 
   var helpers = {
     /*
-    * Loop a object likes a dictionary
+    * loop a object likes a dictionary
     * @param {Object}     : an object
     * @param {Function()} : callback function
     * @return {void}
@@ -17,7 +17,12 @@ var helpers = (function(){
       }
     },
 
-    /* Add event listener for element
+    forEach: function(array, action) {
+      for (var i = 0; i < array.length; i++)
+        action(array[i]);
+    },
+
+    /* add event listener for element
     * @param {Element}     : node
     * @param {String}      : event
     * @param {Function()} : callback funtion
@@ -25,15 +30,17 @@ var helpers = (function(){
     */
     registerEventHandler: function(node, event, handler) {
       if (typeof node.addEventListener === 'function') {
-        // For all major browsers, except IE 8 and earlier
+
+        // for all major browsers, except IE 8 and earlier
         node.addEventListener(event, handler, false);
       } else {
-        // For IE 8 and earlier versions
+
+        // for IE 8 and earlier versions
         node.attachEvent('on' + event, handler);
       }
     },
 
-    /* Remove event listener of element
+    /* remove event listener of element
     * @param {Element}     : node
     * @param {String}      : event
     * @param {Function()}
@@ -41,15 +48,17 @@ var helpers = (function(){
     */
     unregisterEventHandler: function(node, event, handler) {
       if (typeof node.addEventListener === 'function') {
-        // For all major browsers, except IE 8 and earlier
+
+        // for all major browsers, except IE 8 and earlier
         node.removeEventListener(event, handler, false);
       } else {
-        // For IE 8 and earlier versions
+
+        // for IE 8 and earlier versions
         node.detachEvent('on' + event, handler);
       }
     },
 
-    /* Remove an element
+    /* remove an element
     * @param {Element}     : node
     * @return {void}
     */
@@ -57,7 +66,7 @@ var helpers = (function(){
       node.parentNode.removeChild(node);
     },
 
-    /* Add an element before another
+    /* add an element before another
     * @param {Element}     : node
     * @param {Element}     : node
     * @return {void}
@@ -66,29 +75,34 @@ var helpers = (function(){
       node.parentNode.insertBefore(newNode, node);
     },
 
-    /* Normalizing Event Objects - goes over all the event object properties
+    /* normalizing Event Objects - goes over all the event object properties
     * @param {Object}   : event
     * @return {Object}  : optimized event
     */
     normalizeEvent: function(event) {
-      // Cancel bubbling and default action of event
+
+      // cancel bubbling and default action of event
       if (!event.stopPropagation) {
         event.stopPropagation = function() {
           this.cancelBubble = true;
         };
+
         event.preventDefault = function() {
           this.returnValue = false;
         };
       }
+
       if (!event.stop) {
         event.stop = function() {
           this.stopPropagation();
           this.preventDefault();
         };
       }
+
       if (event.srcElement && !event.target) {
         event.target = event.srcElement;
       }
+
       // if ((event.toElement || event.fromElement) && !event.relatedTarget) {
       //   event.relatedTarget = event.toElement || event.fromElement;
       // }
@@ -96,6 +110,7 @@ var helpers = (function(){
         event.pageX = event.clientX + document.body.scrollLeft;
         event.pageY = event.clientY + document.body.scrollTop;
       }
+
       if (event.type === 'keypress') {
         event.character = String.fromCharCode(event.charCode || event.keyCode);
       }
@@ -103,7 +118,7 @@ var helpers = (function(){
       return event;
     },
 
-    /* Add event listener
+    /* add event listener
     * @param {Element}     : node
     * @param {String}      : event
     * @param {Function}    : function
@@ -120,10 +135,11 @@ var helpers = (function(){
         type: type,
         handler: wrapHandler
       };
+
       return obj;
     },
 
-    /* Remove event listener
+    /* remove event listener
     * @param {Object}     : object
     * @return {void}
     */
@@ -131,7 +147,7 @@ var helpers = (function(){
       this.unregisterEventHandler(object.node, object.type, object.handler);
     },
 
-    /* Call a method within its scope
+    /* call a method within its scope
     * @param {Object}
     * @param {String}
     * @return {Function}
@@ -144,36 +160,36 @@ var helpers = (function(){
 
     getLocalStorage: function() {
       try {
-        if(typeof(Storage) !== "undefined") {
+        if (typeof (Storage) !== 'undefined') {
           return localStorage;
         } else {
-          throw new Error("Sorry! No Web Storage support");
+          throw new Error('Sorry! No Web Storage support');
         }
-      } catch(err) {
-        console.log(err.name + " " + err.message);
+      } catch (err) {
+        console.log(err.name + ' ' + err.message);
       }
     },
 
     /**
-     * Add class to an element
+     * add class to an element
      * @param {Element} node
      * @param {string}  className
      */
     addClass: function(node, className) {
 
-      // Add class name to element if it hasn't
+      // add class name to element if it hasn't
       if (!this.hasClass(node, className)) {
         if (node.classList) {
           node.classList.add(className);
         } else {
-          // Fix < IE 9
+          // fix < IE 9
           node.className += ' ' + className;
         }
       }
     },
 
     /**
-     * Remove class from element if it has
+     * remove class from element if it has
      * @param  {Element} node
      * @param  {string}  className
      * @return {void}
@@ -185,7 +201,7 @@ var helpers = (function(){
         if (node.classList) {
           node.classList.remove(className);
         } else {
-          // Fix < IE 9
+          // fix < IE 9
           node.className = node.className.replace(new RegExp('(^|\\b)' +
               className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
         }
@@ -193,7 +209,7 @@ var helpers = (function(){
     },
 
     /**
-     * Checking the element has class `className` or not
+     * checking the element has class `className` or not
      * @param  {Element}  node
      * @param  {string}   className
      * @return {Boolean}           [description]
@@ -205,14 +221,13 @@ var helpers = (function(){
       if (node.classList) {
         hasClazz = node.classList.contains(className);
       } else {
-        // Fix < IE 9
+
+        // fix < IE 9
         hasClazz = new RegExp('(^| )' + className + '( |$)', 'gi').test(node.className);
       }
 
       return hasClazz;
     }
-
-
   };
 
   return helpers;

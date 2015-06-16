@@ -1,5 +1,7 @@
+/* global helpers */
+
 var todoFilter = (function() {
-  "use strict";
+  'use strict';
 
   var _helpers = helpers;
   var view = {
@@ -7,25 +9,28 @@ var todoFilter = (function() {
   };
 
   function TodoFilter(todoList) {
-    this.todoList =  todoList
+    this.todoList =  todoList;
   }
 
   /*
-  * Display menu filter Filter
+  * display menu filter Filter
   */
 
   TodoFilter.prototype.tongleMenuFilter = function() {
-  	var todoFilter = document.getElementById('todoFilter');
+    var todoFilter = document.getElementById('todoFilter');
     var btnFilters = document.getElementsByClassName('filter__btn');
-    
-    for (var i = 0; i < btnFilters.length; i++) {
-      _helpers.addHandler(btnFilters[i], 'click', _helpers.method(this, 'handelTodoFilter'));
-    };
+    var btnClearComplete = document.getElementById('btnClearComplete');
 
-  	if (this.todoList.todos.length) {
-  		_helpers.removeClass(todoFilter, 'hidden');
-  	}
-  }
+    _helpers.addHandler(btnClearComplete, 'click', _helpers.method(this, 'clearTodoCompleted'));
+
+    for (var i = 0; i < btnFilters.length; i++)
+      _helpers.addHandler(btnFilters[i], 'click', _helpers.method(this, 'handelTodoFilter'));
+
+    if (this.todoList.todos.length) {
+      _helpers.removeClass(todoFilter, 'hidden');
+      this.updateCountTodoList();
+    }
+  };
 
   /*
   * handle todo filter
@@ -33,13 +38,14 @@ var todoFilter = (function() {
   TodoFilter.prototype.handelTodoFilter = function(event) {
     var btnFilter = event.target;
     var btnFilters = document.getElementsByClassName('filter__btn');
-    for (var i = 0; i < btnFilters.length; i++) {
-      _helpers.removeClass(btnFilters[i],'selected');
-    };
+
+    _helpers.forEach(btnFilters, function (item) {
+      _helpers.removeClass(item, 'selected');
+    });
 
     _helpers.addClass(btnFilter, 'selected');
 
-    switch(btnFilter.id){
+    switch (btnFilter.id){
       case 'btnComplete':
         this.handelCompleteTodoFilter();
         break;
@@ -50,37 +56,58 @@ var todoFilter = (function() {
         this.handelAllTodoFilter();
     }
 
-  }
+    event.stop();
+  };
 
-  TodoFilter.prototype.handelAllTodoFilter = function(){
-    var todoItems = document.getElementById('todoList').childNodes;
-    for ( var i = 0; i < todoItems.length; i++){
-      _helpers.removeClass(todoItems[i], 'hidden');
+  TodoFilter.prototype.clearTodoCompleted = function(event) {
+    var todos = this.todoList.todos;
+    for (var i = 0; i < todos.length; i++) {
+      if (todos[i].isCompleted) 
+        this.todoList.removeItemAt(i);
     }
+    
+    // update data in Storage
+    this.todoList.saveTodoToStorage();
+    this.todoList.renderHtml();
 
-  }
+    event.stop();
+  };
 
-  TodoFilter.prototype.handelActiveTodoFilter = function(){
+  TodoFilter.prototype.handelAllTodoFilter = function() {
     var todoItems = document.getElementById('todoList').childNodes;
-    for ( var i = 0; i < todoItems.length; i++){
-      if (_helpers.hasClass(todoItems[i], 'completed')){
-        _helpers.addClass(todoItems[i], 'hidden');
-      } 
-      else _helpers.removeClass(todoItems[i], 'hidden');
-    }
+    _helpers.forEach(todoItems, function (item) {
+      _helpers.removeClass(item, 'hidden');
+    });
+  };
 
-  }
-
-  TodoFilter.prototype.handelCompleteTodoFilter = function(){
+  TodoFilter.prototype.handelActiveTodoFilter = function() {
     var todoItems = document.getElementById('todoList').childNodes;
-    for ( var i = 0; i < todoItems.length; i++){
-      if (_helpers.hasClass(todoItems[i], 'completed')){
-        _helpers.removeClass(todoItems[i], 'hidden');
-      } 
-      else _helpers.addClass(todoItems[i], 'hidden');
-    }
+    _helpers.forEach(todoItems, function (item) {
+      if (_helpers.hasClass(item, 'completed')) {
+        _helpers.addClass(item, 'hidden');
+      } else _helpers.removeClass(item, 'hidden');
+    });
+  };
 
-  }
-  
+  TodoFilter.prototype.handelCompleteTodoFilter = function() {
+    var todoItems = document.getElementById('todoList').childNodes;
+    _helpers.forEach(todoItems, function (item) {
+      if (_helpers.hasClass(item, 'completed')) {
+        _helpers.removeClass(item, 'hidden');
+      } else _helpers.addClass(item, 'hidden');
+    });
+
+  };
+
+  TodoFilter.prototype.updateCountTodoList = function() {
+    var count = 0;
+    var countTodo = document.getElementById('countTodo');
+    _helpers.forEach(this.todoList.todos, function (item) {
+      if (!item.isCompleted) count++;
+    });
+    
+    countTodo.innerHTML = (count === 1) ? (count +' item left') : (count +' items left');
+  };
+
   return view;
 })();

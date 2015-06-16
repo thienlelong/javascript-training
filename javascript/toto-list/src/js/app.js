@@ -1,32 +1,34 @@
-!(function() {
+/* global helpers, model, todoList, todoFilter */
+
+;(function() {
   'use strict';
 
   var _helpers = helpers;
   var _model = model;
   var _todoList = todoList;
   var _todoFilter = todoFilter;
- 
+
   /*
-  * Todo controller
+  * todo controller
   * @constructor
   * @param{Array}     : tasks
   */
   function TodoControl(todos, appElement) {
 
     this.todoApp = appElement;
-    var _this = this;
     var toggleAll = document.getElementById('toggleAll');
     var newTodo = document.getElementById('todoNew');
 
-    // Handle event when user enter a task
+    // handle event when user enter a task
     _helpers.addHandler(newTodo, 'keyup', _helpers.method(this, 'handelAddNewTodo'));
-    
+
     this.todoList = new _todoList.TodoList(this.getListTodo(todos));
     this.todoFilter = new _todoFilter.TodoFilter(this.todoList);
 
-    // Render list view and display clear button
+    // render list view and display clear button
     this.todoList.renderHtml();
     this.todoFilter.tongleMenuFilter(this.todoList);
+
     return this;
   }
 
@@ -37,9 +39,10 @@
     if (typeof currentId === 'undefined') {
       currentId = 0;
     }
+
     currentId = parseInt(currentId, 10);
 
-    // User press 'Enter'
+    // user press 'Enter'
     if (event.keyCode === 13 && _target.value !== '') {
       currentId++;
       this.todoList.todos.push(new _model.Todo(_target.value, false, currentId));
@@ -47,20 +50,20 @@
       _helpers.getLocalStorage().setItem('currentId', currentId);
       _target.value = '';
       this.todoFilter.tongleMenuFilter(this.todoList);
-      if(_helpers.hasClass(btnComplete, 'selected'))
+      if (_helpers.hasClass(btnComplete, 'selected'))
         this.todoFilter.handelCompleteTodoFilter();
     }
 
     event.stop();
-  }
+  };
 
   TodoControl.prototype.getListTodo = function(todos) {
     var currentTodos = [];
 
-    // Get todos from localStorage
+    // get todos from localStorage
     var savedTodos = _helpers.getLocalStorage().todos;
-    
-    /*If the browser hasn't todos, or couldn't parse to Object from Json,
+
+    /*if the browser hasn't todos, or couldn't parse to Object from Json,
       get the todos to initialize
     */
     if (typeof savedTodos !== 'undefined') {
@@ -68,14 +71,14 @@
       var len = savedTodos.length;
       for (var i = 0; i < len; i++) {
         currentTodos.push(new _model.Todo(savedTodos[i].name, savedTodos[i].isCompleted, savedTodos[i].id));
-      } 
+      }
+
     } else {
       currentTodos = todos;
     }
 
     return currentTodos;
-  }
-
+  };
 
   new TodoControl([], document.getElementById('todoApp'));
 })();
