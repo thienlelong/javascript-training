@@ -33,9 +33,9 @@ var todoList = (function() {
         this.appendTodoItem(this.todos[i]);
       }
 
-      // Display toggler checkbox if has any todo
-        var _toggleAll = document.getElementById('toggleAll');
-        _helpers.removeClass(_toggleAll, 'hidden');
+      // Display toggle checkbox if has any todo
+      var _toggleAll = document.getElementById('toggleAll');
+      _helpers.removeClass(_toggleAll, 'hidden');
       
 
       // Update data in Storage
@@ -48,7 +48,7 @@ var todoList = (function() {
   * @return{void}
   */
   TodoList.prototype.appendTodoItem = function(todo) {
-    var todo = new todoItem.Todo(todo, this);
+    var todo = new todoItem.TodoItem(todo, this);
     this.rootElement.appendChild(todo.renderHtml());
   };
 
@@ -86,12 +86,55 @@ var todoList = (function() {
    * @return {void}
    */
   TodoList.prototype.updateTodotoStorage = function(id, isCompleted) {
-    console.log(this.todos);
-    var todo = this.todos[3]
+    
+    var todo = this.getItemAt(this.indexOf(id));
     todo.isCompleted = isCompleted;
 
     // Update data in localStorage
     this.saveTodoToStorage();
   };
+
+  /*
+   * Update status of a task
+   * @return {void}
+   */
+  TodoList.prototype.updateTodoNametoStorage = function(id, name) {
+    
+    var todo = this.getItemAt(this.indexOf(id));
+    todo.name = name;
+
+    // Update data in localStorage
+    this.saveTodoToStorage();
+  };
+
+  TodoList.prototype.indexOf = function(id) {
+    var result = -1;
+
+    // Parse id to integer
+    var realId = parseInt(id, 10);
+
+    if (isNaN(realId)) {
+      return result;
+    }
+
+    // Find position of task by Id
+    var len = this.todos.length;
+    for (var i = 0; i < len; i++) {
+      if (this.getItemAt(i).id === realId) {
+        result = i;
+        return result;
+      }
+    }
+
+  };
+
+  TodoList.prototype.getItemAt = function(index) {
+    return this.todos[index];
+  };
+
+  TodoList.prototype.removeItemAt = function(index) {
+    return this.todos.splice(index, 1);
+  };
+
   return view;
 })();

@@ -4,7 +4,7 @@
   var _helpers = helpers;
   var _model = model;
   var _todoList = todoList;
-  var _todoAction = todoAction;
+  var _todoFilter = todoFilter;
  
   /*
   * Todo controller
@@ -15,23 +15,25 @@
 
     this.todoApp = appElement;
     var _this = this;
-    var toggleAll = document.querySelector('#toggleAll');
-    var newTodo = document.querySelector('#todoNew');
+    var toggleAll = document.getElementById('toggleAll');
+    var newTodo = document.getElementById('todoNew');
 
     // Handle event when user enter a task
     _helpers.addHandler(newTodo, 'keyup', _helpers.method(this, 'handelAddNewTodo'));
     
     this.todoList = new _todoList.TodoList(this.getListTodo(todos));
+    this.todoFilter = new _todoFilter.TodoFilter(this.todoList);
 
     // Render list view and display clear button
     this.todoList.renderHtml();
-
+    this.todoFilter.tongleMenuFilter(this.todoList);
     return this;
   }
 
   TodoControl.prototype.handelAddNewTodo = function(event) {
     var _target = event.target;
     var currentId = _helpers.getLocalStorage().currentId;
+    var btnComplete = document.getElementById('btnComplete');
     if (typeof currentId === 'undefined') {
       currentId = 0;
     }
@@ -44,6 +46,9 @@
       this.todoList.addTodo();
       _helpers.getLocalStorage().setItem('currentId', currentId);
       _target.value = '';
+      this.todoFilter.tongleMenuFilter(this.todoList);
+      if(_helpers.hasClass(btnComplete, 'selected'))
+        this.todoFilter.handelCompleteTodoFilter();
     }
 
     event.stop();
@@ -72,5 +77,5 @@
   }
 
 
-  new TodoControl([], document.querySelector('#todoApp'));
+  new TodoControl([], document.getElementById('todoApp'));
 })();
