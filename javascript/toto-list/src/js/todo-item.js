@@ -70,19 +70,14 @@ var todoItem = (function() {
   TodoItem.prototype.handleToggleTodo = function(event) {
     var target = event.target;
     var parentTarget = target.parentNode.parentNode;
-    var btnFilterId = document.querySelector('.todo-filter__list .selected').id;
 
     // add completed class to todo dom to inform that a todo is completed
-    if (target.checked) {
-      _helpers.addClass(parentTarget, 'completed');
-      if(btnFilterId === "btnActive") _helpers.addClass(parentTarget, 'hidden');
-    } else {
-      _helpers.removeClass(parentTarget, 'completed');
-      if(btnFilterId === "btnComplete") _helpers.addClass(parentTarget, 'hidden');
-    }
+    if (target.checked) _helpers.addClass(parentTarget, 'completed');
+    else _helpers.removeClass(parentTarget, 'completed');
 
     // update status of Todo
     this.todoList.updateTodotoStorage(parentTarget.getAttribute('data-id'), target.checked);
+    this.todoFilter.updateTodoFilter();
     this.todoFilter.toggleMenuFilter();
   };
 

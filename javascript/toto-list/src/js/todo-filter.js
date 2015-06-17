@@ -93,6 +93,7 @@ var todoFilter = (function() {
     // render html
     this.todoList.renderHtml();
     this.toggleMenuFilter();
+    this.updateTodoFilter();
 
     event.stop();
   };
@@ -203,6 +204,12 @@ var todoFilter = (function() {
     if (isDisplay) btnClearComplete.checked = false;
     else btnClearComplete.checked = true;
   };
+
+  TodoFilter.prototype.updateTodoFilter = function() {
+    var btnFilterId = document.querySelector('.todo-filter__list .selected').id;
+    if (btnFilterId === "btnActive") this.activeTodoFilter();
+    else if (btnFilterId === "btnComplete") this.completeTodoFilter();
+  }
 
   return view;
 })();

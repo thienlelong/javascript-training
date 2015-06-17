@@ -45,7 +45,6 @@
   TodoControl.prototype.handleAddNewTodo = function(event) {
     var _target = event.target;
     var currentId = _helpers.getLocalStorage().currentId;
-    var btnComplete = document.getElementById('btnComplete');
     if (typeof currentId === 'undefined') {
       currentId = 0;
     }
@@ -59,9 +58,9 @@
       this.todoList.addTodo();
       _helpers.getLocalStorage().setItem('currentId', currentId);
       _target.value = '';
+      
       this.todoFilter.toggleMenuFilter();
-      if (_helpers.hasClass(btnComplete, 'selected'))
-        this.todoFilter.handleCompleteTodoFilter();
+      this.todoFilter.updateTodoFilter();
     }
 
     event.stop();
@@ -83,6 +82,7 @@
 
     this.todoList.renderHtml();
     this.todoFilter.toggleMenuFilter();
+    this.todoFilter.updateTodoFilter();
 
   }
   /**
