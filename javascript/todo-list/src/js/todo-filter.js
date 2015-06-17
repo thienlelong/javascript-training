@@ -39,7 +39,6 @@ var todoFilter = (function() {
       _helpers.addClass(todoFilter, 'hidden');
       _helpers.addClass(toggleAll, 'hidden');
     }
-
   };
 
   /**
@@ -136,6 +135,7 @@ var todoFilter = (function() {
   */
   TodoFilter.prototype.completeTodoFilter = function() {
     var todoItems = document.getElementById('todoList').childNodes;
+
     _helpers.forEach(todoItems, function(item) {
       if (_helpers.hasClass(item, 'completed')) {
         _helpers.removeClass(item, 'hidden');
@@ -154,11 +154,12 @@ var todoFilter = (function() {
   TodoFilter.prototype.updateCountTodoList = function() {
     var count = 0;
     var countTodo = document.getElementById('countTodo');
+
     _helpers.forEach(this.todoList.todos, function(item) {
       if (!item.isCompleted) count++;
     });
 
-    countTodo.innerHTML = (count === 1) ? (count + ' item left') : (count + ' items left');
+    countTodo.innerHTML = count + (count === 1 ? ' item left' : ' items left');
   };
 
   /**
@@ -168,18 +169,16 @@ var todoFilter = (function() {
   * @return {void}
   */
   TodoFilter.prototype.toggleClearComplete = function() {
-    var isDisplay = false;
     var btnClearComplete = document.getElementById('btnClearComplete');
+
     for (var i = 0; i < this.todoList.todos.length; i++) {
       if (this.todoList.todos[i].isCompleted) {
-        isDisplay = true;
-        break;
+        _helpers.removeClass(btnClearComplete, 'hidden');
+        return true;
       }
-
     }
 
-    if (isDisplay) _helpers.removeClass(btnClearComplete, 'hidden');
-    else _helpers.addClass(btnClearComplete, 'hidden');
+    _helpers.addClass(btnClearComplete, 'hidden');
   };
 
   /**
@@ -189,23 +188,21 @@ var todoFilter = (function() {
   * @return {void}
   */
   TodoFilter.prototype.toggleAllTodo = function() {
-    var isDisplay = false;
     var btnClearComplete = document.getElementById('toggleAll');
-    var len = this.todoList.todos.length;
-    for (var i = 0; i < len; i++) {
-      if (!this.todoList.todos[i].isCompleted) {
-        isDisplay = true;
-        break;
-      }
 
+    for (var i = 0; i < this.todoList.todos.length; i++) {
+      if (!this.todoList.todos[i].isCompleted) {
+        btnClearComplete.checked = false;
+        return false;
+      }
     }
 
-    if (isDisplay) btnClearComplete.checked = false;
-    else btnClearComplete.checked = true;
+    btnClearComplete.checked = true;
   };
 
   TodoFilter.prototype.updateTodoFilter = function() {
     var btnFilterId = document.querySelector('.todo-filter__list .selected').id;
+
     if (btnFilterId === 'btnActive') this.activeTodoFilter();
     else if (btnFilterId === 'btnComplete') this.completeTodoFilter();
   };
