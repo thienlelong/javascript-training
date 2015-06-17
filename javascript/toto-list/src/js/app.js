@@ -8,10 +8,12 @@
   var _todoList = todoList;
   var _todoFilter = todoFilter;
 
-  /*
-  * todo controller
-  * @constructor
-  * @param{Array}     : tasks
+  /**
+  * TodoControl()
+  * controller app
+  *
+  * @param {Array} 
+  * @return {void}
   */
   function TodoControl(todos, appElement) {
 
@@ -20,19 +22,27 @@
     var newTodo = document.getElementById('todoNew');
 
     // handle event when user enter a task
-    _helpers.addHandler(newTodo, 'keyup', _helpers.method(this, 'handelAddNewTodo'));
+    _helpers.addHandler(newTodo, 'keyup', _helpers.method(this, 'handleAddNewTodo'));
+    _helpers.addHandler(toggleAll, 'click', _helpers.method(this, 'handleToggleAllTodo'));
 
     this.todoList = new _todoList.TodoList(this.getListTodo(todos));
     this.todoFilter = new _todoFilter.TodoFilter(this.todoList);
 
     // render list view and display clear button
     this.todoList.renderHtml();
-    this.todoFilter.tongleMenuFilter(this.todoList);
+    this.todoFilter.toggleMenuFilter();
 
     return this;
   }
 
-  TodoControl.prototype.handelAddNewTodo = function(event) {
+  /**
+  * handleAddNewTodo()
+  * handle event add new todo
+  *
+  * @param {event} enter keyup 
+  * @return {void}
+  */
+  TodoControl.prototype.handleAddNewTodo = function(event) {
     var _target = event.target;
     var currentId = _helpers.getLocalStorage().currentId;
     var btnComplete = document.getElementById('btnComplete');
@@ -49,23 +59,44 @@
       this.todoList.addTodo();
       _helpers.getLocalStorage().setItem('currentId', currentId);
       _target.value = '';
-      this.todoFilter.tongleMenuFilter(this.todoList);
+      this.todoFilter.toggleMenuFilter();
       if (_helpers.hasClass(btnComplete, 'selected'))
-        this.todoFilter.handelCompleteTodoFilter();
+        this.todoFilter.handleCompleteTodoFilter();
     }
 
     event.stop();
   };
 
+  /**
+  * handleAddNewTodo()
+  * handle event add new todo
+  *
+  * @param {event} enter keyup 
+  * @return {void}
+  */
+  TodoControl.prototype.handleToggleAllTodo = function(event) {
+
+    var todos = this.todoList.todos;
+    for (var i = 0; i < todos.length; i++){
+      this.todoList.updateTodotoStorage(todos[i].id, event.target.checked);
+    }
+
+    this.todoList.renderHtml();
+    this.todoFilter.toggleMenuFilter();
+
+  }
+  /**
+  * getListTodo()
+  * if the browser hasn't todos, or couldn't parse to Object from Json,
+  * get the todos to initialize
+  *
+  * @param {Array} todos 
+  * @return {Array}
+  */
   TodoControl.prototype.getListTodo = function(todos) {
     var currentTodos = [];
-
-    // get todos from localStorage
     var savedTodos = _helpers.getLocalStorage().todos;
 
-    /*if the browser hasn't todos, or couldn't parse to Object from Json,
-      get the todos to initialize
-    */
     if (typeof savedTodos !== 'undefined') {
       savedTodos = JSON.parse(savedTodos);
       var len = savedTodos.length;

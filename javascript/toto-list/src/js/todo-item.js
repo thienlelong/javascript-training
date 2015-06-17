@@ -10,10 +10,11 @@ var todoItem = (function() {
   var _dom = dom;
   var _todoFilter = todoFilter;
 
-  /*
-  * todo view constructor
-  * @param{Array}     : task
-  * @param{Object}     : parent view
+  /**
+  * TodoItem() Constructor
+  *
+  * @param {object} 
+  * @return {void} 
   */
   function TodoItem(todo, parent) {
     this.todo = todo;
@@ -21,9 +22,12 @@ var todoItem = (function() {
     this.todoFilter = new _todoFilter.TodoFilter(this.todoList);
   }
 
-  /*
-  * render a todo view(li element) includes data
-  * @return {HTMLElement}     : a li element
+  /**
+  * renderHtml() returns a new element
+  * render html view of todo item
+  *
+  * @param {String} no param
+  * @return {Element} element
   */
   TodoItem.prototype.renderHtml = function() {
     var todoStatus = this.todo.isCompleted;
@@ -56,8 +60,12 @@ var todoItem = (function() {
     return this.todoItem;
   };
 
-  /*
-  * handle checking a task with event
+  /**
+  * handleToggleTodo()
+  * handle event click checbox on todo item
+  *
+  * @param {event} click mouse
+  * @return {void}
   */
   TodoItem.prototype.handleToggleTodo = function(event) {
     var target = event.target;
@@ -75,11 +83,15 @@ var todoItem = (function() {
 
     // update status of Todo
     this.todoList.updateTodotoStorage(parentTarget.getAttribute('data-id'), target.checked);
-    this.todoFilter.updateCountTodoList();
+    this.todoFilter.toggleMenuFilter();
   };
 
-  /*
-  * handle delete a task with event
+  /**
+  * handleDeleteTodo()
+  * handle event click delete button on todo item
+  *
+  * @param {event} click mouse
+  * @return {void}
   */
   TodoItem.prototype.handleDeleteTodo = function(event) {
     var target = event.target;
@@ -92,13 +104,17 @@ var todoItem = (function() {
     this.todoList.saveTodoToStorage();
     _helpers.removeNode(parentTarget);
 
-    this.todoFilter.updateCountTodoList();
+    this.todoFilter.toggleMenuFilter();
     event.stop();
 
   };
 
-  /*
-  * handle edit a task with event
+  /**
+  * handleEditTodo()
+  * handle event dblclick on name todo item
+  *
+  * @param {event} dblclick mouse
+  * @return {void}
   */
   TodoItem.prototype.handleEditTodo = function(event) {
 
@@ -114,8 +130,12 @@ var todoItem = (function() {
     event.stop();
   };
 
-  /*
-  * handle update a task with event
+  /**
+  * handleUpdateTodo()
+  * handle event enter when edit name todo item
+  *
+  * @param {event} enter keyup
+  * @return {void}
   */
   TodoItem.prototype.handleUpdateTodo = function(event) {
 
@@ -137,8 +157,12 @@ var todoItem = (function() {
     event.stop();
   };
 
-  /*
-  * handle update a task with event
+  /**
+  * handleLeaveEditTodo()
+  * handle event blur mouse out when edit name todo item
+  *
+  * @param {event} blur mouse
+  * @return {void}
   */
   TodoItem.prototype.handleLeaveEditTodo = function(event) {
     var parentTarget = event.target.parentNode;

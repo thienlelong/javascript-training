@@ -12,30 +12,44 @@ var todoFilter = (function() {
     this.todoList =  todoList;
   }
 
-  /*
-  * display menu filter Filter
+  /**
+  * toggleMenuFilter()
+  * render and register events on menu filter
+  *
+  * @param {} 
+  * @return {void}
   */
-
-  TodoFilter.prototype.tongleMenuFilter = function() {
+  TodoFilter.prototype.toggleMenuFilter = function() {
     var todoFilter = document.getElementById('todoFilter');
     var btnFilters = document.getElementsByClassName('filter__btn');
     var btnClearComplete = document.getElementById('btnClearComplete');
+    var toggleAll = document.getElementById('toggleAll');
 
     _helpers.addHandler(btnClearComplete, 'click', _helpers.method(this, 'clearTodoCompleted'));
 
     for (var i = 0; i < btnFilters.length; i++)
-      _helpers.addHandler(btnFilters[i], 'click', _helpers.method(this, 'handelTodoFilter'));
+      _helpers.addHandler(btnFilters[i], 'click', _helpers.method(this, 'handleTodoFilter'));
 
     if (this.todoList.todos.length) {
       _helpers.removeClass(todoFilter, 'hidden');
       this.updateCountTodoList();
+      this.toggleClearComplete();
+      this.toggleAllTodo();
+    } else {
+      _helpers.addClass(todoFilter, 'hidden');
+      _helpers.addClass(toggleAll, 'hidden');
     }
+    
   };
 
-  /*
-  * handle todo filter
+  /**
+  * handleTodoFilter()
+  * handle event filter todo list
+  *
+  * @param {event} click mouse on btn filter 
+  * @return {void}
   */
-  TodoFilter.prototype.handelTodoFilter = function(event) {
+  TodoFilter.prototype.handleTodoFilter = function(event) {
     var btnFilter = event.target;
     var btnFilters = document.getElementsByClassName('filter__btn');
 
@@ -47,18 +61,25 @@ var todoFilter = (function() {
 
     switch (btnFilter.id){
       case 'btnComplete':
-        this.handelCompleteTodoFilter();
+        this.completeTodoFilter();
         break;
       case 'btnActive':
-        this.handelActiveTodoFilter();
+        this.activeTodoFilter();
         break;
       default:
-        this.handelAllTodoFilter();
+        this.allTodoFilter();
     }
 
     event.stop();
   };
 
+  /**
+  * clearTodoCompleted()
+  * handle event clear all todo item is completed
+  *
+  * @param {event} on click mouse btn clear completed 
+  * @return {void}
+  */
   TodoFilter.prototype.clearTodoCompleted = function(event) {
     var todos = this.todoList.todos;
     for (var i = 0; i < todos.length; i++) {
@@ -68,19 +89,36 @@ var todoFilter = (function() {
     
     // update data in Storage
     this.todoList.saveTodoToStorage();
+
+    // render html
     this.todoList.renderHtml();
+    this.toggleMenuFilter();
 
     event.stop();
   };
 
-  TodoFilter.prototype.handelAllTodoFilter = function() {
+  /**
+  * allTodoFilter()
+  * all todo list
+  *
+  * @param {} 
+  * @return {void}
+  */
+  TodoFilter.prototype.allTodoFilter = function() {
     var todoItems = document.getElementById('todoList').childNodes;
     _helpers.forEach(todoItems, function (item) {
       _helpers.removeClass(item, 'hidden');
     });
   };
 
-  TodoFilter.prototype.handelActiveTodoFilter = function() {
+  /**
+  * activeTodoFilter()
+  * filter todo list is actice
+  *
+  * @param {} 
+  * @return {void}
+  */
+  TodoFilter.prototype.activeTodoFilter = function() {
     var todoItems = document.getElementById('todoList').childNodes;
     _helpers.forEach(todoItems, function (item) {
       if (_helpers.hasClass(item, 'completed')) {
@@ -89,7 +127,14 @@ var todoFilter = (function() {
     });
   };
 
-  TodoFilter.prototype.handelCompleteTodoFilter = function() {
+  /**
+  * completeTodoFilter()
+  * filter todo list is completed
+  *
+  * @param {} 
+  * @return {void}
+  */
+  TodoFilter.prototype.completeTodoFilter = function() {
     var todoItems = document.getElementById('todoList').childNodes;
     _helpers.forEach(todoItems, function (item) {
       if (_helpers.hasClass(item, 'completed')) {
@@ -99,6 +144,13 @@ var todoFilter = (function() {
 
   };
 
+  /**
+  * updateCountTodoList()
+  * update and render numbers list item is actice
+  *
+  * @param {} 
+  * @return {void}
+  */
   TodoFilter.prototype.updateCountTodoList = function() {
     var count = 0;
     var countTodo = document.getElementById('countTodo');
@@ -107,6 +159,49 @@ var todoFilter = (function() {
     });
     
     countTodo.innerHTML = (count === 1) ? (count +' item left') : (count +' items left');
+  };
+
+  /**
+  * toggleClearComplete()
+  *
+  * @param {} 
+  * @return {void}
+  */
+  TodoFilter.prototype.toggleClearComplete = function() {
+    var isDisplay = false;
+    var btnClearComplete = document.getElementById('btnClearComplete');
+    for (var i = 0; i < this.todoList.todos.length; i++){
+      if (this.todoList.todos[i].isCompleted) {
+        isDisplay = true;
+        break;
+      } 
+
+    }
+
+    if (isDisplay) _helpers.removeClass(btnClearComplete, 'hidden');
+    else _helpers.addClass(btnClearComplete, 'hidden');
+  };
+
+  /**
+  * toggleClearComplete()
+  *
+  * @param {} 
+  * @return {void}
+  */
+  TodoFilter.prototype.toggleAllTodo = function() {
+    var isDisplay = false;
+    var btnClearComplete = document.getElementById('toggleAll');
+    var len = this.todoList.todos.length; 
+    for (var i = 0; i < len; i++){
+      if (!this.todoList.todos[i].isCompleted) {
+        isDisplay = true;
+        break;
+      } 
+
+    }
+
+    if (isDisplay) btnClearComplete.checked = false;
+    else btnClearComplete.checked = true;
   };
 
   return view;

@@ -18,9 +18,12 @@ var todoList = (function() {
     this.rootElement = document.getElementById('todoList');
   }
 
-  /*
-  * render a new Todo list with its elements
-  * @return{void}
+  /**
+  * renderHtml()
+  * render html view of list todo
+  *
+  * @param { } 
+  * @return {void}
   */
   TodoList.prototype.renderHtml = function() {
     var todosLength = this.todos.length;
@@ -42,18 +45,24 @@ var todoList = (function() {
     }
   };
 
-  /*
-  * append a TodoView to TodoListView
-  * @return{void}
+  /**
+  * appendTodoItem()
+  * render html of todo item and add to todo list
+  *
+  * @param {Object} todo 
+  * @return {void}
   */
   TodoList.prototype.appendTodoItem = function(todo) {
     var todoItem = new _todoItem.TodoItem(todo, this);
     this.rootElement.appendChild(todoItem.renderHtml());
   };
 
-  /*
-  * add a Todo
-  * @return{void}
+  /**
+  * addTodo()
+  * add todo item to todo list
+  *
+  * @param { } 
+  * @return {void}
   */
   TodoList.prototype.addTodo = function() {
     var lastTodo = this.todos[this.todos.length - 1];
@@ -76,10 +85,13 @@ var todoList = (function() {
     _helpers.getLocalStorage().setItem('todos', JSON.stringify(this.todos));
   };
 
-  /*
-   * update status of a task
-   * @return {void}
-   */
+  /**
+  * updateTodotoStorage()
+  * update isComplete of todo item to localStorage
+  *
+  * @param {Number, Boolean} id, isCompleted 
+  * @return {void}
+  */
   TodoList.prototype.updateTodotoStorage = function(id, isCompleted) {
     var todo = this.getItemAt(this.indexOf(id));
     todo.isCompleted = isCompleted;
@@ -88,10 +100,13 @@ var todoList = (function() {
     this.saveTodoToStorage();
   };
 
-  /*
-   * update status of a task
-   * @return {void}
-   */
+  /**
+  * updateTodoNametoStorage()
+  * update name of todo item to localStorage
+  *
+  * @param {Number,String} id, name 
+  * @return {void}
+  */
   TodoList.prototype.updateTodoNametoStorage = function(id, name) {
     var todo = this.getItemAt(this.indexOf(id));
     todo.name = name;
@@ -100,6 +115,13 @@ var todoList = (function() {
     this.saveTodoToStorage();
   };
 
+  /**
+  * indexOf()
+  * get index of todo item from id
+  *
+  * @param {Number} id 
+  * @return {Number} index
+  */
   TodoList.prototype.indexOf = function(id) {
     var result = -1;
 
@@ -121,10 +143,24 @@ var todoList = (function() {
 
   };
 
+  /**
+  * getItemAt()
+  * get todo item of todo list
+  *
+  * @param {number} index 
+  * @return {Object}
+  */
   TodoList.prototype.getItemAt = function(index) {
     return this.todos[index];
   };
 
+  /**
+  * removeItemAt()
+  * remove item of todos list at index
+  *
+  * @param {number} index 
+  * @return {array}
+  */
   TodoList.prototype.removeItemAt = function(index) {
     return this.todos.splice(index, 1);
   };
