@@ -1,4 +1,4 @@
-/* global dom, helpers */
+/* global dom, helpers, todoFilter */
 
 var todoItem = (function() {
   'use strict';
@@ -11,10 +11,10 @@ var todoItem = (function() {
   var _todoFilter = todoFilter;
 
   /**
-  * TodoItem() Constructor
+  * todoItem() Constructor
   *
-  * @param {object} 
-  * @return {void} 
+  * @param {object}
+  * @return {void}
   */
   function TodoItem(todo, parent) {
     this.todo = todo;

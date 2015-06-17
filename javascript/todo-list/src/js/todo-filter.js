@@ -16,7 +16,7 @@ var todoFilter = (function() {
   * toggleMenuFilter()
   * render and register events on menu filter
   *
-  * @param {} 
+  * @param {}
   * @return {void}
   */
   TodoFilter.prototype.toggleMenuFilter = function() {
@@ -39,21 +39,21 @@ var todoFilter = (function() {
       _helpers.addClass(todoFilter, 'hidden');
       _helpers.addClass(toggleAll, 'hidden');
     }
-    
+
   };
 
   /**
   * handleTodoFilter()
   * handle event filter todo list
   *
-  * @param {event} click mouse on btn filter 
+  * @param {event} click mouse on btn filter
   * @return {void}
   */
   TodoFilter.prototype.handleTodoFilter = function(event) {
     var btnFilter = event.target;
     var btnFilters = document.getElementsByClassName('filter__btn');
 
-    _helpers.forEach(btnFilters, function (item) {
+    _helpers.forEach(btnFilters, function(item) {
       _helpers.removeClass(item, 'selected');
     });
 
@@ -77,16 +77,15 @@ var todoFilter = (function() {
   * clearTodoCompleted()
   * handle event clear all todo item is completed
   *
-  * @param {event} on click mouse btn clear completed 
+  * @param {event} on click mouse btn clear completed
   * @return {void}
   */
   TodoFilter.prototype.clearTodoCompleted = function(event) {
     var todos = this.todoList.todos;
     for (var i = 0; i < todos.length; i++) {
-      if (todos[i].isCompleted) 
-        this.todoList.removeItemAt(i);
+      if (todos[i].isCompleted) this.todoList.removeItemAt(i);
     }
-    
+
     // update data in Storage
     this.todoList.saveTodoToStorage();
 
@@ -102,12 +101,12 @@ var todoFilter = (function() {
   * allTodoFilter()
   * all todo list
   *
-  * @param {} 
+  * @param {}
   * @return {void}
   */
   TodoFilter.prototype.allTodoFilter = function() {
     var todoItems = document.getElementById('todoList').childNodes;
-    _helpers.forEach(todoItems, function (item) {
+    _helpers.forEach(todoItems, function(item) {
       _helpers.removeClass(item, 'hidden');
     });
   };
@@ -116,12 +115,12 @@ var todoFilter = (function() {
   * activeTodoFilter()
   * filter todo list is actice
   *
-  * @param {} 
+  * @param {}
   * @return {void}
   */
   TodoFilter.prototype.activeTodoFilter = function() {
     var todoItems = document.getElementById('todoList').childNodes;
-    _helpers.forEach(todoItems, function (item) {
+    _helpers.forEach(todoItems, function(item) {
       if (_helpers.hasClass(item, 'completed')) {
         _helpers.addClass(item, 'hidden');
       } else _helpers.removeClass(item, 'hidden');
@@ -132,12 +131,12 @@ var todoFilter = (function() {
   * completeTodoFilter()
   * filter todo list is completed
   *
-  * @param {} 
+  * @param {}
   * @return {void}
   */
   TodoFilter.prototype.completeTodoFilter = function() {
     var todoItems = document.getElementById('todoList').childNodes;
-    _helpers.forEach(todoItems, function (item) {
+    _helpers.forEach(todoItems, function(item) {
       if (_helpers.hasClass(item, 'completed')) {
         _helpers.removeClass(item, 'hidden');
       } else _helpers.addClass(item, 'hidden');
@@ -149,33 +148,33 @@ var todoFilter = (function() {
   * updateCountTodoList()
   * update and render numbers list item is actice
   *
-  * @param {} 
+  * @param {}
   * @return {void}
   */
   TodoFilter.prototype.updateCountTodoList = function() {
     var count = 0;
     var countTodo = document.getElementById('countTodo');
-    _helpers.forEach(this.todoList.todos, function (item) {
+    _helpers.forEach(this.todoList.todos, function(item) {
       if (!item.isCompleted) count++;
     });
-    
-    countTodo.innerHTML = (count === 1) ? (count +' item left') : (count +' items left');
+
+    countTodo.innerHTML = (count === 1) ? (count + ' item left') : (count + ' items left');
   };
 
   /**
   * toggleClearComplete()
   *
-  * @param {} 
+  * @param {}
   * @return {void}
   */
   TodoFilter.prototype.toggleClearComplete = function() {
     var isDisplay = false;
     var btnClearComplete = document.getElementById('btnClearComplete');
-    for (var i = 0; i < this.todoList.todos.length; i++){
+    for (var i = 0; i < this.todoList.todos.length; i++) {
       if (this.todoList.todos[i].isCompleted) {
         isDisplay = true;
         break;
-      } 
+      }
 
     }
 
@@ -186,18 +185,18 @@ var todoFilter = (function() {
   /**
   * toggleClearComplete()
   *
-  * @param {} 
+  * @param {}
   * @return {void}
   */
   TodoFilter.prototype.toggleAllTodo = function() {
     var isDisplay = false;
     var btnClearComplete = document.getElementById('toggleAll');
-    var len = this.todoList.todos.length; 
-    for (var i = 0; i < len; i++){
+    var len = this.todoList.todos.length;
+    for (var i = 0; i < len; i++) {
       if (!this.todoList.todos[i].isCompleted) {
         isDisplay = true;
         break;
-      } 
+      }
 
     }
 
@@ -207,9 +206,9 @@ var todoFilter = (function() {
 
   TodoFilter.prototype.updateTodoFilter = function() {
     var btnFilterId = document.querySelector('.todo-filter__list .selected').id;
-    if (btnFilterId === "btnActive") this.activeTodoFilter();
-    else if (btnFilterId === "btnComplete") this.completeTodoFilter();
-  }
+    if (btnFilterId === 'btnActive') this.activeTodoFilter();
+    else if (btnFilterId === 'btnComplete') this.completeTodoFilter();
+  };
 
   return view;
 })();

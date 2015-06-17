@@ -22,7 +22,7 @@ var todoList = (function() {
   * renderHtml()
   * render html view of list todo
   *
-  * @param { } 
+  * @param { }
   * @return {void}
   */
   TodoList.prototype.renderHtml = function() {
@@ -49,7 +49,7 @@ var todoList = (function() {
   * appendTodoItem()
   * render html of todo item and add to todo list
   *
-  * @param {Object} todo 
+  * @param {Object} todo
   * @return {void}
   */
   TodoList.prototype.appendTodoItem = function(todo) {
@@ -61,7 +61,7 @@ var todoList = (function() {
   * addTodo()
   * add todo item to todo list
   *
-  * @param { } 
+  * @param { }
   * @return {void}
   */
   TodoList.prototype.addTodo = function() {
@@ -89,7 +89,7 @@ var todoList = (function() {
   * updateTodotoStorage()
   * update isComplete of todo item to localStorage
   *
-  * @param {Number, Boolean} id, isCompleted 
+  * @param {Number, Boolean} id, isCompleted
   * @return {void}
   */
   TodoList.prototype.updateTodotoStorage = function(id, isCompleted) {
@@ -104,7 +104,7 @@ var todoList = (function() {
   * updateTodoNametoStorage()
   * update name of todo item to localStorage
   *
-  * @param {Number,String} id, name 
+  * @param {Number,String} id, name
   * @return {void}
   */
   TodoList.prototype.updateTodoNametoStorage = function(id, name) {
@@ -119,7 +119,7 @@ var todoList = (function() {
   * indexOf()
   * get index of todo item from id
   *
-  * @param {Number} id 
+  * @param {Number} id
   * @return {Number} index
   */
   TodoList.prototype.indexOf = function(id) {
@@ -147,7 +147,7 @@ var todoList = (function() {
   * getItemAt()
   * get todo item of todo list
   *
-  * @param {number} index 
+  * @param {number} index
   * @return {Object}
   */
   TodoList.prototype.getItemAt = function(index) {
@@ -158,7 +158,7 @@ var todoList = (function() {
   * removeItemAt()
   * remove item of todos list at index
   *
-  * @param {number} index 
+  * @param {number} index
   * @return {array}
   */
   TodoList.prototype.removeItemAt = function(index) {

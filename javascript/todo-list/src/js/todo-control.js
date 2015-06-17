@@ -9,10 +9,10 @@
   var _todoFilter = todoFilter;
 
   /**
-  * TodoControl()
+  * todoControl()
   * controller app
   *
-  * @param {Array} 
+  * @param {Array}
   * @return {void}
   */
   function TodoControl(todos, appElement) {
@@ -39,7 +39,7 @@
   * handleAddNewTodo()
   * handle event add new todo
   *
-  * @param {event} enter keyup 
+  * @param {event} enter keyup
   * @return {void}
   */
   TodoControl.prototype.handleAddNewTodo = function(event) {
@@ -58,7 +58,7 @@
       this.todoList.addTodo();
       _helpers.getLocalStorage().setItem('currentId', currentId);
       _target.value = '';
-      
+
       this.todoFilter.toggleMenuFilter();
       this.todoFilter.updateTodoFilter();
     }
@@ -70,13 +70,13 @@
   * handleAddNewTodo()
   * handle event add new todo
   *
-  * @param {event} enter keyup 
+  * @param {event} enter keyup
   * @return {void}
   */
   TodoControl.prototype.handleToggleAllTodo = function(event) {
 
     var todos = this.todoList.todos;
-    for (var i = 0; i < todos.length; i++){
+    for (var i = 0; i < todos.length; i++) {
       this.todoList.updateTodotoStorage(todos[i].id, event.target.checked);
     }
 
@@ -84,13 +84,13 @@
     this.todoFilter.toggleMenuFilter();
     this.todoFilter.updateTodoFilter();
 
-  }
+  };
   /**
   * getListTodo()
   * if the browser hasn't todos, or couldn't parse to Object from Json,
   * get the todos to initialize
   *
-  * @param {Array} todos 
+  * @param {Array} todos
   * @return {Array}
   */
   TodoControl.prototype.getListTodo = function(todos) {
