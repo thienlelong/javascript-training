@@ -1,0 +1,68 @@
+/* 
+* todo new 
+*/
+
+.todo-new {
+    position: relative;
+
+    border-bottom: 1px solid #ccc;
+    background-color: rgba(0, 0, 0, .003);
+    box-shadow: inset 0 -2px 1px rgba(0,0,0,.03);
+}
+
+.todo-new__field {
+    font-size: 24px;
+
+    -moz-box-sizing: border-box;
+         box-sizing: border-box;
+    width: 100%;
+    padding: 20px 20px 20px 60px;
+
+    border: none;
+    border-bottom: 1px solid #e6e6e6;
+    outline: none;
+    background: #fff;
+
+    webkit-box-sizing: border-box;
+}
+
+.todo-new__field::-webkit-input-placeholder {
+    font-style: italic;
+}
+.todo-new__field::-moz-placeholder {
+    /* Firefox 19+ */
+    font-style: italic;
+}
+.todo-new__field:-ms-input-placeholder {
+    font-style: italic;
+}
+.todo-new__field:-moz-placeholder {
+    /* Firefox 18- */
+    font-style: italic;
+}
+
+.todo-new__toggle--all {
+    font-size: 28px;
+
+    position: absolute;
+    top: 50%;
+
+    margin: 0 10px;
+
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+    text-align: center;
+
+    color: #d9d9d9;
+    border: none;
+    outline: none;
+
+            appearance: none;
+       -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.todo-new__toggle--all:checked {
+    color: #737373;
+}

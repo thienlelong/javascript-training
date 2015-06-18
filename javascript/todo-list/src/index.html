@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Todo List App</title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/style-all.css">
+</head>
+<body>
+    <!-- Begin - Todo UI -->
+    <div class="container">
+    <header class="header">
+      <h1 class="header__title">todos</h1>
+    </header>
+
+    <section id="todoApp" class="content todos">
+        <div class="todo-new">
+            <input id="toggleAll" class="todo-new__toggle--all fa fa-chevron-down hidden" type="checkbox">
+            <input id="todoNew" class ="todo-new__field" type="text" placeholder="What needs to be done?">
+        </div>
+        <ul id="todoList" class="todo-list">
+            
+        </ul>
+
+        <!-- End .todo-list-warp-->
+        <div id="todoFilter" class="todo-filter hidden">
+            <span id="countTodo" class="todo-filter__count">items left</span>
+            <ul class="todo-filter__list">
+                <li><a id="btnAll" class="filter__btn filter__btn--all selected">All</a></li>
+                <li><a id="btnActive" class="filter__btn filter__btn--actice">Active</a></li>
+                <li><a id="btnComplete" class="filter__btn filter__btn--completed">Completed</a></li>
+            </ul>
+            <button id="btnClearComplete" class="todo-filter__clear hidden">Clear completed</button> 
+        </div>
+    <!-- End list action-->
+
+    </section>
+
+    <footer class="footer">
+      <p class="footer__info">Double-click to edit a todo</p>
+      <p class="footer__info">Written: Thien Le </p>
+    </footer>
+    </div>
+    <!-- End - Todo UI -->
+
+     <!-- Import App scripts-->
+    <script type="text/javascript" src="js/helper.js"></script>
+    <script type="text/javascript" src="js/dom.js"></script>
+    <script type="text/javascript" src="js/model.js"></script>
+    <script type="text/javascript" src="js/todo-filter.js"></script>
+    <script type="text/javascript" src="js/todo-item.js"></script>
+    <script type="text/javascript" src="js/todo-list.js"></script>
+    <script type="text/javascript" src="js/todo-control.js"></script>
+    
+</body>
+</html>
