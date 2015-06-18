@@ -42,7 +42,7 @@
   "maxparams": 4,
  
   // Prevent deep nesting
-  "maxdepth": 2,
+  "maxdepth": 3,
  
   // Concise functions
   "maxstatements": 15,

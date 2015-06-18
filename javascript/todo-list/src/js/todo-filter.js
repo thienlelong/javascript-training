@@ -159,7 +159,7 @@ var todoFilter = (function() {
       if (!item.isCompleted) count++;
     });
 
-    countTodo.innerHTML = count + (count === 1 ? ' item left' : ' items left');
+    countTodo.innerHTML = count + (count <= 1 ? ' item left' : ' items left');
   };
 
   /**

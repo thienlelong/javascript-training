@@ -1,8 +1,8 @@
 @import 'reset.css';
 @import 'state.css';
-@import '_header.css';
-@import '_footer.css';
-@import '_container.css';
+@import 'header.css';
+@import 'footer.css';
+@import 'container.css';
 @import 'todo.css';
 @import 'todo-list.css';
 @import 'todo-new.css';
