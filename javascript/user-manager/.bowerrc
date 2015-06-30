@@ -1,0 +1,8 @@
+{
+    "directory": "src/files/vendor",
+    "analytics": false,
+    "timeout": 120000,
+    "registry": {
+        "register": "http://localhost:8000"
+    }
+}
