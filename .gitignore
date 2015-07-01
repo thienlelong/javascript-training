@@ -2,4 +2,4 @@
 vagrant/.vagrant/
 javascript/user-manager/node_modules/
 javascript/user-manager/out/
-javascript/user-manager/src/files/vendor/
+javascript/user-manager/src/files/vender/
