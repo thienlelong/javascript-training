@@ -52,6 +52,7 @@ gulp.task('server', [], function() {
     gulp.watch([paths.htmlOutWatch], browserSync.reload);
     gulp.watch([paths.jsOutWatch], browserSync.reload);
     gulp.watch([paths.cssOutWatch], browserSync.reload);
+    gulp.watch([paths.images], browserSync.reload);
 });
 
 // Jshint Task
