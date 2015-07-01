@@ -1,0 +1,33 @@
+
+/* body */
+body {
+    line-height: rem(20px);
+
+    letter-spacing: -.25px;
+
+    @include set-font($font-opensans, 14px, normal, $color-gray);
+}
+
+a:link,
+a:active,
+a:visited,
+a:focus {
+    text-decoration: none;
+
+    color: $color-link;
+    outline: none;
+    outline-width: 0;
+}
+a:hover {
+    text-decoration: underline;
+}
+input[type='text'] {
+    @include set-text($font-ptsans, $color-text-input, 14px, solid 1px $color-border, 8px, 13px);
+    @include rounded(4px);
+}
+select {
+    @include set-text($font-ptsans, $color-text-input, 14px, solid 1px $color-border, 8px, 13px);
+    @include rounded(4px);
+    -webkit-appearance: none;
+            appearance: none;
+}

@@ -1,0 +1,24 @@
+/*
+ * HEADER
+ * @HEADER stylesheet,  
+*/
+.header {
+    @include box-shadow(0, 2px, 2px, 0, rgba(95, 95, 95, .75), true);
+}
+
+.header__nav {
+    li a {
+        font-family: $font-ptsans;
+        font-size: 16px;
+        font-weight: 700;
+
+        display: block;
+
+        text-transform: uppercase;
+
+        text-shadow: none;
+        &:hover{
+            color: $color-blue;
+        }
+    }
+}
