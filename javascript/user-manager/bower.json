@@ -14,5 +14,12 @@
     "src/files/vender",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "lodash": "~3.9.3",
+    "bootstrap-sass": "~3.3.4"
+  },
+  "devDependencies": {
+    "Faker": "~2.1.3"
+  }
 }
