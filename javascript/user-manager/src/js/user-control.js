@@ -16,7 +16,8 @@ var app = app || {};
     this.userStore = new app.UserStore();
     this.userStore.generateUsers(50);
     this.userList = new app.UserList(this.userStore.users);
-    this.userList.renderListUser(this.userList.users);
+    var users = this.userList.users.slice(0,10);
+    this.userList.renderListUser(users);
     this.handleEvents();
   }
 
@@ -44,7 +45,6 @@ var app = app || {};
       if (window.confirm('Are you sure you want to delete user?')) {
         var $userRow = $(event.target).parentsUntil('tr').parent();
         _this.userList.handleUserDelete($userRow.attr('data-id'));
-        $userRow.remove();
       }
 
     });
@@ -82,6 +82,25 @@ var app = app || {};
       }
       
     });
+
+    // pagination list user
+    var amountUsers = _this.userList.users.length;
+    var totalPages = amountUsers/10;
+    if (amountUsers%10 !== 0){
+      totalPages++;
+    }
+
+    app.page = 1;
+
+    $('#pagination').twbsPagination({
+        totalPages: totalPages,
+        onPageClick: function (event, page) {
+          app.page = page;
+          var users = _this.userList.users.slice((page - 1) * 10 ,page * 10);
+          _this.userList.renderListUser(users);
+        }
+    });
+
     
   };
 

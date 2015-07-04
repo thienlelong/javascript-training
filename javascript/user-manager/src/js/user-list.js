@@ -73,9 +73,12 @@ var app = app || {};
     });
 
     if(!_this.hasUser(user.email)) {
-      _this.users.push(user);
+      _this.users.unshift(user);
       _this.userStore.saveUsers(_this.users, ++currentId);
-      _this.appendUserNode(user);
+      // render again page
+      var users = this.users.slice((app.page - 1) * 10, app.page * 10);
+      this.renderListUser(users);
+
       message = 'User has been add successfully';
       $userModal.modal("hide");
       window.alert(message);
@@ -127,7 +130,12 @@ var app = app || {};
     _.remove(_this.users, function(user) {
       return parseInt(user.id) === parseInt(userId);
     });
+
     _this.userStore.saveUsers(_this.users);
+
+    // render again page
+    var users = this.users.slice((app.page - 1) * 10, app.page * 10);
+    this.renderListUser(users);
   };
   
   /**

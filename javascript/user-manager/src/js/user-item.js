@@ -28,7 +28,6 @@ var app = app || {};
     // body...
     var userRow = $([
       '<tr data-id="', _this.user.id, '">',
-      '<td class = "user-id">', _this.user.id, '</td>',
       '<td class = "user-name">', _this.user.username, '</td>',
       '<td class = "user-address">', _this.user.email, '</td>',
       '<td class = "user-email">', _this.user.phone, '</td>',

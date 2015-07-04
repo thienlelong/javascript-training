@@ -2,27 +2,17 @@
 
 ## Practice user manager Structure
 
-### Folder "out": out file build
+### Folder "out": container files after build by gulp
 
 
 ### Folder "src": source of project
 
 - Folder "files": include library for practice 
-
-- Folder "js" include: 
-  - dom.js
-  - helper.js
-  - model.js
-  - todo-*.js
-
+- Folder "js" include: files *.js control practice
 - Folder "images": Include images in practice
-
 - Folder "style": include files *.scss to style layout
-
 - Folder "layouts": include layout and template for practice
-
 - Folder "fonts": include list fonts of practice
-
 - .editorconfig: config editor using project
 - .jshintrc: config jshint tool (code style)
 - .jscsrc: config jscs tool (code style)
@@ -32,10 +22,10 @@
 
 ## run project user-manager, required : started vagrant
 
-## from vagrant machine: 
--
+## from vagrant machine run command: 
 - cd /src/user-manager
-- run "gulp"
+- npm install --save-dev gulp
+- gulp
 
 ## go to webbrowser to access project
 - http://localhost:8080
