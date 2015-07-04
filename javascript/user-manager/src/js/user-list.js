@@ -24,7 +24,7 @@ var app = app || {};
    */
   UserList.prototype.renderListUser = function (users) {
     var _this = this;
-    
+
     // Clear User List View
     _this.$listAllUser.html('');
     if (users.length === 0) {
@@ -78,7 +78,7 @@ var app = app || {};
       _this.appendUserNode(user);
       message = 'User has been add successfully';
       $userModal.modal("hide");
-      alert(message);
+      window.alert(message);
     } else {
       $('#modalMessage').text(message);
     }
@@ -108,7 +108,7 @@ var app = app || {};
       message = 'User has been updated successfully';
       $userModal.modal("hide");
       _this.replaceUserRow(userId);
-      alert(message);
+      window.alert(message);
     } else {
       $('#modalMessage').text(message);
     }

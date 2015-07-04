@@ -38,7 +38,7 @@ var pathsLibraryJs = [
     paths.vender + 'lodash/lodash.min.js',
     paths.vender + 'bootstrap-sass/assets/javascripts/bootstrap.js',
     paths.vender + 'Faker/build/build/faker.js',
-    paths.vender + 'jQueryValidate/js/jquery-validate.min.js'
+    paths.vender + 'jquery-validation/dist/jquery.validate.js'
 ];
 
 // server task
