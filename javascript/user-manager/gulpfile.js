@@ -40,9 +40,7 @@ var pathsLibraryJs = [
     paths.vender + 'Faker/build/build/faker.js',
     paths.vender + 'jQueryValidate/js/jquery-validate.min.js'
 ];
-var pathsLibraryCss = [
-    paths.vender + 'jQueryValidate/css/jquery-validate.css'
-];
+
 // server task
 gulp.task('server', [], function() {
     browserSync({
@@ -115,13 +113,7 @@ gulp.task('jsLibrary', function() {
         .on('error', gutil.log);
 });
 
-
-// Compile Our Sass to css
-gulp.task('cssLibrary', function() {
-    return gulp.src(pathsLibraryCss)
-        .pipe(gulp.dest(paths.cssOut));
-});
-
+// task fonts
 gulp.task('fonts', function () {
     return gulp.src('src/fonts/fonts.list')
         .pipe(googleWebFonts())
@@ -137,4 +129,4 @@ gulp.task('watch', function() {
 
 // Default Task
 gulp.task('default', ['server', 'jshint', 'sass', 'scripts',
-                        'watch','jade', 'jsLibrary', 'fonts', 'images', 'cssLibrary']);
+                        'watch','jade', 'jsLibrary', 'fonts', 'images']);

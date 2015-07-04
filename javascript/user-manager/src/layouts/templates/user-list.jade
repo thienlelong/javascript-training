@@ -1,19 +1,27 @@
 extends ../layout.jade
 block content
-    .user-list.table-responsive 
-        table.table.table-striped
-            thead
-                tr
-                    th ID
-                    th Name
-                    th Email
-                    th Phone
-                    th Address
-                    th Edit
-                    th Delete
-            tbody(id="listAllUser")
-    
-    #modalWrap
+    .user
+        .user__menu.clearfix.row
+            .col-sm-6
+                button(type="button").btn.btn-default#btnAddUser Add User
+            .col-sm-6
+                form.form-inline.user__search#userSearchForm
+                    .form-group
+                        input(type="text", placeholder="Search").form-control#userSearch
+                        button(type="submit").btn.btn-default#btnSearch Search 
+        .user__list.table-responsive 
+            table.table.table-striped
+                thead
+                    tr
+                        th ID
+                        th Name
+                        th Email
+                        th Phone
+                        th Address
+                        th Edit
+                        th Delete
+                tbody(id="listAllUser") 
+    #modalWrap 
     
                 
 

@@ -24,11 +24,16 @@ var app = app || {};
    */
   UserList.prototype.renderListUser = function (users) {
     var _this = this;
+    
     // Clear User List View
     _this.$listAllUser.html('');
-    _.forEach(users, function(user) {
-      _this.appendUserNode(user);
-    });
+    if (users.length === 0) {
+      _this.$listAllUser.html('User not found.');
+    } else {
+      _.forEach(users, function(user) {
+        _this.appendUserNode(user);
+      });
+    }
   };
 
   /**
@@ -57,7 +62,7 @@ var app = app || {};
     var currentId = _this.userStore.getCurrentId();
     var $userModal = $('#userModal');
     var $userForm = $('#userForm');
-    var message = 'User is exist. Please enter new email.';
+    var message = 'Email already exist. Please enter new email.';
     var user = new app.User({
       id: currentId,
       username: $userForm.find('#userName').val().trim(),
@@ -67,11 +72,11 @@ var app = app || {};
       address: $userForm.find('#address').val().trim(),
     });
 
-    if(_this.hasUser(user)) {
+    if(!_this.hasUser(user.email)) {
       _this.users.push(user);
       _this.userStore.saveUsers(_this.users, ++currentId);
       _this.appendUserNode(user);
-      message = 'Add new user successful';
+      message = 'User has been add successfully';
       $userModal.modal("hide");
       alert(message);
     } else {
@@ -90,17 +95,17 @@ var app = app || {};
     var _this = this;
     var $userModal = $('#userModal');
     var $userForm = $('#userForm');
-    var message = 'User is exist. Please enter new email.';
+    var message = 'Email already exist. Please enter new email.';
     var user = _this.getUser(userId);
     var email = $userForm.find('#email').val().trim();
-    if(!_this.hasUser(user) && user.email === email) {
+    if((user.email === email) || (user.email !== email && !_this.hasUser(email) )) {
       user.username = $userForm.find('#userName').val().trim();
       user.email = email;
       user.password =  $userForm.find('#passWord').val().trim();
       user.phone = $userForm.find('#phone').val().trim();
       user.address = $userForm.find('#address').val().trim();
       _this.userStore.saveUsers(_this.users);
-      message = 'Edit new user successful';
+      message = 'User has been updated successfully';
       $userModal.modal("hide");
       _this.replaceUserRow(userId);
       alert(message);
@@ -125,6 +130,23 @@ var app = app || {};
     _this.userStore.saveUsers(_this.users);
   };
   
+  /**
+   * handleUserDelete()
+   * delete user item from list user
+   *
+   * @param {Number} user id
+   * @return {void}
+   */
+
+  UserList.prototype.handleUserSearch = function (username) {
+    var _this = this;
+
+    return _.filter(_this.users, function(user) {
+      return user.username.toLowerCase().indexOf(username.toLowerCase()) > -1;
+    });
+
+  };
+
   /**
    * loadInfoUser()
    * load info user to form view edit
@@ -166,10 +188,10 @@ var app = app || {};
    * @param  {Object}    user
    * @return {Boolean}
    */
-  UserList.prototype.hasUser = function (user) {
+  UserList.prototype.hasUser = function (email) {
     var _this = this;
-    return _.every(_this.users, function(item) {
-      return item.email !== user.email;
+    return !_.every(_this.users, function(item) {
+      return item.email !== email;
     });
   };
 

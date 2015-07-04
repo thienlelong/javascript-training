@@ -33,27 +33,14 @@ var app = app || {};
       '<td class = "user-address">', _this.user.email, '</td>',
       '<td class = "user-email">', _this.user.phone, '</td>',
       '<td class = "user-email">', _this.user.address, '</td>',
-      '<td><button type="button" class="btn btn-default btn-sm" id="btnEditUser" data-toggle="modal">Edit</button></td>',
-      '<td><button type="button" class="btn btn-danger btn-sm" id="btnRemoveUser">Remove</button></td>',
+      '<td><button type="button" class="btn btn-default btn-xs" id="btnEditUser" data-toggle="modal">Edit</button></td>',
+      '<td><button type="button" class="btn btn-danger btn-xs" id="btnRemoveUser">Remove</button></td>',
       '</tr>'
     ].join(''));
 
     return userRow;
   };
-
-  /**
-   * updateUserItem()
-   * update user item
-   *
-   * @param {Object} user
-   * @return {void}
-   */
-  UserItem.prototype.updateUserItem = function (user) {
-    var _this = this;
-
-    _this.user.username = user.username;
-  };
-
+  
   app.UserItem = UserItem;
 
 })(app);

@@ -1,0 +1,14 @@
+extends ../layout.jade
+block content
+    .user-setting
+        form.form-inline.user-setting__generate#userGenerateForm
+            .form-group
+                label Amount User Generate
+                input(type="number", placeholder="Amount users").form-control#amountUsers
+                button(type="submit").btn.btn-default#btnGenerateUsers Generate Users
+                span#generateMessage
+        
+    
+                
+
+

@@ -4,10 +4,9 @@ var app = app || {};
   'use strict';
 
   /**
-   * User Item constructor
+   * User control constructor
    *
-   * @param {Object}      user
-   * @param {DOMElement}  user-list view
+   * @param {}      
    * @return {Void}
    */
 
@@ -18,12 +17,19 @@ var app = app || {};
     this.userStore.generateUsers(50);
     this.userList = new app.UserList(this.userStore.users);
     this.userList.renderListUser(this.userList.users);
-    this.handleEvent();
+    this.handleEvents();
   }
 
-  UserControl.prototype.handleEvent = function (event){
+  /**
+   * handleEvents()
+   * handle all event
+   *
+   * @return {Void}
+   */
+  UserControl.prototype.handleEvents = function (event) {
     var _this = this;
 
+    // add new user
     $('#btnAddUser').on('click',function (event){
       event.preventDefault();
       $('#modalWrap').load('user-modal.html', function(){
@@ -32,24 +38,51 @@ var app = app || {};
       });
     });
 
-    /* delete user */
-    $('#listAllUser').on('click','#btnRemoveUser',function (event){
+    // remove user
+    $('#listAllUser').on('click','#btnRemoveUser',function (event) {
       event.preventDefault();
-      var $userRow = $(event.target).parentsUntil('tr').parent();
-      _this.userList.handleUserDelete($userRow.attr('data-id'));
-      $userRow.remove();
+      if (window.confirm('Are you sure you want to delete user?')) {
+        var $userRow = $(event.target).parentsUntil('tr').parent();
+        _this.userList.handleUserDelete($userRow.attr('data-id'));
+        $userRow.remove();
+      }
+
     });
 
-    /* delete user */
-    $('#listAllUser').on('click','#btnEditUser',function (event){
+    // edit user
+    $('#listAllUser').on('click','#btnEditUser',function (event) {
       event.preventDefault();
       var $userRow = $(event.target).parentsUntil('tr').parent();
-      $('#modalWrap').load('user-modal.html', function(){
+      $('#modalWrap').load('user-modal.html', function() {
         _this.userList.loadInfoUser($userRow.attr("data-id"));
         $('#userModal').modal('show');
         _this.validateForm();
       });
     });
+
+    // search user
+    $('#btnSearch').on('click',function (event) {
+      event.preventDefault();
+      var $username = $('#userSearch').val().trim();
+      var users = _this.userList.handleUserSearch($username);
+      _this.userList.renderListUser(users);
+    });
+
+    // general user
+    $('#btnGenerateUsers').on('click',function (event) {
+      event.preventDefault();
+      var $amount = parseInt($('#amountUsers').val());
+      if (!_.isNaN($amount)) {
+        app.helper.getLocalStorage().clear();
+        this.userStore = new app.UserStore();
+        _this.userStore.generateUsers($amount);
+        $(location).attr('href', window.location.origin + '/user-list.html');
+      } else {
+        $('#generateMessage').text('Please Enter Number');
+      }
+      
+    });
+    
   };
 
   /**
@@ -59,6 +92,14 @@ var app = app || {};
    */
   UserControl.prototype.validateForm = function () {
     var _this = this;
+
+    // validate phone number
+    jQuery.validator.addMethod("phoneNumber", function (phoneNumber, element) {
+      var phoneMatch = /^\+?\(?([0-9]{3,4})\)?[-. ]?([0-9]{3,4})[-. ]?([0-9]{4})$/;
+      return this.optional(element) || 
+              phoneNumber.length > 9 && phoneNumber.match(phoneMatch);
+      }, "Please enter a valid phone number");
+
     var $userAddForm = $('#userForm');
     $userAddForm.validate({
       onfocusout: function (element) {
@@ -76,7 +117,7 @@ var app = app || {};
         },
         phone: {
           required: true,
-          number: true
+          phoneNumber: true
         },
         password: {
           required: true

@@ -7,7 +7,7 @@
                     span(aria-hidden="true") &times;
                 h4.modal-title Add User
             .modal-body
-                form.add-user-container.clearfix#userForm(action="#",method="POST")
+                form.user-add.clearfix#userForm(action="#",method="POST")
                     .form-group.hidden
                         input.form-control#userId(type="text", name='userid')
                     .form-group
@@ -27,7 +27,8 @@
                         input.form-control#address(type="text", name='address')
                     .form-group
                         button.btn.btn-primary#btnSaveAddUser(type="submit") Save
+                        button.btn.btn-primary(type="reset") Reset
                         button.btn.btn-default#btnClose(type="button" data-dismiss="modal") Close
-                        span#modalMessage
+                        span#modalMessage.user-add__message
                 
       
