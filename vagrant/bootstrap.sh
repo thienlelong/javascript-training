@@ -28,7 +28,7 @@ npm install -g grunt-cli
 npm install -g bower
 
 echo '### Install Gulp ...'
-npm install --save-dev gulp
+npm install --global gulp
 
 echo '### Install Sass and Compass'
 

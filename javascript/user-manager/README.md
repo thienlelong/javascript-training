@@ -24,7 +24,9 @@
 
 ## from vagrant machine run command: 
 - cd /src/user-manager
-- npm install --save-dev gulp
+- npm install --global gulp
+- npm install
+- bower install
 - gulp
 
 ## go to webbrowser to access project
