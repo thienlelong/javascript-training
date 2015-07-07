@@ -66,8 +66,10 @@ var app = app || {};
     $('#btnSearch').on('click',function (event) {
       event.preventDefault();
       var $username = $('#userSearch').val().trim();
-      var users = _this.userList.handleUserSearch($username);
-      _this.userList.renderListUser(users);
+      if( $username ){
+        var users = _this.userList.handleUserSearch($username);
+        _this.userList.renderListUser(users);
+      }
     });
 
     // general user
