@@ -76,7 +76,7 @@ var app = app || {};
       _this.users.unshift(user);
       _this.userStore.saveUsers(_this.users, ++currentId);
       // render again page
-      var users = this.users.slice((app.page - 1) * 10, app.page * 10);
+      var users = this.users.slice((app.page - 1) * 15, app.page * 15);
       this.renderListUser(users);
 
       message = 'User has been add successfully';
@@ -134,7 +134,7 @@ var app = app || {};
     _this.userStore.saveUsers(_this.users);
 
     // render again page
-    var users = this.users.slice((app.page - 1) * 10, app.page * 10);
+    var users = this.users.slice((app.page - 1) * 15, app.page * 15);
     this.renderListUser(users);
   };
   

@@ -5,9 +5,9 @@ block content
             .col-sm-6
                 button(type="button").btn.btn-default#btnAddUser Add User
             .col-sm-6
-                form.form-inline.user__search#userSearchForm
+                form.form-inline.user__search#userSearchForm(action="#", method="GET")
                     .form-group
-                        input(type="text", placeholder="Search").form-control#userSearch
+                        input(type="text", placeholder="Search", name="q").form-control#userSearch
                         button(type="submit").btn.btn-default#btnSearch Search 
         .user__list.table-responsive 
             table.table.table-striped
