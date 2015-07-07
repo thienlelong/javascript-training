@@ -1,18 +1,19 @@
 
 var app = app || {};
 
-;(function (app) {
+;(function(app) {
   'use strict';
 
   /**
-   * User Item constructor
+   * user Item constructor
    *
    * @param {Object}      user
    * @param {DOMElement}  user-list view
    * @return {Void}
    */
-  function UserItem(user) {
+  function UserItem(user, userList) {
     this.user = user;
+    this.userList = userList;
     this.$listAllUser = $('#listAllUser');
   }
 
@@ -23,8 +24,9 @@ var app = app || {};
    * @param {}
    * @return {String} html row user item
    */
-  UserItem.prototype.renderHtml = function () {
+  UserItem.prototype.renderHtml = function() {
     var _this = this;
+
     // body...
     var userRow = $([
       '<tr data-id="', _this.user.id, '">',
@@ -39,7 +41,7 @@ var app = app || {};
 
     return userRow;
   };
-  
+
   app.UserItem = UserItem;
 
 })(app);

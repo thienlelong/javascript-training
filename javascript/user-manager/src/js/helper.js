@@ -1,15 +1,15 @@
 var app = app || {};
 
-;(function(){
+;(function() {
   'use strict';
 
   var helper = {
 
-   /**
-    * Get data from browser's localStorage
+    /**
+    * get data from browser's localStorage
     * @return {Object} localStorage object
     */
-    getLocalStorage: function () {
+    getLocalStorage: function() {
       if (typeof Storage !== 'undefined') {
         return localStorage;
       } else {

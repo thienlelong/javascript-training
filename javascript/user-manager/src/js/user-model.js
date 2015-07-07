@@ -1,10 +1,10 @@
 var app = app || {};
 
-;(function (app) {
+;(function(app) {
   'use strict';
 
   /**
-   * Model user: user info
+   * model user: user info
    *
    * @param {Object}    user object
    * @return {Void}
