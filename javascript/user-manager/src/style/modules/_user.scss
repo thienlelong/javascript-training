@@ -1,0 +1,13 @@
+.user {
+    .user__menu{
+        margin-bottom: rem(20px);
+        padding: rem(10px 0px);
+    }
+    .user__search {
+        display: inline;
+        float: right;
+    }
+    .user__pagination{
+        float: right;
+    }
+}

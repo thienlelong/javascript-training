@@ -11,8 +11,16 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "src/files/vendor",
+    "src/files/vender",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "Faker": "~2.1.5",
+    "bootstrap-sass": "~3.3.5",
+    "lodash": "~3.10.0",
+    "jquery-validation": "~1.14.0",
+    "twbs-pagination": "~1.2.5"
+  }
 }

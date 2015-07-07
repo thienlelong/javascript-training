@@ -1,0 +1,22 @@
+doctype html
+html(lang='en')
+    head
+        meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        title User manager
+        link(href='fonts/fonts.css', rel='stylesheet')
+        link(href='styles/style.min.css', rel='stylesheet')
+
+    body
+        include ./partials/header-bar.jade
+        include ./partials/header.jade
+        div(class='main')
+            div(class='container main--content')
+                block content
+        include ./partials/footer.jade
+
+        script(type="text/javascript" src="js/library.min.js")  
+        script(type="text/javascript" src="js/all-script.js")
+            
+

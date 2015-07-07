@@ -9,6 +9,7 @@ var gutil = require('gulp-util');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var livereload = require('gulp-livereload');
+var googleWebFonts = require('gulp-google-webfonts');
 var gulp = require('gulp');
 
 // path file config
@@ -17,8 +18,8 @@ var paths = {
     cssOut: 'out/styles',
     cssOutWatch: 'out/styles/*.css',
 
-    html: 'src/jade/*.jade',
-    htmlWatch: 'src/jade/**/*.jade',
+    html: ['src/layouts/*.jade','src/layouts/templates/*.jade'],
+    htmlWatch: 'src/layouts/**/*.jade',
     htmlOut: 'out',
     htmlOutWatch: 'out/*.html',
 
@@ -26,11 +27,20 @@ var paths = {
     jsOut: 'out/js',
     jsOutWatch: 'out/js/*.js',
 
-    assetImages: 'src/images/*.*',
-    assetImagesOut: 'out/images',
+    images: 'src/images/*.*',
+    imagesOut: 'out/images',
 
     vender: 'src/files/vender/'
 };
+
+var pathsLibraryJs = [
+    paths.vender + 'jquery/dist/jquery.js',
+    paths.vender + 'lodash/lodash.min.js',
+    paths.vender + 'bootstrap-sass/assets/javascripts/bootstrap.js',
+    paths.vender + 'Faker/build/build/faker.js',
+    paths.vender + 'jquery-validation/dist/jquery.validate.js',
+    paths.vender + 'twbs-pagination/jquery.twbsPagination.js'
+];
 
 // server task
 gulp.task('server', [], function() {
@@ -45,6 +55,7 @@ gulp.task('server', [], function() {
     gulp.watch([paths.htmlOutWatch], browserSync.reload);
     gulp.watch([paths.jsOutWatch], browserSync.reload);
     gulp.watch([paths.cssOutWatch], browserSync.reload);
+    gulp.watch([paths.images], browserSync.reload);
 });
 
 // Jshint Task
@@ -64,7 +75,7 @@ gulp.task('scripts', function() {
         .pipe(gulp.dest(paths.jsOut));
 });
 
-// build jade code to html
+// Compile Our Jade to html
 gulp.task('jade', function() {
     var YOUR_LOCALS = {};
 
@@ -76,14 +87,38 @@ gulp.task('jade', function() {
         .pipe(gulp.dest(paths.htmlOut));
 });
 
-// Compile Our Sass
+// Compile Our Sass to css
 gulp.task('sass', function() {
     return gulp.src(paths.css)
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest(paths.cssOut));
-        .pipe(minifyCSS())
+        .pipe(gulp.dest(paths.cssOut))
+        .pipe(minifyCss())
         .pipe(rename('style.min.css'))
         .pipe(gulp.dest(paths.cssOut));
+});
+
+
+// Compile Our Sass to css
+gulp.task('images', function() {
+    return gulp.src(paths.images)
+        .pipe(gulp.dest(paths.imagesOut));
+});
+
+// concat all js on library
+gulp.task('jsLibrary', function() {
+    return gulp.src(pathsLibraryJs)
+        .pipe(concat('library.js'))
+        .pipe(uglify())
+        .pipe(rename('library.min.js'))
+        .pipe(gulp.dest(paths.jsOut))
+        .on('error', gutil.log);
+});
+
+// task fonts
+gulp.task('fonts', function () {
+    return gulp.src('src/fonts/fonts.list')
+        .pipe(googleWebFonts())
+        .pipe(gulp.dest('out/fonts'));
 });
 
 // Watch Files For Changes
@@ -94,4 +129,5 @@ gulp.task('watch', function() {
 });
 
 // Default Task
-gulp.task('default', ['server', 'jshint', 'sass', 'scripts', 'watch','jade']);
+gulp.task('default', ['server', 'jshint', 'sass', 'scripts',
+                        'watch','jade', 'jsLibrary', 'fonts', 'images']);

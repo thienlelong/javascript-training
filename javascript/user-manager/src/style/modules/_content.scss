@@ -1,0 +1,15 @@
+.content {
+    overflow: hidden;
+    
+}
+
+.main {
+    background: $color-white url(../images/background.png) repeat;
+}
+
+.main--content {
+    background: $color-white;
+    min-height: rem(700px);
+    padding-top: rem(30px);
+}
+

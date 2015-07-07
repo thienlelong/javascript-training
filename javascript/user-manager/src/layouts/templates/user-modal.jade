@@ -1,0 +1,34 @@
+//- Begin user form: add user
+.modal.fade#userModal(tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true")
+    .modal-dialog
+        .modal-content.user-modal
+            .modal-header
+                button.close(type="button" data-dismiss="modal" aria-label="Close")
+                    span(aria-hidden="true") &times;
+                h4.modal-title.user-modal__title#titleModal Add User
+            .modal-body
+                form.clearfix#userForm(action="#",method="POST")
+                    .form-group.hidden
+                        input.form-control#userId(type="text", name='userid')
+                    .form-group
+                        .control-label Name:
+                        input.form-control#userName(type="text", name='username')
+                    .form-group
+                        .control-label Email:
+                        input.form-control#email(type="email", name='email')
+                    .form-group
+                        .control-label Password:
+                        input.form-control#passWord(type="password", name='password')
+                    .form-group
+                        .control-label PhoneNumber:
+                        input.form-control#phone(type="text", name='phone')
+                    .form-group
+                        .control-label Address:
+                        input.form-control#address(type="text", name='address')
+                    .form-group
+                        button.btn.btn-primary#btnSaveAddUser(type="submit") Save
+                        button.btn.btn-primary(type="reset") Reset
+                        button.btn.btn-default#btnClose(type="button" data-dismiss="modal") Close
+                        span#modalMessage.user-modal__message
+                
+      
