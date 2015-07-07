@@ -1,13 +1,13 @@
 //- Begin user form: add user
 .modal.fade#userModal(tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true")
     .modal-dialog
-        .modal-content
+        .modal-content.user-modal
             .modal-header
                 button.close(type="button" data-dismiss="modal" aria-label="Close")
                     span(aria-hidden="true") &times;
-                h4.modal-title Add User
+                h4.modal-title.user-modal__title#titleModal Add User
             .modal-body
-                form.user-add.clearfix#userForm(action="#",method="POST")
+                form.clearfix#userForm(action="#",method="POST")
                     .form-group.hidden
                         input.form-control#userId(type="text", name='userid')
                     .form-group
@@ -29,6 +29,6 @@
                         button.btn.btn-primary#btnSaveAddUser(type="submit") Save
                         button.btn.btn-primary(type="reset") Reset
                         button.btn.btn-default#btnClose(type="button" data-dismiss="modal") Close
-                        span#modalMessage.user-add__message
+                        span#modalMessage.user-modal__message
                 
       

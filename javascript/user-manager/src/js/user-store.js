@@ -21,7 +21,7 @@ var app = app || {};
    */
   UserStore.prototype.generateUsers = function (number) {
     var _this = this;
-    // body...
+
     var amount = parseInt(number);
     if (!_this.localStorage.getItem('users')) {
       var users = _.range(amount).map(function(count) {
@@ -30,7 +30,7 @@ var app = app || {};
           username: faker.name.findName(),
           email: faker.internet.email(),
           password: '123456',
-          phone: faker.phone.phoneNumber(),
+          phone: faker.phone.phoneNumberFormat(),
           address: faker.address.streetAddress()
         });
       });
@@ -47,7 +47,7 @@ var app = app || {};
    */
   UserStore.prototype.getCurrentId = function () {
     var _this = this;
-      // body...
+
     var currentId = _this.localStorage.getItem('currentId');
     if (!_.isNull(currentId)) {
         return currentId;
@@ -64,7 +64,7 @@ var app = app || {};
    */
   UserStore.prototype.saveUsers = function (users, currentId) {
     var _this = this;
-      // body...
+
     _this.localStorage.setItem('users', JSON.stringify(users));
     if (currentId) {
         _this.localStorage.setItem('currentId', currentId);

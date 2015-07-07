@@ -10,7 +10,7 @@
         .header__logo{
             background: url(../images/logo.png) no-repeat;
             background-size: 100%;
-            width: 100px;
+            width: rem(100px);
         }
 
     }
@@ -20,7 +20,7 @@
 .header__nav {
     li a {
         font-family: $font-ptsans;
-        font-size: 16px;
+        font-size: rem(16px);
         font-weight: 700;
 
         display: block;

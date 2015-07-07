@@ -1,3 +1,4 @@
+/*global _*/
 var app = app || {};
 
 ;(function (app) {
@@ -16,7 +17,7 @@ var app = app || {};
     this.userStore = new app.UserStore();
     this.userStore.generateUsers(50);
     this.userList = new app.UserList(this.userStore.users);
-    var users = this.userList.users.slice(0, 15);
+    var users = this.userList.users.slice(0, 20);
     this.userList.renderListUser(users);
     this.handleEvents();
   }
@@ -54,6 +55,7 @@ var app = app || {};
       event.preventDefault();
       var $userRow = $(event.target).parentsUntil('tr').parent();
       $('#modalWrap').load('user-modal.html', function() {
+        $('#titleModal').text('Update user');
         _this.userList.loadInfoUser($userRow.attr("data-id"));
         $('#userModal').modal('show');
         _this.validateForm();
@@ -85,14 +87,14 @@ var app = app || {};
 
     // pagination list user
     var amountUsers = _this.userList.users.length;
-    var totalPages = (amountUsers%15 === 0) ? amountUsers/15 : amountUsers/15 + 1  ;
+    var totalPages = (amountUsers%20 === 0) ? amountUsers/20 : amountUsers/20 + 1  ;
     app.page = 1;
 
     $('#pagination').twbsPagination({
         totalPages: totalPages,
         onPageClick: function (event, page) {
           app.page = page;
-          var users = _this.userList.users.slice((page - 1) * 15 ,page * 15);
+          var users = _this.userList.users.slice((page - 1) * 20 ,page * 20);
           _this.userList.renderListUser(users);
         }
     });

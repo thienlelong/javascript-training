@@ -1,3 +1,4 @@
+/*global _*/
 var app = app || {};
 
 ;(function (app) {
@@ -26,7 +27,7 @@ var app = app || {};
     var _this = this;
 
     // Clear User List View
-    _this.$listAllUser.html('');
+    _this.$listAllUser.empty();
     if (users.length === 0) {
       _this.$listAllUser.html('User not found.');
     } else {
@@ -76,7 +77,7 @@ var app = app || {};
       _this.users.unshift(user);
       _this.userStore.saveUsers(_this.users, ++currentId);
       // render again page
-      var users = this.users.slice((app.page - 1) * 15, app.page * 15);
+      var users = this.users.slice((app.page - 1) * 20, app.page * 20);
       this.renderListUser(users);
 
       message = 'User has been add successfully';
@@ -134,7 +135,7 @@ var app = app || {};
     _this.userStore.saveUsers(_this.users);
 
     // render again page
-    var users = this.users.slice((app.page - 1) * 15, app.page * 15);
+    var users = this.users.slice((app.page - 1) * 20, app.page * 20);
     this.renderListUser(users);
   };
   
