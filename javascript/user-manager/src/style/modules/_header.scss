@@ -5,8 +5,8 @@
 .header {
     @include box-shadow(0, 2px, 2px, 0, rgba(95, 95, 95, .75), true);
     .header--navbar{
-        margin-bottom: 0px;
-        border-radius: 0px;
+        margin-bottom: rem(0px);
+        border-radius: rem(0px);
         .header__logo{
             background: url(../images/logo.png) no-repeat;
             background-size: 100%;

@@ -94,7 +94,7 @@ var app = app || {};
         totalPages: totalPages,
         onPageClick: function (event, page) {
           app.page = page;
-          var users = _this.userList.users.slice((page - 1) * 20 ,page * 20);
+          var users = _this.userList.users.slice((page - 1) * 20, page * 20);
           _this.userList.renderListUser(users);
         }
     });
