@@ -102,7 +102,7 @@ var app = app || {};
 
     if ((user.email === userEdit.email) ||
       (user.email !== userEdit.email && !_this.hasUser(userEdit.email))) {
-      
+
       // update info user
       userItem.cloneUser(userEdit);
       _this.userStore.saveUsers(_this.users);
@@ -149,7 +149,6 @@ var app = app || {};
     return _.filter(_this.users, function(user) {
       return user.username.toLowerCase().indexOf(username.toLowerCase()) > -1;
     });
-
   };
 
 

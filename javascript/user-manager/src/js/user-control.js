@@ -48,7 +48,6 @@ var app = app || {};
         var $userRow = $(event.target).parentsUntil('tr').parent();
         _this.userList.handleUserDelete($userRow.attr('data-id'));
       }
-
     });
 
     // edit user
@@ -90,6 +89,8 @@ var app = app || {};
     // pagination list user
     var amountUsers = _this.userList.users.length;
     var totalPages = (amountUsers % 20) ? amountUsers / 20 + 1 : amountUsers / 20;
+
+    // fixme: shouldn't use a global here
     app.page = 1;
 
     $('#pagination').twbsPagination({
@@ -148,6 +149,7 @@ var app = app || {};
           email: 'Please enter a valid email address'
         }
       },
+
       submitHandler: function(form) {
         var userId = parseInt(form.userid.value);
         if (userId) {
@@ -157,7 +159,6 @@ var app = app || {};
         }
       }
     });
-
   };
 
   app.UserControl = UserControl;
