@@ -21,6 +21,7 @@ var app = app || {};
     var users = this.userList.users.slice(0, 20);
     this.userList.renderListUser(users);
     this.handleEvents();
+    this.paginationUsers();
   }
 
   /**
@@ -33,66 +34,34 @@ var app = app || {};
     var _this = this;
 
     // add new user
-    $('#btnAddUser').on('click', function(event) {
-      event.preventDefault();
-      $('#modalWrap').load('user-modal.html', function() {
-        $('#userModal').modal('show');
-        _this.validateForm();
-      });
-    });
+    $('#btnAddUser').on('click', this.addNewUser.bind(_this));
 
     // remove user
-    $('#listAllUser').on('click', '#btnRemoveUser', function(event) {
-      event.preventDefault();
-      if (window.confirm('Are you sure you want to delete user?')) {
-        var $userRow = $(event.target).parentsUntil('tr').parent();
-        _this.userList.handleUserDelete($userRow.attr('data-id'));
-      }
-    });
+    $('#listAllUser').on('click', '#btnRemoveUser', this.removeUser.bind(this));
 
     // edit user
-    $('#listAllUser').on('click', '#btnEditUser', function(event) {
-      event.preventDefault();
-      var $userRow = $(event.target).parentsUntil('tr').parent();
-      $('#modalWrap').load('user-modal.html', function() {
-        $('#titleModal').text('Update user');
-        var user = _this.userList.getUser($userRow.attr('data-id'));
-        _this.userForm.loadInfoUser(user);
-        $('#userModal').modal('show');
-        _this.validateForm();
-      });
-    });
+    $('#listAllUser').on('click', '#btnEditUser', this.editUser.bind(this));
 
     // search user
-    $('#btnSearch').on('click', function(event) {
-      event.preventDefault();
-      var username = $('#userSearch').val().trim();
-      if (username) {
-        var users = _this.userList.handleUserSearch(username);
-        _this.userList.renderListUser(users);
-      }
-    });
+    $('#btnSearch').on('click', this.searchUser.bind(this));
 
     // general user
-    $('#btnGenerateUsers').on('click', function(event) {
-      event.preventDefault();
-      var amount = parseInt($('#amountUsers').val());
-      if (!_.isNaN(amount)) {
-        app.helper.getLocalStorage().clear();
-        _this.userStore.generateUsers(amount);
-        $(location).attr('href', window.location.origin + '/user-list.html');
-      } else {
-        $('#generateMessage').text('Please Enter Number');
-      }
-    });
+    $('#btnGenerateUsers').on('click', this.generateusers.bind(this));
 
-    // pagination list user
+  };
+
+  /**
+   * pagination
+   *
+   * @return {Void}
+   */
+  UserControl.prototype.paginationUsers = function() {
+    var _this = this;
     var amountUsers = _this.userList.users.length;
     var totalPages = (amountUsers % 20) ? amountUsers / 20 + 1 : amountUsers / 20;
 
     // fixme: shouldn't use a global here
     app.page = 1;
-
     $('#pagination').twbsPagination({
       totalPages: totalPages,
       onPageClick: function(event, page) {
@@ -101,7 +70,89 @@ var app = app || {};
         _this.userList.renderListUser(users);
       }
     });
+  };
 
+  /**
+   * add New User
+   *
+   * @return {Void}
+   */
+  UserControl.prototype.addNewUser = function(event) {
+    var _this = this;
+    event.preventDefault();
+    $('#modalWrap').load('user-modal.html', function() {
+      $('#userModal').modal('show');
+      _this.validateForm();
+    });
+  };
+
+  /**
+   * remove User
+   *
+   * @return {Void}
+   */
+  UserControl.prototype.removeUser = function(event) {
+    event.preventDefault();
+    var _this = this;
+
+    if (window.confirm('Are you sure you want to delete user?')) {
+      var $userRow = $(event.target).parentsUntil('tr').parent();
+      _this.userList.handleUserDelete($userRow.attr('data-id'));
+    }
+  };
+
+  /**
+   * edit User
+   *
+   * @return {Void}
+   */
+  UserControl.prototype.editUser = function(event) {
+    event.preventDefault();
+    var _this = this;
+    var $userRow = $(event.target).parentsUntil('tr').parent();
+
+    $('#modalWrap').load('user-modal.html', function() {
+      $('#titleModal').text('Update user');
+      var user = _this.userList.getUser($userRow.attr('data-id'));
+      _this.userForm.loadInfoUser(user);
+      $('#userModal').modal('show');
+      _this.validateForm();
+    });
+  };
+
+  /**
+   * search User
+   *
+   * @return {Void}
+   */
+  UserControl.prototype.searchUser = function(event) {
+    event.preventDefault();
+    var _this = this;
+    var username = $('#userSearch').val().trim();
+
+    if (username) {
+      var users = _this.userList.handleUserSearch(username);
+      _this.userList.renderListUser(users);
+    }
+  };
+
+  /**
+   * search User
+   *
+   * @return {Void}
+   */
+  UserControl.prototype.generateusers = function(event) {
+    event.preventDefault();
+    var _this = this;
+    var amount = parseInt($('#amountUsers').val());
+
+    if (!_.isNaN(amount)) {
+      app.helper.getLocalStorage().clear();
+      _this.userStore.generateUsers(amount);
+      $(location).attr('href', window.location.origin + '/user-list.html');
+    } else {
+      $('#generateMessage').text('Please Enter Number');
+    }
   };
 
   /**
