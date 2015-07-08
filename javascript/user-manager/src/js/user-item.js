@@ -1,4 +1,4 @@
-
+/* global _*/
 var app = app || {};
 
 ;(function(app) {
@@ -24,22 +24,26 @@ var app = app || {};
    */
   UserItem.prototype.renderHtml = function() {
     var _this = this;
+    var userRow = _.template('<tr data-id=<%= id %>>' +
+      '<td><%= username %></td>' +
+      '<td><%= email %></td>' +
+      '<td><%= password %></td>' +
+      '<td><%= phone %></td>' +
+      '<td><%= address %></td>' +
+      '<td><button type="button" class="btn btn-default btn-xs" id="btnEditUser" data-toggle="modal">Edit</button></td>' +
+      '<td><button type="button" class="btn btn-danger btn-xs" id="btnRemoveUser">Remove</button></td>' +
+      '</tr>');
 
-    // body...
-    var userRow = $([
-      '<tr data-id="', _this.user.id, '">',
-      '<td class = "user-name">', _this.user.username, '</td>',
-      '<td class = "user-address">', _this.user.email, '</td>',
-      '<td class = "user-email">', _this.user.phone, '</td>',
-      '<td class = "user-email">', _this.user.address, '</td>',
-      '<td><button type="button" class="btn btn-default btn-xs" id="btnEditUser" data-toggle="modal">Edit</button></td>',
-      '<td><button type="button" class="btn btn-danger btn-xs" id="btnRemoveUser">Remove</button></td>',
-      '</tr>'
-    ].join(''));
-
-    return userRow;
+    return userRow(_this.user);
   };
 
+  /**
+   * cloneUser()
+   * clone data from user to user
+   *
+   * @param {}
+   * @return {String} html row user item
+   */
   UserItem.prototype.cloneUser = function(user) {
     var _this = this;
     _this.user.username = user.username;

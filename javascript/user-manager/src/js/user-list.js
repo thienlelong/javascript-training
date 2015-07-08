@@ -100,7 +100,9 @@ var app = app || {};
     var userItem = new app.UserItem(user);
     var userEdit = _this.userForm.getInfoUser();
 
-    if ((user.email === userEdit.email) || (user.email !== userEdit.email && !_this.hasUser(userEdit.email))) {
+    if ((user.email === userEdit.email) ||
+      (user.email !== userEdit.email && !_this.hasUser(userEdit.email))) {
+      
       // update info user
       userItem.cloneUser(userEdit);
       _this.userStore.saveUsers(_this.users);
