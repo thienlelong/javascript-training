@@ -13,8 +13,6 @@ var app = app || {};
    */
   function UserItem(user, userList) {
     this.user = user;
-    this.userList = userList;
-    this.$listAllUser = $('#listAllUser');
   }
 
   /**
@@ -40,6 +38,15 @@ var app = app || {};
     ].join(''));
 
     return userRow;
+  };
+
+  UserItem.prototype.cloneUser = function(user) {
+    var _this = this;
+    _this.user.username = user.username;
+    _this.user.email = user.email;
+    _this.user.password = user.password;
+    _this.user.phone = user.phone;
+    _this.user.address = user.address;
   };
 
   app.UserItem = UserItem;

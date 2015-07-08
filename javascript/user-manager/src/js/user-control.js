@@ -14,9 +14,10 @@ var app = app || {};
 
   function UserControl() {
 
+    this.userForm = new app.UserForm();
     this.userStore = new app.UserStore();
     this.userStore.generateUsers(50);
-    this.userList = new app.UserList(this.userStore.users, this.userStore);
+    this.userList = new app.UserList(this.userStore.users, this.userStore, this.userForm);
     var users = this.userList.users.slice(0, 20);
     this.userList.renderListUser(users);
     this.handleEvents();
@@ -56,7 +57,8 @@ var app = app || {};
       var $userRow = $(event.target).parentsUntil('tr').parent();
       $('#modalWrap').load('user-modal.html', function() {
         $('#titleModal').text('Update user');
-        _this.userList.loadInfoUser($userRow.attr('data-id'));
+        var user = _this.userList.getUser($userRow.attr('data-id'));
+        _this.userForm.loadInfoUser(user);
         $('#userModal').modal('show');
         _this.validateForm();
       });
@@ -67,7 +69,7 @@ var app = app || {};
       event.preventDefault();
       var username = $('#userSearch').val().trim();
       if (username) {
-        var users = _this.userList.handleUserSearch($username);
+        var users = _this.userList.handleUserSearch(username);
         _this.userList.renderListUser(users);
       }
     });
@@ -76,9 +78,8 @@ var app = app || {};
     $('#btnGenerateUsers').on('click', function(event) {
       event.preventDefault();
       var amount = parseInt($('#amountUsers').val());
-      if (!_.isNaN($amount)) {
+      if (!_.isNaN(amount)) {
         app.helper.getLocalStorage().clear();
-        this.userStore = new app.UserStore();
         _this.userStore.generateUsers(amount);
         $(location).attr('href', window.location.origin + '/user-list.html');
       } else {
@@ -88,7 +89,7 @@ var app = app || {};
 
     // pagination list user
     var amountUsers = _this.userList.users.length;
-    var totalPages = (amountUsers % 20 === 0) ? amountUsers / 20 : amountUsers / 20 + 1  ;
+    var totalPages = (amountUsers % 20) ? amountUsers / 20 + 1 : amountUsers / 20;
     app.page = 1;
 
     $('#pagination').twbsPagination({

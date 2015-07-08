@@ -2,10 +2,7 @@
 var app = app || {};
 
 ;(function(app) {
-  // body...
   'use strict';
-
-  var User = app.User;
 
   function UserStore() {
     this.localStorage = app.helper.getLocalStorage();
@@ -25,7 +22,7 @@ var app = app || {};
     var amount = parseInt(number);
     if (!_this.localStorage.getItem('users')) {
       var users = _.range(amount).map(function(count) {
-        return new User({
+        return new app.User({
           id: ++count,
           username: faker.name.findName(),
           email: faker.internet.email(),

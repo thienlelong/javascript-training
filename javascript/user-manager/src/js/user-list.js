@@ -10,10 +10,11 @@ var app = app || {};
    * @param {Object}      user
    * @return {Void}
    */
-  function UserList(users, userStore) {
+  function UserList(users, userStore, userForm) {
     this.users = users;
     this.$listAllUser = $('#listAllUser');
     this.userStore = userStore;
+    this.userForm = userForm;
   }
 
   /**
@@ -45,9 +46,7 @@ var app = app || {};
    * @return {void}
    */
   UserList.prototype.appendUserNode = function(user) {
-    var _this = this;
-    var userItem = new app.UserItem(user, _this);
-
+    var userItem = new app.UserItem(user);
     this.$listAllUser.append(userItem.renderHtml());
 
   };
@@ -61,20 +60,16 @@ var app = app || {};
    */
   UserList.prototype.handleUserAdd = function() {
     var _this = this;
+
     var currentId = _this.userStore.getCurrentId();
     var $userModal = $('#userModal');
-    var $userForm = $('#userForm');
     var message = 'Email already exist. Please enter new email.';
-    var user = new app.User({
-      id: currentId,
-      username: $userForm.find('#userName').val().trim(),
-      email: $userForm.find('#email').val().trim(),
-      password: $userForm.find('#passWord').val().trim(),
-      phone: $userForm.find('#phone').val().trim(),
-      address: $userForm.find('#address').val().trim()
-    });
+    var user = new app.User(this.userForm.getInfoUser());
+    user.id = currentId;
 
     if (!_this.hasUser(user.email)) {
+
+      // remove and save data to localStorage
       _this.users.unshift(user);
       _this.userStore.saveUsers(_this.users, ++currentId);
 
@@ -98,18 +93,18 @@ var app = app || {};
    */
   UserList.prototype.handleUserEdit = function(userId) {
     var _this = this;
+
     var $userModal = $('#userModal');
-    var $userForm = $('#userForm');
     var message = 'Email already exist. Please enter new email.';
     var user = _this.getUser(userId);
-    var email = $userForm.find('#email').val().trim();
-    if ((user.email === email) || (user.email !== email && !_this.hasUser(email))) {
-      user.username = $userForm.find('#userName').val().trim();
-      user.email = email;
-      user.password =  $userForm.find('#passWord').val().trim();
-      user.phone = $userForm.find('#phone').val().trim();
-      user.address = $userForm.find('#address').val().trim();
+    var userItem = new app.UserItem(user);
+    var userEdit = _this.userForm.getInfoUser();
+
+    if ((user.email === userEdit.email) || (user.email !== userEdit.email && !_this.hasUser(userEdit.email))) {
+      // update info user
+      userItem.cloneUser(userEdit);
       _this.userStore.saveUsers(_this.users);
+
       message = 'User has been updated successfully';
       $userModal.modal('hide');
       _this.replaceUserRow(userId);
@@ -129,10 +124,8 @@ var app = app || {};
   UserList.prototype.handleUserDelete = function(userId) {
     var _this = this;
 
-    _.remove(_this.users, function(user) {
-      return parseInt(user.id) === parseInt(userId);
-    });
-
+    // remove and update users list
+    _this.removeUser(userId);
     _this.userStore.saveUsers(_this.users);
 
     // render again page
@@ -157,28 +150,9 @@ var app = app || {};
 
   };
 
-  /**
-   * loadInfoUser()
-   * load info user to form view edit
-   *
-   * @param {Number} user id
-   * @return {void}
-   */
-  UserList.prototype.loadInfoUser = function(userId) {
-    var _this = this;
-    var $userForm = $('#userForm');
-    var user = _this.getUser(userId);
-
-    $userForm.find('#userId').val(user.id);
-    $userForm.find('#userName').val(user.username);
-    $userForm.find('#passWord').val(user.password);
-    $userForm.find('#email').val(user.email);
-    $userForm.find('#phone').val(user.phone);
-    $userForm.find('#address').val(user.address);
-  };
 
   /**
-   * loadInfoUser()
+   * replaceUserRow()
    * load info user to form view edit
    *
    * @param {Number} user id
@@ -187,7 +161,7 @@ var app = app || {};
   UserList.prototype.replaceUserRow = function(userId) {
     var _this = this;
     var user = _this.getUser(userId);
-    var userItem = new app.UserItem(user, _this);
+    var userItem = new app.UserItem(user);
     $('tr[data-id=' + userId + ']').replaceWith(userItem.renderHtml());
   };
 
@@ -216,6 +190,20 @@ var app = app || {};
     var _this = this;
     return _.find(_this.users, function(item) {
       return parseInt(item.id) === parseInt(userId);
+    });
+  };
+
+  /**
+   * getUser()
+   * get user from user list
+   *
+   * @param  {Number}  user id
+   * @return {Object} user
+   */
+  UserList.prototype.removeUser = function(userId) {
+    var _this = this;
+    _.remove(_this.users, function(user) {
+      return parseInt(user.id) === parseInt(userId);
     });
   };
 

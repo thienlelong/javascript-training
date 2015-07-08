@@ -20,4 +20,4 @@ var app = app || {};
 
   app.helper = helper;
 
-}) ();
+})();
