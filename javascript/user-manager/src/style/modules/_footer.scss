@@ -8,10 +8,10 @@
     text-align: center;
 
     background: $bg-footer;
-    .footer--wrap {
+    &--wrap {
         background: transparent;
     }
-    .footer__title {
+    &__title {
         margin: rem(46px 0 20px 0);
 
         text-align: center;

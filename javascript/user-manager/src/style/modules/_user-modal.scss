@@ -3,11 +3,11 @@
         color: $color-red;
         font-weight: normal;
     }
-    .user-modal__message{
+    &__message{
         color: $color-red;
         margin-left: rem(20px);
     }
-    .user-modal__title{
+    &__title{
         @include set-font($font-ptsans, rem(18px), bold, $color-blue);
     }
 }
