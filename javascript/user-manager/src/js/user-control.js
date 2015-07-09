@@ -202,7 +202,7 @@ var app = app || {};
       },
 
       submitHandler: function(form) {
-        var userId = parseInt(form.userid.value);
+        var userId = parseInt(form.userid.value, 10);
         if (userId) {
           _this.userList.handleUserEdit(userId);
         } else {

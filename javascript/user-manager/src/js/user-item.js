@@ -39,7 +39,7 @@ var app = app || {};
 
   /**
    * cloneUser()
-   * clone data from user to user
+   * clone data from user to
    *
    * @param {}
    * @return {String} html row user item

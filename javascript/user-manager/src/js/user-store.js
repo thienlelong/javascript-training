@@ -19,7 +19,7 @@ var app = app || {};
   UserStore.prototype.generateUsers = function(number) {
     var _this = this;
 
-    var amount = parseInt(number);
+    var amount = parseInt(number, 10);
     if (!_this.localStorage.getItem('users')) {
       var users = _.range(amount).map(function(count) {
         return new app.User({

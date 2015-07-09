@@ -84,6 +84,7 @@ var app = app || {};
       $('#modalMessage').text(message);
     }
   };
+
   /**
    * handleUserAdd()
    * add user and append to list user
@@ -190,7 +191,7 @@ var app = app || {};
   UserList.prototype.getUser = function(userId) {
     var _this = this;
     return _.find(_this.users, function(item) {
-      return parseInt(item.id) === parseInt(userId);
+      return parseInt(item.id, 10) === parseInt(userId, 10);
     });
   };
 
@@ -204,7 +205,7 @@ var app = app || {};
   UserList.prototype.removeUser = function(userId) {
     var _this = this;
     _.remove(_this.users, function(user) {
-      return parseInt(user.id) === parseInt(userId);
+      return parseInt(user.id, 10) === parseInt(userId, 10);
     });
   };
 
