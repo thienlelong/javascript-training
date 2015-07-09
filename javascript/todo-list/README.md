@@ -1,6 +1,6 @@
-# TODO-LIST
+# Todo List
 
-##I. Folder Structure
+## I. Folder Structure
 
 - **js**: Folder contain files *.js control practice
 - **images**: Folder contain all images for practice
