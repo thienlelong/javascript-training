@@ -1,33 +1,38 @@
-# user manager
+# User Manager
 
-## Practice user manager Structure
+## I. Folder structure:
 
-### Folder "out": container files after build by gulp
+### 1. **out**: Folder contain files after build by gulp
 
+### 2. **src**: folder contain source of project
 
-### Folder "src": source of project
+- **files**: Folder contain library for practice 
+- **js**: Folder contain files *.js control practice
+- **images**: Folder contain all images for practice
+- **style**: Folder contain files *.scss to style layout for project
+- **layouts**: Folder contain layout and template for practice
+- **fonts**: Include list fonts of practice
+- **.editorconfig**: File config editor rule using project
+- **.jshintrc**: File config jshint tool (code style)
+- **.jscsrc**: config jscs tool (code style)
+- **gulpfile.js**: config all task and start Gulp
+- **package.js**: contain all plugin install via npm for project 
+- **bower.js**: contain all plugins install via bower for project
 
-- Folder "files": include library for practice 
-- Folder "js" include: files *.js control practice
-- Folder "images": Include images in practice
-- Folder "style": include files *.scss to style layout
-- Folder "layouts": include layout and template for practice
-- Folder "fonts": include list fonts of practice
-- .editorconfig: config editor using project
-- .jshintrc: config jshint tool (code style)
-- .jscsrc: config jscs tool (code style)
-- gulpfile.js: config Gulp
-- package.js: include plugins install via 
-- bower.js: include plugins install via bower
+## II. Install library and run project:
 
-## run project user-manager, required : started vagrant
+### 1. Strart vagrant machine:
 
-## from vagrant machine run command: 
+- vagrant up
+- vagrant ssh
+
+### 2. Install library and run gulp:
+
 - cd /src/user-manager
 - npm install --global gulp
 - npm install
 - bower install
 - gulp
 
-## go to webbrowser to access project
+### 3. access project:
 - http://localhost:8080
