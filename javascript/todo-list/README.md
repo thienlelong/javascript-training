@@ -1,28 +1,25 @@
 # TODO-LIST
 
-## Practice todo-list Structure
+##I. Folder Structure
 
-- Folder "js" include: 
-  - dom.js
-  - helper.js
-  - model.js
-  - todo-*.js
+- **js**: Folder contain files *.js control practice
+- **images**: Folder contain all images for practice
+- **style**: Folder contain files *.scss to style layout for project
+- **.editorconfig**: File config editor rule using project
+- **.jshintrc**: File config jshint tool (code style)
+- **.jscsrc**: config jscs tool (code style)
 
-- Folder "images" 
+## II. Install library and run project:
 
-  - Include images in practice
+### 1. Strart vagrant machine:
 
-- "index.html" file 
+- vagrant up
+- vagrant ssh
 
+### 2. Install library and run gulp:
 
-- .editorconfig: config editor using project
-- .jshintrc: config jshint tool (code style)
-- .jscsrc: config jscs tool (code style)
-
-## run project todo-list game, required : started vagrant
-
-## from vagrant machine: 
 - cd /src/todo-list/src
 - python -m SimpleHTTPServer 8000 
-## go to webbrowser to access project
-- http://localhost:8080/index.html 
+
+### 3. access project:
+- http://localhost:8080
