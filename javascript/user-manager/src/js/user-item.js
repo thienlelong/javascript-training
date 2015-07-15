@@ -24,15 +24,15 @@ var app = app || {};
    */
   UserItem.prototype.renderHtml = function() {
     var _this = this;
-    var userRow = _.template('<tr data-id=<%= id %>>' +
-      '<td><%= username %></td>' +
-      '<td><%= email %></td>' +
-      '<td><%= password %></td>' +
-      '<td><%= phone %></td>' +
-      '<td><%= address %></td>' +
-      '<td><button type="button" class="btn btn-default btn-xs" id="btnEditUser" data-toggle="modal">Edit</button></td>' +
-      '<td><button type="button" class="btn btn-danger btn-xs" id="btnRemoveUser">Remove</button></td>' +
-      '</tr>');
+    var userRow = _.template('<tr data-id=<%= id %>>\
+      <td><%= username %></td>\
+      <td><%= email %></td>\
+      <td><%= password %></td>\
+      <td><%= phone %></td>\
+      <td><%= address %></td>\
+      <td><button type="button" class="btn btn-default btn-xs" id="btnEditUser" data-toggle="modal">Edit</button></td>\
+      <td><button type="button" class="btn btn-danger btn-xs" id="btnRemoveUser">Remove</button></td>\
+      </tr>');
 
     return userRow(_this.user);
   };

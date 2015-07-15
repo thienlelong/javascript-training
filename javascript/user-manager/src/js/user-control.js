@@ -34,19 +34,19 @@ var app = app || {};
     var _this = this;
 
     // add new user
-    $('#btnAddUser').on('click', this.addNewUser.bind(_this));
+    $('#btnAddUser').on('click', _this.addNewUser.bind(_this));
 
     // remove user
-    $('#listAllUser').on('click', '#btnRemoveUser', this.removeUser.bind(this));
+    $('#listAllUser').on('click', '#btnRemoveUser', _this.removeUser.bind(_this));
 
     // edit user
-    $('#listAllUser').on('click', '#btnEditUser', this.editUser.bind(this));
+    $('#listAllUser').on('click', '#btnEditUser', _this.editUser.bind(_this));
 
     // search user
-    $('#btnSearch').on('click', this.searchUser.bind(this));
+    $('#btnSearch').on('click', _this.searchUser.bind(_this));
 
     // general user
-    $('#btnGenerateUsers').on('click', this.generateusers.bind(this));
+    $('#btnGenerateUsers').on('click', _this.generateusers.bind(_this));
 
   };
 
@@ -58,7 +58,8 @@ var app = app || {};
   UserControl.prototype.paginationUsers = function() {
     var _this = this;
     var amountUsers = _this.userList.users.length;
-    var totalPages = (amountUsers % 20) ? amountUsers / 20 + 1 : amountUsers / 20;
+    var pageNumbers =  amountUsers / 20;
+    var totalPages = (amountUsers % 20) ? pageNumbers + 1 : pageNumbers;
 
     // fixme: shouldn't use a global here
     app.page = 1;
@@ -78,8 +79,9 @@ var app = app || {};
    * @return {Void}
    */
   UserControl.prototype.addNewUser = function(event) {
-    var _this = this;
     event.preventDefault();
+    var _this = this;
+
     $('#modalWrap').load('user-modal.html', function() {
       $('#userModal').modal('show');
       _this.validateForm();
@@ -170,8 +172,7 @@ var app = app || {};
               phoneNumber.length > 9 && phoneNumber.match(phoneMatch);
     }, 'Please enter a valid phone number');
 
-    var $userAddForm = $('#userForm');
-    $userAddForm.validate({
+    $('#userForm').validate({
       onfocusout: function(element) {
         $(element).valid();
       },

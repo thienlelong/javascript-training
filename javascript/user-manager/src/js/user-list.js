@@ -29,12 +29,12 @@ var app = app || {};
 
     // clear User List View
     _this.$listAllUser.empty();
-    if (users.length === 0) {
-      _this.$listAllUser.html('User not found.');
-    } else {
+    if (users.length) {
       _.forEach(users, function(user) {
         _this.appendUserNode(user);
       });
+    } else {
+      _this.$listAllUser.html('User not found.');
     }
   };
 
@@ -62,14 +62,13 @@ var app = app || {};
     var _this = this;
 
     var currentId = _this.userStore.getCurrentId();
-    var $userModal = $('#userModal');
     var message = 'Email already exist. Please enter new email.';
     var user = new app.User(this.userForm.getInfoUser());
     user.id = currentId;
 
     if (!_this.hasUser(user.email)) {
 
-      // remove and save data to localStorage
+      // add newu to first users list and save data to localStorage
       _this.users.unshift(user);
       _this.userStore.saveUsers(_this.users, ++currentId);
 
@@ -78,7 +77,7 @@ var app = app || {};
       this.renderListUser(users);
 
       message = 'User has been add successfully';
-      $userModal.modal('hide');
+      $('#userModal').modal('hide');
       window.alert(message);
     } else {
       $('#modalMessage').text(message);
@@ -94,8 +93,6 @@ var app = app || {};
    */
   UserList.prototype.handleUserEdit = function(userId) {
     var _this = this;
-
-    var $userModal = $('#userModal');
     var message = 'Email already exist. Please enter new email.';
     var user = _this.getUser(userId);
     var userItem = new app.UserItem(user);
@@ -109,7 +106,7 @@ var app = app || {};
       _this.userStore.saveUsers(_this.users);
 
       message = 'User has been updated successfully';
-      $userModal.modal('hide');
+      $('#userModal').modal('hide');
       _this.replaceUserRow(userId);
       window.alert(message);
     } else {
@@ -162,8 +159,7 @@ var app = app || {};
    */
   UserList.prototype.replaceUserRow = function(userId) {
     var _this = this;
-    var user = _this.getUser(userId);
-    var userItem = new app.UserItem(user);
+    var userItem = new app.UserItem(_this.getUser(userId));
     $('tr[data-id=' + userId + ']').replaceWith(userItem.renderHtml());
   };
 

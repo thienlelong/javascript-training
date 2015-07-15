@@ -23,7 +23,7 @@ var app = app || {};
     if (!_this.localStorage.getItem('users')) {
       var users = _.range(amount).map(function(count) {
         return new app.User({
-          id: ++count,
+          id: count,
           username: faker.name.findName(),
           email: faker.internet.email(),
           password: '123456',
