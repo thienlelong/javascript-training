@@ -130,10 +130,10 @@ var app = app || {};
   UserControl.prototype.searchUser = function(event) {
     event.preventDefault();
     var _this = this;
-    var username = $('#userSearch').val().trim();
+    var userSearch = $('#userSearch').val().trim();
 
-    if (username) {
-      var users = _this.userList.handleUserSearch(username);
+    if (userSearch) {
+      var users = _this.userList.handleUserSearch(userSearch);
       _this.userList.renderListUser(users);
     }
   };
@@ -146,12 +146,13 @@ var app = app || {};
   UserControl.prototype.generateusers = function(event) {
     event.preventDefault();
     var _this = this;
+    var loca = location;
     var amount = parseInt($('#amountUsers').val());
 
     if (!_.isNaN(amount)) {
       app.helper.getLocalStorage().clear();
       _this.userStore.generateUsers(amount);
-      $(location).attr('href', window.location.origin + '/user-list.html');
+      $(loca).attr('href', loca.origin + '/user-list.html');
     } else {
       $('#generateMessage').text('Please Enter Number');
     }
@@ -216,3 +217,7 @@ var app = app || {};
   app.UserControl = UserControl;
 
 })(app);
+
+$(document).ready(function() {
+  new app.UserControl();
+});

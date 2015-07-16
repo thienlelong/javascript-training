@@ -48,5 +48,8 @@
   "maxstatements": 20,
  
   // Prevent excessive branching
-  "maxcomplexity": 6
+  "maxcomplexity": 6,
+
+  //multi string
+  "multistr": true 
 }

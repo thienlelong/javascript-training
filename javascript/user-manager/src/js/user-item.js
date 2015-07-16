@@ -27,7 +27,6 @@ var app = app || {};
     var userRow = _.template('<tr data-id=<%= id %>>\
       <td><%= username %></td>\
       <td><%= email %></td>\
-      <td><%= password %></td>\
       <td><%= phone %></td>\
       <td><%= address %></td>\
       <td><button type="button" class="btn btn-default btn-xs" id="btnEditUser" data-toggle="modal">Edit</button></td>\

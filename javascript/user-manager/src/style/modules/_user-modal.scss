@@ -10,4 +10,7 @@
     &__title{
         @include set-font($font-ptsans, rem(18px), bold, $color-blue);
     }
+    &__btn--custom{
+        margin-left: 10px;
+    }
 }

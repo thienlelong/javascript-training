@@ -172,8 +172,8 @@ var app = app || {};
    */
   UserList.prototype.hasUser = function(email) {
     var _this = this;
-    return !_.every(_this.users, function(item) {
-      return item.email !== email;
+    return _.some(_this.users, function(item) {
+      return item.email === email;
     });
   };
 
