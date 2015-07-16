@@ -48,7 +48,6 @@ var app = app || {};
   UserList.prototype.appendUserNode = function(user) {
     var userItem = new app.UserItem(user);
     this.$listAllUser.append(userItem.renderHtml());
-
   };
 
   /**

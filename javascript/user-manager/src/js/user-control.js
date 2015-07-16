@@ -33,17 +33,17 @@ var app = app || {};
   UserControl.prototype.handleEvents = function(event) {
     var _this = this;
 
-    // add new user
-    $('#btnAddUser').on('click', _this.addNewUser.bind(_this));
+    // add new user using context
+    $('#btnAddUser', '#userContainer').on('click', _this.addNewUser.bind(_this));
 
-    // remove user
+    // remove user using delegate event
     $('#listAllUser').on('click', '#btnRemoveUser', _this.removeUser.bind(_this));
 
     // edit user
     $('#listAllUser').on('click', '#btnEditUser', _this.editUser.bind(_this));
 
     // search user
-    $('#btnSearch').on('click', _this.searchUser.bind(_this));
+    $('#btnSearch', '#userContainer').on('click', _this.searchUser.bind(_this));
 
     // general user
     $('#btnGenerateUsers').on('click', _this.generateusers.bind(_this));
@@ -70,7 +70,7 @@ var app = app || {};
         var users = _this.userList.users.slice((page - 1) * 20, page * 20);
         _this.userList.renderListUser(users);
       }
-    });
+    })
   };
 
   /**
@@ -98,8 +98,10 @@ var app = app || {};
     var _this = this;
 
     if (window.confirm('Are you sure you want to delete user?')) {
-      var $userRow = $(event.target).parentsUntil('tr').parent();
-      _this.userList.handleUserDelete($userRow.attr('data-id'));
+
+      // chaining
+      var userId = $(event.target).parentsUntil('tr').parent().attr('data-id');
+      _this.userList.handleUserDelete(userId);
     }
   };
 
@@ -111,12 +113,11 @@ var app = app || {};
   UserControl.prototype.editUser = function(event) {
     event.preventDefault();
     var _this = this;
-    var $userRow = $(event.target).parentsUntil('tr').parent();
+    var userId = $(event.target).parentsUntil('tr').parent().attr('data-id');
 
     $('#modalWrap').load('user-modal.html', function() {
       $('#titleModal').text('Update user');
-      var user = _this.userList.getUser($userRow.attr('data-id'));
-      _this.userForm.loadInfoUser(user);
+      _this.userForm.loadInfoUser(_this.userList.getUser(userId));
       $('#userModal').modal('show');
       _this.validateForm();
     });
@@ -147,9 +148,9 @@ var app = app || {};
     event.preventDefault();
     var _this = this;
     var loca = location;
-    var amount = parseInt($('#amountUsers').val());
+    var amount = parseInt($('#amountUsers').val(), 10);
 
-    if (!_.isNaN(amount)) {
+    if (!_.isNaN(amount) && amount > 0) {
       app.helper.getLocalStorage().clear();
       _this.userStore.generateUsers(amount);
       $(loca).attr('href', loca.origin + '/user-list.html');
