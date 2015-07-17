@@ -147,7 +147,7 @@ var app = app || {};
   UserControl.prototype.generateusers = function(event) {
     event.preventDefault();
     var _this = this;
-    var loca = location;
+    var loca = window.location;
     var amount = parseInt($('#amountUsers').val(), 10);
 
     if (!_.isNaN(amount) && amount > 0) {
