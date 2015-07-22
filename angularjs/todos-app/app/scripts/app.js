@@ -1,3 +1,4 @@
+/* global define */
 'use strict';
 
 /**
@@ -8,26 +9,12 @@
  *
  * Main module of the application.
  */
-angular
-  .module('todosAppApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch'
-  ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+
+define([
+  'angular',
+  'angularRoute',
+  'controllers/controllers',
+  'services/services'
+  ], function(angular) {
+  return angular.module('TodosApp', ['ngRoute', 'controllers', 'services']);
+});
