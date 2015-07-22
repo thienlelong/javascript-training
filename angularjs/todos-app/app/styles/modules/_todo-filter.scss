@@ -1,0 +1,47 @@
+.todo-filter {
+    padding: 10px 0px;
+
+    color: #777;
+    border-top: 1px solid #e6e6e6;
+    background-color: #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 8px 0 -3px #f6f6f6,
+    0 9px 1px -3px rgba(0, 0, 0, .2), 0 16px 0 -6px #f6f6f6,
+    0 17px 2px -6px rgba(0, 0, 0, .2);
+    &__count {
+        float: left;
+    }
+    &__clear {
+        float: right;
+
+        border: 0;
+        background: transparent;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    &__list {
+        padding: 0;
+
+        list-style: none;
+
+        text-align: center;
+        li {
+            display: inline-block;
+
+            cursor: pointer;
+        }
+        .filter__btn {
+            color: inherit;
+            margin: 3px;
+            padding: 5px 8px;
+
+            text-decoration: none;
+
+            border: 1px solid transparent;
+            border-radius: 3px;
+            .selected {
+                border-color: #efd5d5;
+            }
+        }
+    }
+}

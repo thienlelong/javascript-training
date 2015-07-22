@@ -18,7 +18,7 @@
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
     .container {
-        max-width: 730px;
+        max-width: 600px;
     }
 }
 
@@ -43,6 +43,16 @@
 
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
+    .todo-filter {
+        text-align: center;
+        &__count {
+            float: none;
+        }
+        &__clear {
+            float: none;
+        }
+    }
+
 }
 
 /* Extra Small Devices, Phones */

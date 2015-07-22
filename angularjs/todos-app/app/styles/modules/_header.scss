@@ -3,33 +3,15 @@
  * @HEADER stylesheet,  
 */
 .header {
-    @include box-shadow(0, 2px, 2px, 0, rgba(95, 95, 95, .75), true);
-    &--navbar {
-        margin-bottom: rem(0px);
+    text-align: center;
+    &__title {
+        font-size: 100px;
+        font-weight: 100;
 
-        border-radius: rem(0px);
-    }
-    &__logo {
-        width: rem(100px);
+        width: 100%;
 
-        background: url(../images/logo.png) no-repeat;
-        background-size: 100%;
-    }
-}
+        text-align: center;
 
-.header__nav {
-    .header__nav-item {
-        font-family: $font-ptsans;
-        font-size: rem(16px);
-        font-weight: 700;
-
-        display: block;
-
-        text-transform: uppercase;
-
-        text-shadow: none;
-        a:hover {
-            color: $color-blue !important;
-        }
+        color: rgba(175, 47, 47, .15);
     }
 }

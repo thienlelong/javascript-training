@@ -16,7 +16,8 @@ define([
 });
 
 function TodoListCtrl($scope, TodoStorageService) {
-  $scope.todos = ['sdf', 'sdfsfdsfsf', 's df'];
+  $scope.todos = [{title: 'newTodo', completed: false}, {title: 'fsdf', completed: false}];
+  $scope.remainingCount = 5;
+  $scope.completedCount = 1;
   TodoStorageService.put($scope.todos)
-  console.log($scope.todos);
 };

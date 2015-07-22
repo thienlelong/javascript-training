@@ -21,13 +21,4 @@ a:focus {
 a:hover {
     text-decoration: underline;
 }
-input[type='text'] {
-    @include set-text($font-ptsans, $color-text-input, 14px, solid 1px $color-border, 8px, 13px);
-    @include rounded(4px);
-}
-select {
-    @include set-text($font-ptsans, $color-text-input, 14px, solid 1px $color-border, 8px, 13px);
-    @include rounded(4px);
-    -webkit-appearance: none;
-            appearance: none;
-}
+

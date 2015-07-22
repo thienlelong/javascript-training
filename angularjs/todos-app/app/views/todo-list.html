@@ -1,3 +1,53 @@
-<div class="jumbotron">
-    sdfj
-</div>
+
+<header class="header">
+    <h1 class="header__title">todos</h1>
+</header>
+<section id="todoApp" class="todos">
+
+    <header class="todo-new"> 
+        <input id="toggleAll" class="todo-new__toggle--all glyphicon glyphicon-chevron-down" type="checkbox" ng-model="allChecked"  ng-click="markAll(allChecked)">
+        <form id="todoForm" ng-submit="addTodo()">
+            <input id="todoNew" class="todo-new__field" placeholder="What needs to be done?" ng-model="todoNew" autofocus>
+        </form>
+    </header>
+
+    <section id="main" ng-show="todos.length" ng-cloak>
+        <ul id="todoList" class="todo-list">
+            <li ng-repeat="todo in todos" ng-class="" class="todo-item">
+                <div class="todo-view">
+                    <input class="todo-item__toggle" type="checkbox" ng-model="todo.completed">
+                    <label class="todo-item__name" ng-dblclick="editTodo(todo)">{{todo.title}}</label>
+                    <button class="todo-item__btn-delete destroy close" ng-click="removeTodo(todo)">&times;</button>
+                </div>
+                <form ng-submit="doneEditing(todo)">
+                    <input class="todo-item__edit hidden" ng-trim="false" ng-model="todo.title" ng-blur="doneEditing(todo)">
+                </form>
+            </li>
+        </ul>
+    </section>
+
+    <footer class="todo-filter">
+        <div class="row">
+            <div class="col-sm-3">
+                <span id="todoCount" class="todo-filter__count">{{remainingCount}}
+                    <ng-pluralize count="remainingCount" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
+                </span>
+            </div>
+            <div class="col-sm-6">
+                <ul class="todo-filter__list">
+                    <li><a class="filter__btn" ng-class="{selected: status == ''} " href="#/">All</a></li>
+                    <li><a class="filter__btn" ng-class="{selected: status == 'active'}" href="#/active">Active</a></li>
+                    <li><a class="filter__btn" ng-class="{selected: status == 'completed'}" href="#/completed">Completed</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                <button id="btnClearComplete" class="todo-filter__clear" ng-click="clearCompletedTodos()" ng-show="completedCount">Clear completed</button> 
+            </div>
+        </div>   
+    </footer>
+
+    
+    <!-- End .todo-list-warp-->
+
+<!-- End list action-->
+</section>
