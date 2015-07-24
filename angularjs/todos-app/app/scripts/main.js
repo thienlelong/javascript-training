@@ -41,6 +41,10 @@ require([
           controller: 'TodoCtrl',
           templateUrl:'views/todo-list.html'
         })
+        .when('/:status', {
+          controller: 'TodoCtrl',
+          templateUrl: 'views/todo-list.html'
+        })
         .otherwise({redirectTo:'/'});
     }
 

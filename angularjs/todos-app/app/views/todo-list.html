@@ -5,15 +5,15 @@
 <section id="todoApp" class="todos">
 
     <header class="todo-new"> 
-        <input id="toggleAll" class="todo-new__toggle--all glyphicon glyphicon-chevron-down" type="checkbox" ng-model="allChecked"  ng-click="markAll(allChecked)">
-        <form id="todoForm" ng-submit="addTodo()">
-            <input id="todoNew" class="todo-new__field" placeholder="What needs to be done?" ng-model="todoNew" autofocus>
+        <input id="toggleAll" class="todo-new__toggle--all glyphicon glyphicon-chevron-down" type="checkbox" ng-model="allChecked"  ng-show="todos.length" ng-click="markAll(allChecked)">
+        <form name="todoForm" ng-submit="addTodo()">
+            <input type="text" name="todoNew" class="todo-new__field" placeholder="What needs to be done?" ng-model="newTodo.title" autofocus>
         </form>
     </header>
 
     <section id="main" ng-show="todos.length" ng-cloak>
         <ul id="todoList" class="todo-list">
-            <li ng-repeat="todo in todos" ng-class="" class="todo-item">
+            <li ng-repeat="todo in todos | filter:statusFilter track by $index" ng-class="" class="todo-item">
                 <div class="todo-view">
                     <input class="todo-item__toggle" type="checkbox" ng-model="todo.completed">
                     <label class="todo-item__name" ng-dblclick="editTodo(todo)">{{todo.title}}</label>
@@ -26,7 +26,7 @@
         </ul>
     </section>
 
-    <footer class="todo-filter">
+    <footer class="todo-filter" ng-show="todos.length">
         <div class="row">
             <div class="col-sm-3">
                 <span id="todoCount" class="todo-filter__count">{{remainingCount}}
@@ -41,7 +41,7 @@
                 </ul>
             </div>
             <div class="col-sm-3">
-                <button id="btnClearComplete" class="todo-filter__clear" ng-click="clearCompletedTodos()" ng-show="completedCount">Clear completed</button> 
+                <button class="todo-filter__clear" ng-click="clearCompletedTodos()" ng-show="completedCount">Clear completed</button> 
             </div>
         </div>   
     </footer>
