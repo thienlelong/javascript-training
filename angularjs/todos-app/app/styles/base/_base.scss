@@ -1,11 +1,8 @@
 
 /* body */
 body {
-    line-height: rem(20px);
-
-    letter-spacing: -.25px;
-
-    @include set-font($font-opensans, 14px, normal, $color-gray);
+    background-color: #f5f5f5;
+    @include set-font($font-helvetica, 14px, normal, $font-color);
 }
 
 a:link,
@@ -13,8 +10,6 @@ a:active,
 a:visited,
 a:focus {
     text-decoration: none;
-
-    color: $color-link;
     outline: none;
     outline-width: 0;
 }

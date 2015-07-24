@@ -2,18 +2,18 @@
     padding: 10px 0px;
 
     color: #777;
-    border-top: 1px solid #e6e6e6;
     background-color: #fff;
     box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 8px 0 -3px #f6f6f6,
     0 9px 1px -3px rgba(0, 0, 0, .2), 0 16px 0 -6px #f6f6f6,
     0 17px 2px -6px rgba(0, 0, 0, .2);
     &__count {
         float: left;
+        padding-left: 15px;
     }
     &__clear {
         float: right;
 
-        border: 0;
+        @include border(0px, transparent);
         background: transparent;
         &:hover {
             text-decoration: underline;
@@ -33,13 +33,13 @@
         .filter__btn {
             color: inherit;
             margin: 3px;
-            padding: 5px 8px;
+            padding: 3px 8px;
 
             text-decoration: none;
 
-            border: 1px solid transparent;
+            @include border(1px, transparent);
             border-radius: 3px;
-            .selected {
+            &.selected {
                 border-color: #efd5d5;
             }
         }

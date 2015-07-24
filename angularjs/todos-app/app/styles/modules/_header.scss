@@ -3,14 +3,14 @@
  * @HEADER stylesheet,  
 */
 .header {
-    text-align: center;
+    @extend %text-center;
     &__title {
         font-size: 100px;
         font-weight: 100;
 
         width: 100%;
 
-        text-align: center;
+        @extend %text-center;
 
         color: rgba(175, 47, 47, .15);
     }

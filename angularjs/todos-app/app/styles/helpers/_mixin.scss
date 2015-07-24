@@ -41,29 +41,6 @@
     left: $left;
 }
 
-@mixin btn($background-color, $padding-vertical,$padding-horizontal,$font-size, $font-weight, $color, $border-radius, $text-align, $border)
-{
-    font-size: $font-size;
-    font-weight: $font-weight;
-    color: $color;
-    padding: $padding-vertical $padding-horizontal;
-
-    text-align: $text-align;
-    -webkit-border-radius: $border-radius;
-       -moz-border-radius: $border-radius;
-            border-radius: $border-radius;
-    background-color: $background-color;
-    cursor: pointer;
-    border: $border;
-}
-
-@mixin set-text($font-family, $color, $font-size, $border, $padding-vertical, $padding-horizontal)
-{
-    font-size: $font-size;
-    
-    font-family: $font-family;
-    padding: $padding-vertical $padding-horizontal;
-
-    color: $color;
-    border: $border;
+@mixin border($width, $color){
+    border: $width solid $color;
 }

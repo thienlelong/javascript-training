@@ -1,17 +1,11 @@
-/*global angular */
-
+/*global define */
+'use strict';
 /**
  * services that persists and retrieves TODOs from localStorage
  */
 
-define([
-  'services/services'
-], function(services) {
-  services.factory('TodoStorageService', TodoStorage);
-});
-
 function TodoStorage() {
-  'use strict';
+
 
   var STORAGE_ID = 'todos';
 
@@ -25,7 +19,15 @@ function TodoStorage() {
       localStorage.setItem(STORAGE_ID, JSON.stringify(todos));
     }
   };
-};
+
+}
+
+define(['services/services'], function(services) {
+  services.factory('TodoStorageService', TodoStorage);
+});
+
+
+
 
 
 

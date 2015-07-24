@@ -7,9 +7,9 @@
 
     margin: 65px auto 0;
 
-    text-align: center;
+    @extend %text-center;
 
-    color: #bfbfbf;
+    color: $cl-gray;
     text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
     line-height: 16px;
 }

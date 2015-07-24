@@ -1,13 +1,11 @@
-/* global define */
+/* global require */
 require.config({
   paths: {
     jquery: '../bower_components/jquery/dist/jquery',
     angular: '../bower_components/angular/angular',
     angularRoute: '../bower_components/angular-route/angular-route',
     angularResource: '../bower_components/angular-resource/angular-resource',
-    bootstrap: '../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap',
-    angularAnimate: '../bower_components/angular-animate/angular-animate',
-    angularSanitize: '../bower_components/angular-sanitize/angular-sanitize'
+    bootstrap: '../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap'
   },
   shim: {
     bootstrap: {
@@ -41,7 +39,7 @@ require([
           controller: 'TodoCtrl',
           templateUrl:'views/todo-list.html'
         })
-        .when('/:status', {
+        .when('/:status/', {
           controller: 'TodoCtrl',
           templateUrl: 'views/todo-list.html'
         })

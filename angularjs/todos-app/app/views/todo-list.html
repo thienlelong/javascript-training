@@ -7,20 +7,20 @@
     <header class="todo-new"> 
         <input id="toggleAll" class="todo-new__toggle--all glyphicon glyphicon-chevron-down" type="checkbox" ng-model="allChecked"  ng-show="todos.length" ng-click="markAll(allChecked)">
         <form name="todoForm" ng-submit="addTodo()">
-            <input type="text" name="todoNew" class="todo-new__field" placeholder="What needs to be done?" ng-model="newTodo.title" autofocus>
+            <input type="text" name="todoNew" class="todo-new__field" placeholder="What needs to be done?" ng-model="newTodo.name" autofocus>
         </form>
     </header>
 
     <section id="main" ng-show="todos.length" ng-cloak>
         <ul id="todoList" class="todo-list">
-            <li ng-repeat="todo in todos | filter:statusFilter track by $index" ng-class="" class="todo-item">
+            <li ng-repeat="todo in todos | filter:statusFilter track by $index" class="todo-item" ng-class="{editing: todo == editedTodo}">
                 <div class="todo-view">
                     <input class="todo-item__toggle" type="checkbox" ng-model="todo.completed">
-                    <label class="todo-item__name" ng-dblclick="editTodo(todo)">{{todo.title}}</label>
+                    <label class="todo-item__name" ng-dblclick="editTodo(todo)">{{todo.name}}</label>
                     <button class="todo-item__btn-delete destroy close" ng-click="removeTodo(todo)">&times;</button>
                 </div>
-                <form ng-submit="doneEditing(todo)">
-                    <input class="todo-item__edit hidden" ng-trim="false" ng-model="todo.title" ng-blur="doneEditing(todo)">
+                <form ng-submit="doneEditTodo(todo)" class="todo-form">
+                    <input class="todo-item__edit" ng-trim="false" ng-model="todo.name" ng-blur="doneEditTodo(todo)" autofocus>
                 </form>
             </li>
         </ul>
@@ -46,7 +46,6 @@
         </div>   
     </footer>
 
-    
     <!-- End .todo-list-warp-->
 
 <!-- End list action-->

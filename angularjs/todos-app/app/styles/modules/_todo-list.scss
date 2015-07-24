@@ -1,113 +1,100 @@
 .todo-list {
+    margin: 0;
     padding: 0;
-    margin: 0px;
+
+    list-style: none;
     .todo-item {
         border-bottom: 1px solid #ededed;
     }
-}
-
-
-
-.todo-view {
-    position: relative;
-    &:hover .todo-item__btn-delete {
-        display: inline;
+    .editing {
+        .todo-view {
+            display: none;
+        }
+        .todo-item__edit {
+            @extend %block;
+        }
     }
 }
 
+
+
+
+
 .todo-item {
+    font-size: 24px;
+    .todo-view {
+        position: relative;
+        &:hover .todo-item__btn-delete {
+            display: inline;
+        }
+    }
     .todo-item__toggle {
         position: absolute;
-        margin: 0px;
+        top: 0;
+        bottom: 0;
+
         width: 50px;
-        height: 60px;
+        height: 35px;
+        margin: auto 0;
 
-        text-align: center;
-
-        outline: none;
+        @extend %text-center;
 
                 appearance: none;
            -moz-appearance: none;
         -webkit-appearance: none;
-        &:focus{
+        &:focus {
             outline: none;
-        }   
+        }
         &:after {
-            position: absolute;
-            top: 14px;
-            left: 4px;
-
             display: inline-block;
 
-            width: 30px;
-            height: 30px;
+            width: 35px;
+            height: 35px;
 
             content: '';
 
-            border: 1px solid #efefef;
-            -webkit-border-radius: 30px;
-               -moz-border-radius: 30px;
-                    border-radius: 30px;
+            @include border(1px, #efefef);
+            @include rounded(50%);
         }
     }
-
     &__toggle:checked:after {
-        border: 1px solid #c7e0db;
+        @include border(1px, #c7e0db);
         background: url(../images/check-icon.png) no-repeat center center;
     }
-
     &__toggle:checked + &__name {
         text-decoration: line-through;
 
-        color: #d9d9d9;
+        color: $cl-gray;
     }
-
     &__name {
-        font-size: 24px;
+        font-weight: normal;
 
-        display: block;
+        @extend %block;
         overflow: hidden;
 
-        width: 100%;
-        margin: 0;
-        padding: 20px 50px;
-
-        border: none;
-        font-weight: normal;
+        margin: 0 0 0 45px;
+        padding: 20px;
     }
-
-
     .todo-item__btn-delete {
         font-size: 24px;
 
         position: absolute;
-        top: 5px;
-        right: 10px;
+        top: 20px;
+        right: 15px;
 
         display: none;
 
-        width: 40px;
-        height: 40px;
-        margin: 10px 0;
-        text-align: center;
-
-        color: #cc9a9a;
+        color: $cl-btn-delete;
     }
-
-
-
     &__edit {
-        font-size: 24px;
+        display: none;
 
-        box-sizing: border-box;
-        width: 500px;
-        height: 60px;
-        margin: 0 0 0 48px;
-        padding: 20px 50px 20px 10px;
+        width: 92%;
+        height: 100%;
+        margin-left: 8%;
+        padding: 15px;
 
-        border: 1px solid #999;
+        @include border(1px, #999);
         outline: none;
     }
-
 }
-
