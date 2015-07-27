@@ -1,7 +1,9 @@
 /*global define */
 'use strict';
+
 /**
- * services that persists and retrieves TODOs from localStorage
+ * @name TodoStorage
+ * @desc get and put totos from localStorage
  */
 
 function TodoStorage() {
@@ -21,6 +23,7 @@ function TodoStorage() {
   };
 
 }
+
 
 define(['services/services'], function(services) {
   services.factory('TodoStorageService', TodoStorage);

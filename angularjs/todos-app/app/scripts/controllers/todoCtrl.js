@@ -3,18 +3,18 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name todosApp.controller:TodoCtrl
- * @description
- * # TodoCtrl
- * Controller of the todosApp
+ * @name TodoCtrl
+ * @desc Main Controller todo app
  */
 function TodoCtrl($scope, $filter, $routeParams, TodoStorageService) {
   var todos = $scope.todos = TodoStorageService.get();
   $scope.newTodo = {};
   $scope.editedTodo = null;
 
-  // watch todos onchange
+  /**
+   * @name watch
+   * @desc watch onchange todos and update data to localStorage
+   */
   $scope.$watch('todos', function(newValue, oldValue) {
     $scope.remainingCount = $filter('filter')(todos, { completed: false }).length;
     $scope.completedCount = todos.length - $scope.remainingCount;
@@ -28,6 +28,10 @@ function TodoCtrl($scope, $filter, $routeParams, TodoStorageService) {
   }, true);
 
   // the current route for changes and filter todo on status
+  /**
+   * @name routeChangeSuccess
+   * @desc event onchange route and update status filter todo
+   */
   $scope.$on('$routeChangeSuccess', function() {
     var status = $scope.status = $routeParams.status || '';
 
@@ -36,48 +40,76 @@ function TodoCtrl($scope, $filter, $routeParams, TodoStorageService) {
       { completed: true } : {};
   });
 
-  // add new todo
+  /**
+   * @name addTodo
+   * @desc add new todo 
+   * @param {String} : new todo name
+   * @returns {void}
+   */
   $scope.addTodo = function() {
     var newTodo = $scope.newTodo.name.trim();
-    if (!newTodo.length) {
-      return;
+    if (newTodo.length) {
+      todos.push({
+        name: newTodo,
+        completed: false
+      });
+      $scope.newTodo = {};
     }
-
-    todos.push({
-      name: newTodo,
-      completed: false
-    });
-
-    $scope.newTodo = {};
+    
   };
 
-  // edit todo
+  /**
+   * @name editTodo
+   * @desc update info todo
+   * @param {Object} todo -todo edit
+   * @returns {void}
+   */
   $scope.editTodo = function(todo) {
     $scope.editedTodo = todo;
   };
 
-  // edit todo when enter or focus out input
+  /**
+   * @name doneEditTodo
+   * @desc had been change info todo and update local storage
+   * @param {Object} todo - todo info
+   * @returns {void}
+   */
   $scope.doneEditTodo = function(todo) {
     $scope.editedTodo = null;
-    var editTodo = todo.name;
+    var editTodo = todo.name.trim();
     if (!editTodo) {
       $scope.removeTodo(todo);
     }
   }
 
-  // check all todo tongle
+  /**
+   * @name markAll
+   * @desc toggle mark all todo list
+   * @param {Boolean} completed
+   * @returns {void}
+   */
   $scope.markAll = function(completed) {
     todos.forEach(function(todo) {
       todo.completed = completed;
     });
   };
 
-  // remove todo
+  /**
+   * @name removeTodo
+   * @desc Remove todo item
+   * @param {Object} todo
+   * @returns {void}
+   */
   $scope.removeTodo = function(todo) {
     todos.splice(todos.indexOf(todo), 1);
   };
 
-  // clear all todo complete
+  /**
+   * @name clearCompletedTodos
+   * @desc remove all todo item have status completed
+   * @param {Array} list todo 
+   * @returns {void}
+   */
   $scope.clearCompletedTodos = function() {
     $scope.todos = todos = todos.filter(function(todo) {
       return !todo.completed;

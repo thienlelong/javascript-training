@@ -20,7 +20,7 @@
                     <button class="todo-item__btn-delete destroy close" ng-click="removeTodo(todo)">&times;</button>
                 </div>
                 <form ng-submit="doneEditTodo(todo)" class="todo-form">
-                    <input class="todo-item__edit" ng-trim="false" ng-model="todo.name" ng-blur="doneEditTodo(todo)" autofocus>
+                    <input class="todo-item__edit" ng-trim="false" ng-model="todo.name" ng-blur="doneEditTodo(todo)">
                 </form>
             </li>
         </ul>
