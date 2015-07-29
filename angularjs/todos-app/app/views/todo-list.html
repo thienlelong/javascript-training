@@ -7,7 +7,7 @@
     <header class="todo-new"> 
         <input id="toggleAll" class="todo-new__toggle--all glyphicon glyphicon-chevron-down" type="checkbox" ng-model="allChecked"  ng-show="todos.length" ng-click="markAll(allChecked)">
         <form name="todoForm" ng-submit="addTodo()">
-            <input type="text" name="todoNew" class="todo-new__field" placeholder="What needs to be done?" ng-model="newTodo.name" autofocus>
+            <input type="text" name="todoNew" class="todo-new__field" placeholder="What needs to be done?" ng-model="todo.name" autofocus>
         </form>
     </header>
 

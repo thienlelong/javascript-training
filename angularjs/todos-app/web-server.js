@@ -50,10 +50,12 @@ app.get('/todos', function(req, res) {
     todos.push(todosList[key]);
   }
 
+  res.send(todos);
+
   // simulate delay in server
-  setTimeout(function() {
+  /*setTimeout(function() {
     res.send(todos);
-  }, 500);
+  }, 500);*/
 });
 
 app.get('/todos/:id', function(req, res) {
@@ -69,7 +71,7 @@ app.post('/todos', function(req, res) {
   var todo = {};
   todo.id = next_id++;
   todo.name = req.body.name;
-  todo.completed = req.body.completed;
+  todo.completed = false;
   todosList[todo.id] = todo;
 
   res.send(todo);
@@ -87,6 +89,13 @@ app.post('/todos/:id', function(req, res) {
   todo.completed = req.body.completed;
   todosList[todo.id] = todo;
 
+  res.send(todo);
+});
+
+app.delete('/todos/:id', function(req, res) {
+  var todo = {};
+  todo.id = req.params.id;
+  delete todosList[todo.id];
   res.send(todo);
 });
 

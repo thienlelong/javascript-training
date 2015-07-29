@@ -7,23 +7,31 @@
  * @desc Main Controller todo app
  */
 function TodoCtrl($scope, $filter, $routeParams, TodoStorageService, Todo, TodosLoader, todos) {
-  var todos = $scope.todos = todos
-  $scope.newTodo = {};
+  $scope.todos = todos
+  $scope.todo = new Todo();
   $scope.editedTodo = null;
+
+  $scope.refreshTodos = function() {
+    var promise = new TodosLoader();
+
+    promise.then(function(todos) {
+      $scope.todos = todos
+    });
+  };
 
   /**
    * @name watch
    * @desc watch onchange todos and update data to localStorage
    */
   $scope.$watch('todos', function(newValue, oldValue) {
-    $scope.remainingCount = $filter('filter')(todos, { completed: false }).length;
-    $scope.completedCount = todos.length - $scope.remainingCount;
+    $scope.remainingCount = $filter('filter')($scope.todos, { completed: false }).length;
+    $scope.completedCount = $scope.todos.length - $scope.remainingCount;
     $scope.allChecked = !$scope.remainingCount;
-
+    console.log('watch');
     if (newValue !== oldValue) {
 
       // update todos to local Storage
-      TodoStorageService.put(todos);
+      // TodoStorageService.put(todos);
     }
   }, true);
 
@@ -47,14 +55,10 @@ function TodoCtrl($scope, $filter, $routeParams, TodoStorageService, Todo, Todos
    * @returns {void}
    */
   $scope.addTodo = function() {
-    var newTodo = $scope.newTodo.name.trim();
-    if (newTodo.length) {
-      todos.push({
-        name: newTodo,
-        completed: false
-      });
-      $scope.newTodo = {};
-    }
+    $scope.todo.$save(function(todo) {
+      $scope.todo = new Todo();
+      $scope.refreshTodos();
+    });
 
   };
 
@@ -89,7 +93,7 @@ function TodoCtrl($scope, $filter, $routeParams, TodoStorageService, Todo, Todos
    * @returns {void}
    */
   $scope.markAll = function(completed) {
-    todos.forEach(function(todo) {
+    $scope.todos.forEach(function(todo) {
       todo.completed = completed;
     });
   };
@@ -101,7 +105,9 @@ function TodoCtrl($scope, $filter, $routeParams, TodoStorageService, Todo, Todos
    * @returns {void}
    */
   $scope.removeTodo = function(todo) {
-    todos.splice(todos.indexOf(todo), 1);
+    todo.$remove(function() {
+      $scope.refreshTodos();
+    });
   };
 
   /**
@@ -111,9 +117,15 @@ function TodoCtrl($scope, $filter, $routeParams, TodoStorageService, Todo, Todos
    * @returns {void}
    */
   $scope.clearCompletedTodos = function() {
-    $scope.todos = todos = todos.filter(function(todo) {
+  /*  $scope.todos = todos = todos.filter(function(todo) {
       return !todo.completed;
+    });*/
+    $scope.todos.forEach(function(todo) {
+      if (todo.completed){
+        todo.$remove();
+      }
     });
+    $scope.refreshTodos();
   };
 }
 
