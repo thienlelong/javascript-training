@@ -20,6 +20,7 @@ module.exports = function (grunt) {
     app: require('./bower.json').appPath || 'app',
     dist: 'dist'
   };
+  grunt.loadNpmTasks('grunt-express-server');
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -419,17 +420,41 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    express: {
+      options: {
+        // Override defaults here
+        port: 8000
+      },
+      dev: {
+        options: {
+          script: 'web-server.js'
+        }
+      },
+      prod: {
+        options: {
+          script: 'web-server.js',
+          node_env: 'production'
+        }
+      },
+      test: {
+        options: {
+          script: 'web-server.js'
+        }
+      }
     }
   });
 
 
-  grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
+  grunt.registerTask('serve', 'Compile then start a connect web server', function(target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
 
     grunt.task.run([
       'clean:server',
+      'express:dev',
       'wiredep',
       'concurrent:server',
       'autoprefixer:server',
@@ -438,7 +463,7 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
+  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function(target) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
     grunt.task.run(['serve:' + target]);
   });
@@ -453,6 +478,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'express',
     'clean:dist',
     'wiredep',
     'useminPrepare',

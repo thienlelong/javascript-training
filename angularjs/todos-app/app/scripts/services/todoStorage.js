@@ -8,7 +8,6 @@
 
 function TodoStorage() {
 
-
   var STORAGE_ID = 'todos';
 
   return {
@@ -24,10 +23,10 @@ function TodoStorage() {
 
 }
 
-
 define(['services/services'], function(services) {
   services.factory('TodoStorageService', TodoStorage);
 });
+
 
 
 

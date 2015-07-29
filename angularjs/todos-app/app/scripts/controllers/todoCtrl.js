@@ -6,8 +6,8 @@
  * @name TodoCtrl
  * @desc Main Controller todo app
  */
-function TodoCtrl($scope, $filter, $routeParams, TodoStorageService) {
-  var todos = $scope.todos = TodoStorageService.get();
+function TodoCtrl($scope, $filter, $routeParams, TodoStorageService, Todo, TodosLoader, todos) {
+  var todos = $scope.todos = todos
   $scope.newTodo = {};
   $scope.editedTodo = null;
 
@@ -42,7 +42,7 @@ function TodoCtrl($scope, $filter, $routeParams, TodoStorageService) {
 
   /**
    * @name addTodo
-   * @desc add new todo 
+   * @desc add new todo
    * @param {String} : new todo name
    * @returns {void}
    */
@@ -55,7 +55,7 @@ function TodoCtrl($scope, $filter, $routeParams, TodoStorageService) {
       });
       $scope.newTodo = {};
     }
-    
+
   };
 
   /**
@@ -107,7 +107,7 @@ function TodoCtrl($scope, $filter, $routeParams, TodoStorageService) {
   /**
    * @name clearCompletedTodos
    * @desc remove all todo item have status completed
-   * @param {Array} list todo 
+   * @param {Array} list todo
    * @returns {void}
    */
   $scope.clearCompletedTodos = function() {
@@ -118,5 +118,5 @@ function TodoCtrl($scope, $filter, $routeParams, TodoStorageService) {
 }
 
 define(['controllers/controllers'], function(controllers) {
-  controllers.controller('TodoCtrl', ['$scope', '$filter', '$routeParams', 'TodoStorageService', TodoCtrl]);
+  controllers.controller('TodoCtrl', ['$scope', '$filter', '$routeParams', 'TodoStorageService', 'Todo', 'TodosLoader', 'todos', TodoCtrl]);
 });

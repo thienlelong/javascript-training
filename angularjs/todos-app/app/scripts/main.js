@@ -28,7 +28,9 @@ require([
   'angular',
   'app',
   'controllers/todoCtrl',
-  'services/todoStorage'
+  'services/todoStorage',
+  'services/todo',
+  'services/todosLoader'
 ],
   function(angular, app) {
     'use strict';
@@ -37,11 +39,21 @@ require([
       $routeProvider
         .when('/', {
           controller: 'TodoCtrl',
-          templateUrl:'views/todo-list.html'
+          templateUrl:'views/todo-list.html',
+          resolve: {
+            todos: ['TodosLoader', function(TodosLoader) {
+              return new TodosLoader();
+            }]
+          }
         })
         .when('/:status/', {
           controller: 'TodoCtrl',
-          templateUrl: 'views/todo-list.html'
+          templateUrl: 'views/todo-list.html',
+          resolve: {
+            todos: ['TodosLoader', function(TodosLoader) {
+              return new TodosLoader();
+            }]
+          }
         })
         .otherwise({redirectTo:'/'});
     }

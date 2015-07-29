@@ -1,6 +1,6 @@
 /* global define */
 'use strict';
 
-define(['angular'], function(angular) {
-  return angular.module('services', []);
+define(['angular', 'angularResource'], function(angular) {
+  return angular.module('services', ['ngResource']);
 });

@@ -25,7 +25,7 @@
 - vagrant up
 - vagrant ssh
 
-### 2. Install library and run gulp:
+### 2. Install library and run grunt:
 
 - cd /src/angularjs/todos-app
 - npm install
