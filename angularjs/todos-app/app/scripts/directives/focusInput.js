@@ -1,13 +1,13 @@
 /*global define */
 'use strict';
 
-function FocusInput() {
+function FocusInput($timeout) {
   return {
     restrict: 'A',
     link: function(scope, element, attrs) {
       scope.$watch(attrs.focus, function(newVal) {
         if (newVal) {
-          element[0].focus();
+          $timeout(function() {element[0].focus();}, 100)
         }
       });
     }
@@ -15,5 +15,5 @@ function FocusInput() {
 }
 
 define(['directives/directives'], function(directives) {
-  directives.directive('focus', FocusInput);
+  directives.directive('focus',['$timeout' , FocusInput]);
 });
