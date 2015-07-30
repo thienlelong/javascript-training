@@ -1,5 +1,4 @@
 /* global define */
-
 'use strict';
 
 /**
@@ -7,7 +6,7 @@
  * @desc Main Controller todo app
  */
 function TodoCtrl($scope, $filter, $routeParams, Todo, TodosLoader, todos) {
-  $scope.todos = todos
+  $scope.todos = todos;
   $scope.todo = new Todo();
   $scope.editedTodo = null;
 
@@ -21,8 +20,14 @@ function TodoCtrl($scope, $filter, $routeParams, Todo, TodosLoader, todos) {
     var promise = new TodosLoader();
 
     promise.then(function(todos) {
-      $scope.todos = todos
-    });
+      $scope.todos = todos;
+    },
+
+    function(todos) {
+      $scope.todos = [];
+    }
+
+    );
   };
 
   /**
@@ -83,7 +88,7 @@ function TodoCtrl($scope, $filter, $routeParams, Todo, TodosLoader, todos) {
     } else {
       $scope.removeTodo(todo);
     }
-  }
+  };
 
   /**
    * @name toggleAllCompleted
@@ -136,7 +141,7 @@ function TodoCtrl($scope, $filter, $routeParams, Todo, TodosLoader, todos) {
     todo.$save(function(todo) {
       $scope.refreshTodos();
     });
-  }
+  };
 }
 
 define(['controllers/controllers'], function(controllers) {
