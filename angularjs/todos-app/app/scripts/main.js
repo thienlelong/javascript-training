@@ -30,7 +30,8 @@ require([
   'controllers/todoCtrl',
   'services/todoStorage',
   'services/todo',
-  'services/todosLoader'
+  'services/todosLoader',
+  'directives/focusInput'
 ],
   function(angular, app) {
     'use strict';

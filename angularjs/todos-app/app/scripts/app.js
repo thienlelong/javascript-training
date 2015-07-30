@@ -14,7 +14,8 @@ define([
   'angular',
   'angularRoute',
   'controllers/controllers',
-  'services/services'
+  'services/services',
+  'directives/directives'
   ], function(angular) {
-  return angular.module('TodosApp', ['ngRoute', 'controllers', 'services']);
+  return angular.module('TodosApp', ['ngRoute', 'controllers', 'services', 'directives']);
 });

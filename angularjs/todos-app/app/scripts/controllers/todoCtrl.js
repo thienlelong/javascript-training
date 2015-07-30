@@ -6,11 +6,17 @@
  * @name TodoCtrl
  * @desc Main Controller todo app
  */
-function TodoCtrl($scope, $filter, $routeParams, TodoStorageService, Todo, TodosLoader, todos) {
+function TodoCtrl($scope, $filter, $routeParams, Todo, TodosLoader, todos) {
   $scope.todos = todos
   $scope.todo = new Todo();
   $scope.editedTodo = null;
 
+  /**
+   * @name refreshTodos
+   * @desc get all todos from sever and refresh page again
+   * @param {}
+   * @returns {Array} todos
+   */
   $scope.refreshTodos = function() {
     var promise = new TodosLoader();
 
@@ -27,15 +33,8 @@ function TodoCtrl($scope, $filter, $routeParams, TodoStorageService, Todo, Todos
     $scope.remainingCount = $filter('filter')($scope.todos, { completed: false }).length;
     $scope.completedCount = $scope.todos.length - $scope.remainingCount;
     $scope.allChecked = !$scope.remainingCount;
-    console.log('watch');
-    if (newValue !== oldValue) {
-
-      // update todos to local Storage
-      // TodoStorageService.put(todos);
-    }
   }, true);
 
-  // the current route for changes and filter todo on status
   /**
    * @name routeChangeSuccess
    * @desc event onchange route and update status filter todo
@@ -59,7 +58,6 @@ function TodoCtrl($scope, $filter, $routeParams, TodoStorageService, Todo, Todos
       $scope.todo = new Todo();
       $scope.refreshTodos();
     });
-
   };
 
   /**
@@ -80,21 +78,23 @@ function TodoCtrl($scope, $filter, $routeParams, TodoStorageService, Todo, Todos
    */
   $scope.doneEditTodo = function(todo) {
     $scope.editedTodo = null;
-    var editTodo = todo.name.trim();
-    if (!editTodo) {
+    if (todo.name.trim()) {
+      todo.$save();
+    } else {
       $scope.removeTodo(todo);
     }
   }
 
   /**
-   * @name markAll
+   * @name toggleAllCompleted
    * @desc toggle mark all todo list
    * @param {Boolean} completed
    * @returns {void}
    */
-  $scope.markAll = function(completed) {
+  $scope.toggleAllCompleted = function(completed) {
     $scope.todos.forEach(function(todo) {
       todo.completed = completed;
+      todo.$save();
     });
   };
 
@@ -117,18 +117,28 @@ function TodoCtrl($scope, $filter, $routeParams, TodoStorageService, Todo, Todos
    * @returns {void}
    */
   $scope.clearCompletedTodos = function() {
-  /*  $scope.todos = todos = todos.filter(function(todo) {
-      return !todo.completed;
-    });*/
     $scope.todos.forEach(function(todo) {
-      if (todo.completed){
+      if (todo.completed) {
         todo.$remove();
       }
     });
+
     $scope.refreshTodos();
   };
+
+  /**
+   * @name toggleCompleted
+   * @desc toggle check todo
+   * @param {Object} todo
+   * @returns {void}
+   */
+  $scope.toggleCompleted = function(todo) {
+    todo.$save(function(todo) {
+      $scope.refreshTodos();
+    });
+  }
 }
 
 define(['controllers/controllers'], function(controllers) {
-  controllers.controller('TodoCtrl', ['$scope', '$filter', '$routeParams', 'TodoStorageService', 'Todo', 'TodosLoader', 'todos', TodoCtrl]);
+  controllers.controller('TodoCtrl', ['$scope', '$filter', '$routeParams', 'Todo', 'TodosLoader', 'todos', TodoCtrl]);
 });

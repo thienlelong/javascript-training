@@ -1,8 +1,11 @@
+/*global define */
+'use strict';
 
-function Todo($resource) {
-  return $resource('http://localhost:8000/todos/:id', {id: '@id'});
+function Todo($resource, $location) {
+  var url = [$location.protocol(), '://', $location.host(), ':8000/todos/:id'].join('');
+  return $resource(url, {id: '@id'});
 }
 
 define(['services/services'], function(services) {
-  services.factory('Todo', ['$resource', Todo]);
+  services.factory('Todo', ['$resource', '$location', Todo]);
 });

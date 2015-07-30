@@ -26,12 +26,12 @@ app.use(bodyParser.json());
 var todosList = {
   '1': {
     'id': 1,
-    'name': 'Cookies',
+    'name': 'Task 1',
     'completed': false
   },
   '2': {
     'id': 2,
-    'name': 'Recipe 2',
+    'name': 'Task 2',
     'completed': true
   }
 };
