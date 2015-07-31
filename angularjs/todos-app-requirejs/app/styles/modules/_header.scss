@@ -1,0 +1,17 @@
+/*
+ * HEADER
+ * @HEADER stylesheet,  
+*/
+.header {
+    @extend %text-center;
+    &__title {
+        font-size: 100px;
+        font-weight: 100;
+
+        width: 100%;
+
+        @extend %text-center;
+
+        color: rgba(175, 47, 47, .15);
+    }
+}

@@ -1,0 +1,46 @@
+/* Box shadow */
+@mixin box-shadow($left, $top, $blur, $dis,$color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $left $top $blur $dis $color;
+    -moz-box-shadow:inset $left $top $blur $dis $color;
+    box-shadow:inset $left $top $blur $dis $color;
+  } @else {
+    -webkit-box-shadow: $left $top $blur $dis $color;
+    -moz-box-shadow: $left $top $blur $dis $color;
+    box-shadow: $left $top $blur $dis $color;
+  }
+}
+
+
+/* Rounded */
+@mixin rounded($radius)
+{
+    -webkit-border-radius: $radius;
+        -moz-border-radius: $radius;
+            border-radius: $radius;
+}
+
+/* Set font */
+
+@mixin set-font($font-family, $font-size, $font-weight, $color)
+{
+    font-family: $font-family;
+    font-size: $font-size;
+    font-weight: $font-weight;
+
+    color: $color;
+}
+
+
+/* Button */
+
+@mixin position($type, $top, $left)
+{
+    position: $type;
+    top: $top;
+    left: $left;
+}
+
+@mixin border($width, $color){
+    border: $width solid $color;
+}

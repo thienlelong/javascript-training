@@ -13,9 +13,9 @@ myApp.controller('StartUpController', ['$scope', function($scope) {
 }]);
 
 myApp.controller('AlbumController', ['$scope', function($scope) {
-  var album = [{name:'Southwest Serenade', duration: '2:34'},
-            {name:'Northern Light Waltz', duration: '3:21'},
-            {name:'Eastern Tango', duration: '17:45'}];
+  var album = [{name:'southwest serenade', duration: '2:34'},
+            {name:'Northern light waltz', duration: '3:21'},
+            {name:'Eastern tango', duration: '17:45'}];
   $scope.album = album;
 }]);
 
@@ -30,26 +30,57 @@ myApp.controller('DeathrayMenuController', ['$scope', function($scope) {
 
 
 
-myApp.controller('CartController', ['$scope', function($scope) {
+myApp.controller('CartController', ['$scope', 'Items', function($scope, Items) {
   $scope.bill = {};
-  $scope.items = [
-    {title: 'Paint pots', quantity: 8, price: 3.95},
-    {title: 'Polka dots', quantity: 17, price: 12.95},
-    {title: 'Pebbles', quantity: 5, price: 6.95}
-  ];
-  $scope.bill.discount = 10;
-  $scope.totalCart = function() {
+  $scope.items = Items.query();
+
+  $scope.$watch(function() {
     var total = 0;
-    for (var i = 0, len = $scope.items.length; i < len; i++) {
-      total = total + $scope.items[i].price * $scope.items[i].quantity;
+    for (var i = 0; i < $scope.items.length; i++) {
+    total = total + $scope.items[i].price * $scope.items[i].quantity;
     }
-    return total;
-  };
-  $scope.subtotal = function() {
-    return $scope.totalCart() - $scope.bill.discount;
-  };
-  function calculateDiscount(newValue, oldValue, scope) {
-    $scope.bill.discount = ((newValue - oldValue) > 100) ? $scope.bill.discount * 10 : $scope.bill.discount;
-  }
-  $scope.$watch($scope.totalCart, calculateDiscount);
+    $scope.bill.totalCart = total;
+    $scope.bill.discount = total > 100 ? 10 : 0;
+    $scope.bill.subtotal = total - $scope.bill.discount;
+    });
 }]);
+
+
+messages = [{
+  id: 0, sender: 'jean@somecompany.com', subject: 'Hi there, old friend',
+  date: 'Dec 7, 2013 12:32:00', recipients: ['greg@somecompany.com'],
+  message: 'Hey, we should get together for lunch sometime and catch up.'
+  +'There are many things we should collaborate on this year.'
+  }, {
+  id: 1, sender: 'maria@somecompany.com',
+  subject: 'Where did you leave my laptop?',
+  date: 'Dec 7, 2013 8:15:12', recipients: ['greg@somecompany.com'],
+  message: 'I thought you were going to put it in my desk drawer.'
+  +'But it does not seem to be there.'
+  }, {
+  id: 2, sender: 'bill@somecompany.com', subject: 'Lost python',
+  date: 'Dec 6, 2013 20:35:02', recipients: ['greg@somecompany.com'],
+  message: "Nobody panic, but my pet python is missing from her cage."
+  }, ];
+// Publish our messages for the list template
+
+
+/*myApp.controller('ListController', ['$scope', function($scope) {
+  console.log($scope.messages);
+  $scope.messages = messages;
+
+}]);*/
+function ListController($scope) {
+  $scope.messages = messages;
+}
+
+// Get the message id from the route (parsed from the URL) and use it to
+// find the right message object.
+
+/*myApp.controller('DetailController', ['$scope', '$routeParams', function($scope, $routeParams) {
+  $scope.message = messages[$routeParams.id];
+}]);*/
+
+function DetailController($scope, $routeParams) {
+$scope.message = messages[$routeParams.id];
+}

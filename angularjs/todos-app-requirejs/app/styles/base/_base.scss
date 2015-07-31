@@ -1,0 +1,19 @@
+
+/* body */
+body {
+    background-color: #f5f5f5;
+    @include set-font($font-helvetica, 14px, normal, $font-color);
+}
+
+a:link,
+a:active,
+a:visited,
+a:focus {
+    text-decoration: none;
+    outline: none;
+    outline-width: 0;
+}
+a:hover {
+    text-decoration: underline;
+}
+
