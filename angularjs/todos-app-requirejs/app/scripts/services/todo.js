@@ -6,6 +6,9 @@ function Todo($resource, $location) {
   return $resource(url, {id: '@id'});
 }
 
-define(['services/services'], function(services) {
-  services.factory('Todo', ['$resource', '$location', Todo]);
+Todo.$inject = ['$resource', '$location']
+define([
+  'services/services'
+], function(services) {
+  services.factory('Todo', Todo);
 });

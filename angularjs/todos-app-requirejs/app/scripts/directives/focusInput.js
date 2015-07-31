@@ -14,6 +14,9 @@ function FocusInput($timeout) {
   };
 }
 
-define(['directives/directives'], function(directives) {
-  directives.directive('focus',['$timeout' , FocusInput]);
+FocusInput.$inject = ['$timeout']
+define([
+  'directives/directives'
+], function(directives) {
+  directives.directive('focus', FocusInput);
 });

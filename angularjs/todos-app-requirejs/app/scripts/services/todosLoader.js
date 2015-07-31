@@ -21,8 +21,9 @@ function TodosLoader(Todo, $q) {
   };
 }
 
+TodosLoader.$inject = ['Todo', '$q']
 define([
   'services/services'
 ], function(services) {
-  services.factory('TodosLoader', ['Todo', '$q', TodosLoader]);
+  services.factory('TodosLoader', TodosLoader);
 });

@@ -16,6 +16,6 @@ define([
   'controllers/controllers',
   'services/services',
   'directives/directives'
-  ], function(angular) {
+], function(angular) {
   return angular.module('TodosApp', ['ngRoute', 'controllers', 'services', 'directives']);
 });

@@ -125,6 +125,10 @@ function TodoCtrl($scope, $filter, $routeParams, Todo, TodosLoader, todos) {
   };
 }
 
-define(['controllers/controllers'], function(controllers) {
-  controllers.controller('TodoCtrl', ['$scope', '$filter', '$routeParams', 'Todo', 'TodosLoader', 'todos', TodoCtrl]);
+TodoCtrl.$inject = ['$scope', '$filter', '$routeParams', 'Todo', 'TodosLoader', 'todos'];
+
+define([
+  'controllers/controllers'
+], function(controllers) {
+  controllers.controller('TodoCtrl', TodoCtrl);
 });

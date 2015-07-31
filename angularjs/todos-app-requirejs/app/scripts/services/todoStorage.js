@@ -23,9 +23,12 @@ function TodoStorage() {
 
 }
 
-define(['services/services'], function(services) {
+define([
+  'services/services'
+], function(services) {
   services.factory('TodoStorageService', TodoStorage);
 });
+
 
 
 
