@@ -17,9 +17,9 @@ rvm rubygems current
 
 
 echo '### Install Node Version Manager'
-curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | sh
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.26.1/install.sh | bash
 source ~/.nvm/nvm.sh
-nvm install 0.10.22 && nvm alias default 0.10.22
+nvm install 4.0 && nvm alias default 4.0
 
 
 echo '### Install global modules ...'
