@@ -1,11 +1,12 @@
 const path = require('path');
 
 const PATHS = {
-  app: path.join(__dirname, 'js'),
+  app: path.join(__dirname, 'src'),
   build: path.join(__dirname, 'build')
 };
 
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const merge = require('webpack-merge');
 
@@ -16,23 +17,34 @@ const common = {
   // Entry accepts a path or an object of entries. We'll be using the
   // latter form given it's convenient with more complex configurations.
   entry: {
-    app: PATHS.app + '/app.js'
+    app: PATHS.app + "/js/app.js"
   },
   output: {
     path: PATHS.build,
-    filename: 'bundle.js'
+    filename: '[name].bundle.js'
   },
-    module: {
-        loaders: [
-            { test: /\.js?$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/ },
-            { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
-            { test: /\.css$/, loader: "style!css" },
-            { test: /\.html$/, loader: 'html-loader' }
-        ]
-    },
-    plugins: [
-      new webpack.NoErrorsPlugin()
+  module: {
+    loaders: [
+      {
+        test: /\.js?$/,
+        /*loaders: ['react-hot', 'babel'],*/
+        include: path.join(__dirname, 'src'),
+        exclude: /node_modules/,
+        loaders: ['react-hot', 'babel-loader?presets[]=react,presets[]=es2015'],
+      },
+      /*{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},*/
+      { test: /\.css$/, loaders: ['style-loader', 'css-loader'] },
+      { test: /\.html$/, loader: 'html-loader' }
     ]
+  },
+  plugins: [
+    new webpack.NoErrorsPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({  // Also generate a test.html
+      filename: 'index.html',
+      template: 'src/index.html'
+    })
+  ]
 };
 
 
@@ -48,7 +60,7 @@ if(TARGET === 'start' || !TARGET) {
       historyApiFallback: true,
       hot: true,
       inline: true,
-      progress: false,
+      progress: true,
 
       // Display only errors to reduce the amount of output.
       stats: 'errors-only',
@@ -62,10 +74,7 @@ if(TARGET === 'start' || !TARGET) {
       // localhost
       host: process.env.HOST || '0.0.0.0',
       port: process.env.PORT || 8000
-    },
-    plugins: [
-      new webpack.HotModuleReplacementPlugin()
-    ]
+    }
   });
 }
 
