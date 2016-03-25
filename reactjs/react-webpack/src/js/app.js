@@ -3,6 +3,7 @@ var ReactDOM = require('react-dom');
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 require('../css/style.css');
 var Avatar = require('./avatar.js');
+var {WithLink, WithoutLink} = require('./linked-state.js');
 
 var Avatars = React.createClass({
   getInitialState() {
@@ -42,6 +43,11 @@ var Avatars = React.createClass({
   }
 });
 
+
 var AvatarsComponent = ReactDOM.render(
-  <Avatars />, document.getElementById('react')
-);
+  <Avatars />, document.getElementById('react'));
+
+var WithLinkComponent = ReactDOM.render(
+  <WithLink />, document.getElementById('with-link'));
+var WithoutLinkComponent = ReactDOM.render(
+  <WithoutLink />, document.getElementById('without-link'));
