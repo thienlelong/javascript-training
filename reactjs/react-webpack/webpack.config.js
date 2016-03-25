@@ -6,7 +6,8 @@ const PATHS = {
 };
 
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var LiveReloadPlugin = require('webpack-livereload-plugin');
 
 const merge = require('webpack-merge');
 
@@ -27,7 +28,6 @@ const common = {
     loaders: [
       {
         test: /\.js?$/,
-        /*loaders: ['react-hot', 'babel'],*/
         include: path.join(__dirname, 'src'),
         exclude: /node_modules/,
         loaders: ['react-hot', 'babel-loader?presets[]=react,presets[]=es2015'],
@@ -40,10 +40,11 @@ const common = {
   plugins: [
     new webpack.NoErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({  // Also generate a test.html
+    /*new HtmlWebpackPlugin({  // Also generate a test.html
       filename: 'index.html',
       template: 'src/index.html'
-    })
+    }),*/
+    new LiveReloadPlugin()
   ]
 };
 
