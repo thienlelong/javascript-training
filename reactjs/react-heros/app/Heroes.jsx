@@ -1,7 +1,7 @@
 import React from 'react';
 import Hero from './Hero.jsx';
 import uuid from 'node-uuid';
-import _ from 'underscore';
+import _ from 'lodash';
 import '../css/style.css';
 
 class Heroes extends React.Component {
@@ -26,13 +26,19 @@ class Heroes extends React.Component {
         }
       ]
     };
+
+    //bind function
+    this.addHero = this.addHero.bind(this);
+    this.addHeroPress = this.addHeroPress.bind(this);
+    this.removeHero = this.removeHero.bind(this);
   }
+
   render() {
     let heroes = this.state.heroes;
     return (
       <div className='heroes'>
         <p>Type to add new hero</p>
-        <input className='add-hero' type='text' ref='heroName'/>
+        <input className='add-hero' type='text' ref='heroName' onKeyPress={this.addHeroPress}/>
         <div className='heroes-list'>
           <p>Heroes:</p>
             {
@@ -42,6 +48,7 @@ class Heroes extends React.Component {
                   id={hero.id}
                   level={hero.level}
                   name={hero.name}
+                  onRemove={this.removeHero}
                 >
                 </Hero>
               )
@@ -49,6 +56,29 @@ class Heroes extends React.Component {
         </div>
     </div>
     );
+  }
+
+  addHeroPress(event) {
+    if (event.key == 'Enter') {
+      this.addHero();
+    }
+  }
+
+  addHero() {
+    let heroes = this.state.heroes.slice();
+    heroes.push({
+      id: uuid.v4(),
+      name: this.refs.heroName.value,
+      level: 1
+    });
+    this.setState({heroes: heroes});
+    //or using concat
+    this.refs.heroName.value = '';
+  }
+
+  removeHero(id) {
+    _.remove(this.state.heroes, {id: id});
+    this.setState({heroes: this.state.heroes});
   }
 }
 

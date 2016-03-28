@@ -1,5 +1,5 @@
 import React from 'react';
-import _ from 'underscore';
+import _ from 'lodash';
 
 class Hero extends React.Component {
   constructor(props) {
@@ -9,13 +9,19 @@ class Hero extends React.Component {
       level: this.props.level,
       id: this.props.id
     };
+    this.removeHero = this.removeHero.bind(this);
   }
   render() {
     return (
       <div className='hero'>
           Name: {this.state.name}, Level: {this.state.level}
+          <button className='btn btn-danger' onClick={this.removeHero}>x</button>
       </div>
     );
+  }
+
+  removeHero() {
+    this.props.onRemove(this.state.id);
   }
 }
 
