@@ -31,6 +31,7 @@ class Heroes extends React.Component {
     this.addHero = this.addHero.bind(this);
     this.addHeroPress = this.addHeroPress.bind(this);
     this.removeHero = this.removeHero.bind(this);
+    this.editHero = this.editHero.bind(this);
   }
 
   render() {
@@ -38,7 +39,8 @@ class Heroes extends React.Component {
     return (
       <div className='heroes'>
         <p>Type to add new hero</p>
-        <input className='add-hero' type='text' ref='heroName' onKeyPress={this.addHeroPress}/>
+        <p>Name: <input className='add-hero' type='text' ref='heroName' onKeyPress={this.addHeroPress}/></p>
+        <p>Level: <input className='add-hero' type='text' ref='heroLevel' onKeyPress={this.addHeroPress}/></p>
         <div className='heroes-list'>
           <p>Heroes:</p>
             {
@@ -49,6 +51,7 @@ class Heroes extends React.Component {
                   level={hero.level}
                   name={hero.name}
                   onRemove={this.removeHero}
+                  onEdit={this.editHero}
                 >
                 </Hero>
               )
@@ -69,11 +72,21 @@ class Heroes extends React.Component {
     heroes.push({
       id: uuid.v4(),
       name: this.refs.heroName.value,
-      level: 1
+      level: this.refs.heroLevel.value
     });
     this.setState({heroes: heroes});
     //or using concat
     this.refs.heroName.value = '';
+    this.refs.heroLevel.value = '';
+  }
+
+  editHero(id, newHero) {
+    let index = _.findIndex(this.state.heroes, {id: id});
+    if(index !==-1) {
+      this.state.heroes[index].name = newHero.name;
+      this.state.heroes[index].level = newHero.level;
+    }
+    this.setState({heroes: this.state.heroes});
   }
 
   removeHero(id) {
