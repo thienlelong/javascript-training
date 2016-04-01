@@ -7,6 +7,13 @@ const todoActions = {
       actionType: appConstants.ADD_ITEM,
       data: item
     });
+  },
+
+  removeItem(id){
+    AppDispatcher.handleAction({
+      actionType: appConstants.REMOVE_ITEM,
+      data: id
+    });
   }
 };
 

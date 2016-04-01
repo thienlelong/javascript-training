@@ -3,6 +3,7 @@ import appConstants from '../constants/appConstants.jsx';
 import objectAssign from 'react/lib/Object.assign';
 import { EventEmitter } from 'events';
 import uuid from 'node-uuid';
+import _ from 'lodash';
 
 const CHANGE_EVENT = 'change';
 
@@ -36,11 +37,19 @@ const addItem = (item) => {
   _store.list.push(toDo);
 };
 
+const removeItem = (id) => {
+  _.remove(_store.list, {id: id});
+};
+
 AppDispatcher.register(function(payload){
   const action = payload.action;
   switch(action.actionType){
     case appConstants.ADD_ITEM:
       addItem(action.data);
+      todoStore.emit(CHANGE_EVENT);
+      break;
+    case appConstants.REMOVE_ITEM:
+      removeItem(action.data);
       todoStore.emit(CHANGE_EVENT);
       break;
     default:

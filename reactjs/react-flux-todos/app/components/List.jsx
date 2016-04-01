@@ -13,7 +13,8 @@ class List extends React.Component {
           </label>
           <span><strong> {item.name}</strong></span>
           <span
-            className="glyphicon glyphicon-remove pull-right">
+            className="glyphicon glyphicon-remove pull-right"
+            onClick={this.props.removeItem.bind(null, item.id)}>
           </span>
         </li>
       )
