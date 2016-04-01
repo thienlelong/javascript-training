@@ -14,6 +14,20 @@ const todoActions = {
       actionType: appConstants.REMOVE_ITEM,
       data: id
     });
+  },
+
+  toggleCheckAll(completed) {
+    AppDispatcher.handleAction({
+      actionType: appConstants.CHECK_ALL,
+      data: completed
+    });
+  },
+
+  updateItem(updateItem) {
+    AppDispatcher.handleAction({
+      actionType: appConstants.UPDATE_ITEM,
+      data: updateItem
+    });
   }
 };
 

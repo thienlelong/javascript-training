@@ -41,6 +41,21 @@ const removeItem = (id) => {
   _.remove(_store.list, {id: id});
 };
 
+const toggleCheckAll = (completed) => {
+  _.forEach(_store.list, item => {
+    item.completed = completed;
+  });
+};
+
+const updateItem = (updateItem) => {
+  _.forEach(_store.list, item => {
+    if(item.id === updateItem.id) {
+      item.completed = updateItem.completed;
+      item.name = updateItem.name;
+    }
+  });
+};
+
 AppDispatcher.register(function(payload){
   const action = payload.action;
   switch(action.actionType){
@@ -50,6 +65,14 @@ AppDispatcher.register(function(payload){
       break;
     case appConstants.REMOVE_ITEM:
       removeItem(action.data);
+      todoStore.emit(CHANGE_EVENT);
+      break;
+    case appConstants.CHECK_ALL:
+      toggleCheckAll(action.data);
+      todoStore.emit(CHANGE_EVENT);
+      break;
+    case appConstants.UPDATE_ITEM:
+      updateItem(action.data);
       todoStore.emit(CHANGE_EVENT);
       break;
     default:

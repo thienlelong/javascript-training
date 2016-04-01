@@ -17,10 +17,12 @@ class ListContainer extends React.Component {
 
   componentDidMount() {
     todoStore.addChangeListener(this._onChange);
+    console.log("this.state sdf", this.state.list);
   }
 
   _onChange() {
     this.setState({list: todoStore.getList()});
+    console.log("this.state", this.state.list);
   }
 
   handleAddItem(newItem) {
@@ -31,13 +33,23 @@ class ListContainer extends React.Component {
     todoActions.removeItem(id);
   }
 
+  handleToggleCheckAll(completed) {
+    todoActions.toggleCheckAll(completed);
+  }
+
+  handleUpdateItem(updateItem) {
+    todoActions.updateItem(updateItem);
+  }
+
   render(){
     return (
       <div className="col-sm-6 col-md-offset-3">
         <div className="col-sm-12">
           <h3 className="text-center"> Todo List </h3>
-          <AddItem addItem={this.handleAddItem}/>
-          <List items={this.state.list} removeItem={this.handleRemoveItem}/>
+          <AddItem addItem={this.handleAddItem} toggleCheckAll={this.handleToggleCheckAll}/>
+          <List items={this.state.list}
+            removeItem={this.handleRemoveItem}
+            checkCompleted={this.handleUpdateItem}/>
         </div>
       </div>
     )
