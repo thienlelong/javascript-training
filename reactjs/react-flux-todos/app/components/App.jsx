@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ListContainer from '../components/ListContainer.jsx'
 
 class App extends React.Component {
   render() {
     return (
       <div className="container">
-        <h2>welcome react flux</h2>
+        <div className="row">
+          <ListContainer />
+        </div>
       </div>
     )
   }
