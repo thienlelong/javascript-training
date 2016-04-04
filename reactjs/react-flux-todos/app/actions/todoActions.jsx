@@ -28,6 +28,12 @@ const todoActions = {
       actionType: appConstants.UPDATE_ITEM,
       data: updateItem
     });
+  },
+
+  removeCompleted() {
+    AppDispatcher.handleAction({
+      actionType: appConstants.REMOVE_COMPLETED
+    });
   }
 };
 

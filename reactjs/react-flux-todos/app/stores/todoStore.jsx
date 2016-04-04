@@ -56,6 +56,10 @@ const updateItem = (updateItem) => {
   });
 };
 
+const removeCompleted = () => {
+  _.remove(_store.list, {completed: true});
+};
+
 AppDispatcher.register(function(payload){
   const action = payload.action;
   switch(action.actionType){
@@ -73,6 +77,10 @@ AppDispatcher.register(function(payload){
       break;
     case appConstants.UPDATE_ITEM:
       updateItem(action.data);
+      todoStore.emit(CHANGE_EVENT);
+      break;
+    case appConstants.REMOVE_COMPLETED:
+      removeCompleted();
       todoStore.emit(CHANGE_EVENT);
       break;
     default:
