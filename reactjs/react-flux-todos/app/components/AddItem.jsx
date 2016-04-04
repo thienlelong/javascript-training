@@ -3,8 +3,8 @@ import React from 'react';
 class AddItem extends React.Component {
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleToggleCheckAll = this.handleToggleCheckAll.bind(this);
+    this._onSubmit = this._onSubmit.bind(this);
+    this._onToggleCheckAll = this._onToggleCheckAll.bind(this);
   }
   render() {
     return (
@@ -14,21 +14,21 @@ class AddItem extends React.Component {
             <input type="checkbox"
               checked={this.props.areAllComplete}
               ref="checkAll"
-              onClick={this.handleToggleCheckAll} />
+              onClick={this._onToggleCheckAll} />
           </label>
           <div className="col-sm-11">
             <input type="text"
               ref="newItem"
               className="form-control"
               placeholder="New Item"
-              onKeyDown={this.handleSubmit} />
+              onKeyDown={this._onSubmit} />
           </div>
         </div>
       </div>
     )
   }
 
-  handleSubmit(e) {
+  _onSubmit(e) {
     if(e.keyCode === 13){
       let newItem = this.refs.newItem.value;
       this.refs.newItem.value = '';
@@ -36,7 +36,7 @@ class AddItem extends React.Component {
     }
   }
 
-  handleToggleCheckAll(e) {
+  _onToggleCheckAll(e) {
     let completed = this.refs.checkAll.checked;
     this.props.toggleCheckAll(completed);
   }

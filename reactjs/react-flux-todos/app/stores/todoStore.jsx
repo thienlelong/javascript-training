@@ -82,20 +82,20 @@ AppDispatcher.register(function(payload){
 
 const todoStore = objectAssign({}, EventEmitter.prototype, {
 
-  addChangeListener(cb){
+  addChangeListener(cb) {
     this.on(CHANGE_EVENT, cb);
   },
 
-  removeChangeListener(cb){
+  removeChangeListener(cb) {
     this.removeListener(CHANGE_EVENT, cb);
   },
 
-  getList(){
+  getList() {
     return _store.list;
   },
 
   areAllComplete() {
-    return !_.find(_store.list, { completed: false});
+    return !_.isEmpty(_store.list) && !_.find(_store.list, { completed: false});
   }
 });
 

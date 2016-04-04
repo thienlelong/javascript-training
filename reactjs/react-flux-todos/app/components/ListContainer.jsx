@@ -26,15 +26,15 @@ class ListContainer extends React.Component {
     this.setState({list: todoStore.getList(), areAllComplete: todoStore.areAllComplete()});
   }
 
-  handleAddItem(newItem) {
+  _onAddItem(newItem) {
     todoActions.addItem(newItem);
   }
 
-  handleToggleCheckAll(completed) {
+  _onToggleCheckAll(completed) {
     todoActions.toggleCheckAll(completed);
   }
 
-  handleUpdateItem(updateItem) {
+  _onUpdateItem(updateItem) {
     todoActions.updateItem(updateItem);
   }
 
@@ -43,8 +43,8 @@ class ListContainer extends React.Component {
       <div className="col-sm-6 col-md-offset-3">
         <div className="col-sm-12">
           <h3 className="text-center"> Todo List </h3>
-          <AddItem addItem={this.handleAddItem}
-            toggleCheckAll={this.handleToggleCheckAll}
+          <AddItem addItem={this._onAddItem}
+            toggleCheckAll={this._onToggleCheckAll}
             areAllComplete={this.state.areAllComplete}/>
           <List items={this.state.list}/>
         </div>
