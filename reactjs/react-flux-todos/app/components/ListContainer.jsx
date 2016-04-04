@@ -29,10 +29,6 @@ class ListContainer extends React.Component {
     todoActions.addItem(newItem);
   }
 
-  handleRemoveItem(id) {
-    todoActions.removeItem(id);
-  }
-
   handleToggleCheckAll(completed) {
     todoActions.toggleCheckAll(completed);
   }
@@ -47,9 +43,7 @@ class ListContainer extends React.Component {
         <div className="col-sm-12">
           <h3 className="text-center"> Todo List </h3>
           <AddItem addItem={this.handleAddItem} toggleCheckAll={this.handleToggleCheckAll}/>
-          <List items={this.state.list}
-            removeItem={this.handleRemoveItem}
-            checkCompleted={this.handleUpdateItem}/>
+          <List items={this.state.list}/>
         </div>
       </div>
     )
