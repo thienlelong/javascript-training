@@ -92,6 +92,10 @@ const todoStore = objectAssign({}, EventEmitter.prototype, {
 
   getList(){
     return _store.list;
+  },
+
+  areAllComplete() {
+    return !_.find(_store.list, { completed: false});
   }
 });
 

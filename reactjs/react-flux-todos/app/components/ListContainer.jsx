@@ -7,7 +7,10 @@ import todoActions from '../actions/todoActions.jsx';
 class ListContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {list: todoStore.getList()};
+    this.state = {
+      list: todoStore.getList(),
+      areAllComplete: todoStore.areAllComplete()
+    };
     this._onChange = this._onChange.bind(this);
   }
 
@@ -17,12 +20,10 @@ class ListContainer extends React.Component {
 
   componentDidMount() {
     todoStore.addChangeListener(this._onChange);
-    console.log("this.state sdf", this.state.list);
   }
 
   _onChange() {
-    this.setState({list: todoStore.getList()});
-    console.log("this.state", this.state.list);
+    this.setState({list: todoStore.getList(), areAllComplete: todoStore.areAllComplete()});
   }
 
   handleAddItem(newItem) {
@@ -42,7 +43,9 @@ class ListContainer extends React.Component {
       <div className="col-sm-6 col-md-offset-3">
         <div className="col-sm-12">
           <h3 className="text-center"> Todo List </h3>
-          <AddItem addItem={this.handleAddItem} toggleCheckAll={this.handleToggleCheckAll}/>
+          <AddItem addItem={this.handleAddItem}
+            toggleCheckAll={this.handleToggleCheckAll}
+            areAllComplete={this.state.areAllComplete}/>
           <List items={this.state.list}/>
         </div>
       </div>

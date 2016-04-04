@@ -12,7 +12,7 @@ class AddItem extends React.Component {
         <div className="panel-body form-horizontal">
           <label className="col-sm-1">
             <input type="checkbox"
-              defaultChecked={false}
+              checked={this.props.areAllComplete}
               ref="checkAll"
               onClick={this.handleToggleCheckAll} />
           </label>
